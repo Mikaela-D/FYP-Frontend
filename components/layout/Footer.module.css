@@ -1,0 +1,31 @@
+.footer {
+    background-color: #00467c; /* Dark background for footer */
+    color: white; /* White text */
+    text-align: center; /* Center-align the text */
+    padding: 20px 0; /* Top and bottom padding */
+    position: relative; /* Ensures it stays at the bottom of the layout */
+    width: 100%; /* Full width of the page */
+    bottom: 0; /* Position the footer at the bottom */
+  }
+  
+  .footer p {
+    margin: 0; /* Remove default paragraph margins */
+    font-size: 14px; /* Font size for footer text */
+  }
+  
+  .socialMedia {
+    margin-top: 10px; /* Space above social media icons */
+  }
+  
+  .socialMedia a {
+    margin: 0 10px; /* Space between each icon */
+    color: white; /* Icon color */
+    font-size: 24px; /* Icon size */
+    transition: transform 0.3s; /* Smooth hover effect */
+  }
+  
+  .socialMedia a:hover {
+    transform: scale(1.2); /* Slightly enlarge on hover */
+    color: #61dafb; /* Highlight color on hover */
+  }
+  

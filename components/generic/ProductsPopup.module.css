@@ -1,0 +1,144 @@
+.popupBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.popupContent {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  overflow-y: auto;
+  max-height: 90%;
+  animation: scaleIn 0.3s ease-in-out;
+}
+
+.popupContent h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.popupContent ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popupContent .productList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.popupContent .productItem {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.popupContent .productItem:hover {
+  transform: scale(1.02);
+}
+
+.popupContent .productItem img {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.productDetails {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.productInfo {
+  text-align: left;
+  flex: 1;
+}
+
+.productInfo h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.productInfo p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.productInfo strong {
+  color: #333;
+}
+
+.popupContent .actions {
+  margin-top: 10px;
+}
+
+.popupContent .actions button {
+  padding: 8px 15px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.popupContent .actions button:hover {
+  background: #005bb5;
+}
+
+.popupContent .closeButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.popupContent .closeButton:hover {
+  background: #c53030;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
