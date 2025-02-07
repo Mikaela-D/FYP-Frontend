@@ -1,12 +1,16 @@
+// HamMenuContent.js
+
 import classes from "./HamMenuContent.module.css";
 import { useState, useContext } from "react";
 import GlobalContext from "../../pages/store/globalContext";
 import ProductsPopup from "../generic/ProductsPopup";
+import { useRouter } from "next/router";
 
 export default function HamMenuContent({ onClose = () => {} }) {
   const globalCtx = useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [popupToggle, setPopupToggle] = useState(false);
+  const router = useRouter();
 
   const categories = ["Food", "Clothes", "Furniture", "Miscellaneous"];
 
@@ -26,6 +30,11 @@ export default function HamMenuContent({ onClose = () => {} }) {
     if (typeof onClose === "function") {
       onClose();
     }
+  };
+
+  const navigateToTutorial = () => {
+    router.push("/tutorial");
+    closeMenu();
   };
 
   if (globalCtx.theGlobalObject.hideHamMenu) {
@@ -48,6 +57,12 @@ export default function HamMenuContent({ onClose = () => {} }) {
               {category}
             </div>
           ))}
+          <div
+            className={classes.menuItem}
+            onClick={navigateToTutorial} // New menu item for tutorial
+          >
+            Tutorial
+          </div>
         </div>
       </div>
 
