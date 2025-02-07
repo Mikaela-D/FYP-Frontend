@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color:  #00467c;
+  background-color: #ff451a;
   padding: 0 10%;
   color: white;
 }
@@ -37,30 +37,4 @@
 .header a:active,
 .header a.active {
   color: white;
-}
-
-/* Style for the Christmas Sale Timer */
-.saleTimer {
-  background-color: #ff0000;  /* Christmas red */
-  color: #ffffff;             /* White font */
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.saleTimer p {
-  margin: 0;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
 }
