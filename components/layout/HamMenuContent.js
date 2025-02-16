@@ -37,6 +37,11 @@ export default function HamMenuContent({ onClose = () => {} }) {
     closeMenu();
   };
 
+  const navigateToStationSelection = () => {
+    router.push("/station-selection");
+    closeMenu();
+  };
+
   if (globalCtx.theGlobalObject.hideHamMenu) {
     return null;
   }
@@ -62,6 +67,12 @@ export default function HamMenuContent({ onClose = () => {} }) {
             onClick={navigateToTutorial} // New menu item for tutorial
           >
             Tutorial
+          </div>
+          <div
+            className={classes.menuItem}
+            onClick={navigateToStationSelection}
+          >
+            Station Selection
           </div>
         </div>
       </div>
