@@ -47,6 +47,11 @@ export default function HamMenuContent({ onClose = () => {} }) {
     closeMenu();
   };
 
+  const navigateToQueueActivation = () => {
+    router.push("/queue-activation");
+    closeMenu();
+  };
+
   if (globalCtx.theGlobalObject.hideHamMenu) {
     return null;
   }
@@ -78,6 +83,9 @@ export default function HamMenuContent({ onClose = () => {} }) {
           </div>
           <div className={classes.menuItem} onClick={navigateToAgentStats}>
             Agent Stats
+          </div>
+          <div className={classes.menuItem} onClick={navigateToQueueActivation}>
+            Queue Activation
           </div>
         </div>
       </div>
