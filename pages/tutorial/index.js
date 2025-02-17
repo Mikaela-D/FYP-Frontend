@@ -1,20 +1,11 @@
 import { useState, useEffect } from "react";
 import styles from "./tutorial.module.css";
 
-const platformColors = {
-  sf: "#5798d9",
-  generic: "#46b6c6",
-  sn: "#ac75ff",
-  zendesk: "#e55ecd",
-  default: "#ccc",
-};
-
 const Tutorial = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [filteredComponents, setFilteredComponents] = useState([]);
   const [components, setComponents] = useState([]);
 
-  // Fetch data from the component-library.json file
   useEffect(() => {
     fetch("/component-library.json")
       .then((response) => response.json())
@@ -36,12 +27,11 @@ const Tutorial = () => {
   };
 
   const getBorderColor = (platforms) => {
-    for (const platform of platforms) {
-      if (platformColors[platform]) {
-        return platformColors[platform];
-      }
-    }
-    return platformColors.default;
+    if (platforms.includes("sf")) return "var(--sf-color)";
+    if (platforms.includes("generic")) return "var(--generic-color)";
+    if (platforms.includes("sn")) return "var(--sn-color)";
+    if (platforms.includes("zendesk")) return "var(--zendesk-color)";
+    return "var(--default-color)";
   };
 
   return (

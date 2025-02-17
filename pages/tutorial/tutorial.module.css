@@ -1,4 +1,10 @@
 .container {
+    --sf-color: #5798d9;
+    --generic-color: #46b6c6;
+    --sn-color: #ac75ff;
+    --zendesk-color: #e55ecd;
+    --default-color: #ccc;
+  
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -12,7 +18,7 @@
   }
   
   .button {
-    background-color: #ccc;
+    background-color: var(--default-color);
     color: black;
     border: none;
     padding: 10px 15px;
