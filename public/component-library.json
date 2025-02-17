@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "platforms": ["generic"],
+    "link": "station-selection",
+    "name": "Station Selection",
+    "image": "/station-selection.png",
+    "description": "Manage and assign workstations efficiently."
+  },
+  {
+    "id": 2,
+    "platforms": ["sf", "generic"],
+    "link": "agent-stats",
+    "name": "Agent Stats",
+    "image": "/agent-stats-full.png",
+    "description": "Monitor agent performance and metrics."
+  },
+  {
+    "id": 3,
+    "platforms": ["zendesk", "sn"],
+    "link": "queue-activation",
+    "name": "Queue Activation",
+    "image": "/queue-activation.png",
+    "description": "Activate and manage customer service queues."
+  },
+  {
+    "id": 4,
+    "platforms": ["sf", "generic", "zendesk"],
+    "link": "call-controls",
+    "name": "Call Controls",
+    "image": "/call-controls-1.png",
+    "description": "Control and manage live calls efficiently."
+  }
+]

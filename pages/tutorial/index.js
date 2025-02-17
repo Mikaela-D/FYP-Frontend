@@ -1,5 +1,5 @@
-import styles from "./tutorial.module.css";
 import { useState, useEffect } from "react";
+import styles from "./tutorial.module.css";
 
 const platformColors = {
   sf: "#5798d9",
@@ -12,46 +12,14 @@ const platformColors = {
 const Tutorial = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("all");
   const [filteredComponents, setFilteredComponents] = useState([]);
+  const [components, setComponents] = useState([]);
 
-  const handlePlatformFilter = (platform) => {
-    setSelectedPlatform(platform);
-  };
-
-  const components = [
-    {
-      id: 1,
-      link: "station-selection",
-      platforms: ["generic"],
-      name: "Station Selection",
-      image: "/station-selection.png",
-      description: "Manage and assign workstations efficiently.",
-    },
-    {
-      id: 2,
-      link: "agent-stats",
-      platforms: ["sf", "generic"],
-      name: "Agent Stats",
-      image: "/agent-stats-full.png",
-      description: "Monitor agent performance and metrics.",
-    },
-    {
-      id: 3,
-      link: "queue-activation",
-      platforms: ["zendesk", "sn"],
-      name: "Queue Activation",
-      image: "/queue-activation.png",
-      description: "Activate and manage customer service queues.",
-    },
-    {
-      id: 4,
-      link: "call-controls",
-      platforms: ["sf", "generic", "zendesk"],
-      name: "Call Controls",
-      image: "/call-controls-1.png",
-      description: "Control and manage live calls efficiently.",
-    }
-    
-  ];
+  // Fetch data from the component-library.json file
+  useEffect(() => {
+    fetch("/component-library.json")
+      .then((response) => response.json())
+      .then((data) => setComponents(data));
+  }, []);
 
   useEffect(() => {
     const filtered =
@@ -61,7 +29,11 @@ const Tutorial = () => {
             component.platforms.includes(selectedPlatform)
           );
     setFilteredComponents(filtered);
-  }, [selectedPlatform]);
+  }, [selectedPlatform, components]);
+
+  const handlePlatformFilter = (platform) => {
+    setSelectedPlatform(platform);
+  };
 
   const getBorderColor = (platforms) => {
     for (const platform of platforms) {
