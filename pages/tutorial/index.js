@@ -1,4 +1,4 @@
-import styles from "./tutorial.module.css"; // ✅ Correct CSS Module Import
+import styles from "./tutorial.module.css";
 import { useState, useEffect } from "react";
 
 const platformColors = {
@@ -23,7 +23,7 @@ const Tutorial = () => {
       link: "station-selection",
       platforms: ["generic"],
       name: "Station Selection",
-      image: "/path/to/station-selection.png",
+      image: "/station-selection.png",
       description: "Manage and assign workstations efficiently.",
     },
     {
@@ -31,7 +31,7 @@ const Tutorial = () => {
       link: "agent-stats",
       platforms: ["sf", "generic"],
       name: "Agent Stats",
-      image: "/path/to/agent-stats.png",
+      image: "/agent-stats-full.png",
       description: "Monitor agent performance and metrics.",
     },
     {
@@ -39,7 +39,7 @@ const Tutorial = () => {
       link: "queue-activation",
       platforms: ["zendesk", "sn"],
       name: "Queue Activation",
-      image: "/path/to/queue-activation.png",
+      image: "/queue-activation.png",
       description: "Activate and manage customer service queues.",
     },
     {
