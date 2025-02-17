@@ -29,7 +29,7 @@ const Footer = () => {
           <FontAwesomeIcon icon={faXTwitter} className={classes.socialIcon} />
         </a>
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/genesyscx/"
           target="_blank"
           rel="noopener noreferrer"
         >
