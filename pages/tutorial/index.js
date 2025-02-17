@@ -47,9 +47,10 @@ const Tutorial = () => {
       link: "call-controls",
       platforms: ["sf", "generic", "zendesk"],
       name: "Call Controls",
-      image: "/path/to/call-controls.png",
+      image: "/call-controls-1.png",
       description: "Control and manage live calls efficiently.",
-    },
+    }
+    
   ];
 
   useEffect(() => {
