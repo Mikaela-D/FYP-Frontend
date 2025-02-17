@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 const ComponentDetailPage = () => {
   const { query } = useRouter();
-  const { componentLink } = query; // This will be the dynamic part of the URL
+  const { componentLink } = query;
   const [componentData, setComponentData] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
   const [modalIndex, setModalIndex] = useState(0);
@@ -15,13 +15,17 @@ const ComponentDetailPage = () => {
   const slideIndex = useRef(0);
 
   useEffect(() => {
+    const fetchComponentLibrary = async () => {
+      const res = await fetch("/component-library.json");
+      const data = await res.json();
+      const component = data.find((comp) => comp.link === componentLink);
+      if (component) {
+        setComponentData(component);
+      }
+    };
+
     if (componentLink) {
-      fetch("/component-library.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const component = data.find((c) => c.link === componentLink);
-          setComponentData(component);
-        });
+      fetchComponentLibrary();
     }
   }, [componentLink]);
 
@@ -40,7 +44,9 @@ const ComponentDetailPage = () => {
   };
 
   const changeSlide = (n) => {
-    slideIndex.current = (slideIndex.current + n + componentData.images?.length) % componentData.images?.length;
+    slideIndex.current =
+      (slideIndex.current + n + componentData.images?.length) %
+      componentData.images?.length;
   };
 
   const openModal = (index) => {
@@ -55,7 +61,11 @@ const ComponentDetailPage = () => {
   };
 
   const changeSlideModal = (n) => {
-    setModalIndex((prevIndex) => (prevIndex + n + componentData.images?.length) % componentData.images?.length);
+    setModalIndex(
+      (prevIndex) =>
+        (prevIndex + n + componentData.images?.length) %
+        componentData.images?.length
+    );
   };
 
   if (!componentData) return <div>Loading...</div>;
@@ -81,12 +91,17 @@ const ComponentDetailPage = () => {
       {/* Tab content */}
       <div className="tab-content-container">
         {componentData.tabs?.map((tab, index) => (
-          <div key={index} className={`tab-content ${activeTab === index ? "active" : ""}`}>
+          <div
+            key={index}
+            className={`tab-content ${activeTab === index ? "active" : ""}`}
+          >
             <div dangerouslySetInnerHTML={{ __html: tab.content }} />
             {tab.name === "Description" && componentData.images?.length > 0 && (
               <div className="slideshow-container">
                 <button
-                  className={`prev ${componentData.images?.length < 4 ? "not-allowed" : ""}`}
+                  className={`prev ${
+                    componentData.images?.length < 4 ? "not-allowed" : ""
+                  }`}
                   onMouseOver={handleMouseOver}
                   onMouseLeave={handleMouseLeave}
                   onMouseMove={handleMouseMove}
@@ -109,7 +124,9 @@ const ComponentDetailPage = () => {
                 </div>
 
                 <button
-                  className={`next ${componentData.images?.length < 4 ? "not-allowed" : ""}`}
+                  className={`next ${
+                    componentData.images?.length < 4 ? "not-allowed" : ""
+                  }`}
                   onMouseOver={handleMouseOver}
                   onMouseLeave={handleMouseLeave}
                   onMouseMove={handleMouseMove}
@@ -147,10 +164,22 @@ const ComponentDetailPage = () => {
       {/* Modal navigation */}
       {showModal && componentData.images?.length > 1 && (
         <>
-          <button className="modal-prev" onClick={(e) => { e.stopPropagation(); changeSlideModal(-1); }}>
+          <button
+            className="modal-prev"
+            onClick={(e) => {
+              e.stopPropagation();
+              changeSlideModal(-1);
+            }}
+          >
             &lsaquo;
           </button>
-          <button className="modal-next" onClick={(e) => { e.stopPropagation(); changeSlideModal(1); }}>
+          <button
+            className="modal-next"
+            onClick={(e) => {
+              e.stopPropagation();
+              changeSlideModal(1);
+            }}
+          >
             &rsaquo;
           </button>
         </>

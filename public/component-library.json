@@ -13,7 +13,40 @@
     "link": "agent-stats",
     "name": "Agent Stats",
     "image": "/agent-stats-full.png",
-    "description": "Monitor agent performance and metrics."
+    "description": "Monitor agent performance and metrics.",
+    "agentStats": {
+      "name": "Agent Performance & Stats",
+      "description": "The Genesys Cloud CX Agent Performance Stats is an embeddable component that allows for an agent to view their real time performance stats.",
+      "title": "Agent Performance and Stats",
+      "attributes": [
+        {
+          "name": "AUTHOR",
+          "content": "Genesys"
+        },
+        {
+          "name": "VERSION",
+          "content": "1.0"
+        },
+        {
+          "name": "APP TYPE",
+          "content": "Embeddable Desktop"
+        },
+        {
+          "name": "SELLING PARTY",
+          "content": "Genesys Billing Party"
+        }
+      ],
+      "tabs": [
+        {
+          "name": "Description",
+          "content": "<p>The Genesys Cloud CX Agent Performance Stats is an embeddable component that allows for an agent to view their <strong>real time performance<strong> stats.</p>"
+        },
+        {
+          "name": "Component Details",
+          "content": "<h3>Add component via Lightning App Builder</h3><table><tr><td style='padding-right: 30px; vertical-align: top;'><h3>Full View</h3><p>This view will show a list of all Interaction Channels with the Agents Performance Statistics.</p><ul><li><strong>Answered:</strong> Answered increments when the agent is the first to connect to the interaction.</li><li><strong>Avg Talk:</strong> The average number of seconds spent interacting on a media type.</li><li><strong>Avg Hold:</strong> The average number of seconds that interactions were placed on hold.</li><li><strong>Avg ACW:</strong> The average amount of time agents spent completing after-call work.</li><li><strong>AHT:</strong> The average amount of time agents spent handling interactions.</li><li><strong>Transferred:</strong> A measurement of the number of interactions an agent answered in one queue and then transferred.</li><li><strong>Talk:</strong> The total amount of time spent interacting on all the conversations by the agent, within an interval.</li><li><strong>ACW:</strong> The number of times after-call work (ACW) was completed.</li></ul></td><td style='vertical-align: top;'><h3>Mini View</h3><ul><li>Choose which interaction channel to view OR user defined on the UI</li><li>Choose which Performance Statistics to view OR user defined on the UI</li></ul><h3>Limitations</h3><ul><li><strong>Note:</strong> Not to be used as a dashboard widget for a supervisor.</li></ul></td></tr></table><h2>Additional Details</h2><h3>Embeddable Desktop</h3><h2>Licenses and Permissions</h2><ul><li>Genesys Cloud CX 3 Digital or Genesys Cloud EX license</li><li>Genesys Cloud CX 3, Genesys Cloud CX 1 WEM Add-on II, or Genesys Cloud CX 2 WEM Add-on I</li><li>Analytics > Conversation Aggregate > View permission</li><li>Analytics > User Aggregate > View permission</li><li>Salesforce Service Cloud</li><li>CX Cloud from Genesys and Salesforce integration installed</li><li>Product code</li></ul><h2>Supported CRMs</h2><h3>Salesforce Lightning</h3><h2>Documentation</h3><ul><li><a href='https://www.genesys.com/'>Terms and Conditions</a></li><li><a href='https://help.mypurecloud.com/'>Help Documentation</a></li></ul>"
+        }
+      ]
+    }
   },
   {
     "id": 3,
