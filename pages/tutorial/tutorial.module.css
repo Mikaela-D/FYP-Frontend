@@ -131,3 +131,9 @@
   font-size: 14px;
   color: gray;
 }
+
+.componentLink a {
+    text-decoration: none;
+    color: inherit;
+  }
+  

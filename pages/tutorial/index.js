@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import styles from "./tutorial.module.css";
 
 const platformColors = {
@@ -96,27 +97,27 @@ const Tutorial = () => {
             <div className={styles.componentContainer}>
               {filteredComponents.map((component) => (
                 <div key={component.id} className={styles.component}>
-                  <a
-                    href={"/" + component.link}
-                    className={styles.componentLink}
-                  >
-                    <div
-                      className={styles.platformColor}
-                      style={{
-                        backgroundColor: getBorderColor(component.platforms),
-                      }}
-                    />
-                    <div className={styles.imageContainer}>
-                      <img
-                        src={component.image}
-                        className={styles.componentImage}
+                  <Link href={`/component/${component.link}`} passHref>
+                    <a className={styles.componentLink}>
+                      <div
+                        className={styles.platformColor}
+                        style={{
+                          backgroundColor: getBorderColor(component.platforms),
+                        }}
                       />
-                    </div>
-                    <h2 className={styles.componentName}>{component.name}</h2>
-                    <div className={styles.description}>
-                      {component.description}
-                    </div>
-                  </a>
+                      <div className={styles.imageContainer}>
+                        <img
+                          src={component.image}
+                          className={styles.componentImage}
+                          alt={component.name}
+                        />
+                      </div>
+                      <h2 className={styles.componentName}>{component.name}</h2>
+                      <div className={styles.description}>
+                        {component.description}
+                      </div>
+                    </a>
+                  </Link>
                 </div>
               ))}
             </div>
