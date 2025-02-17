@@ -16,13 +16,13 @@
   z-index: 998;
 }
 
-.button {
+.filterButtons button {
   margin-top: 10px;
   margin-right: 10px;
   padding: 5px 20px;
   border: none;
   border-radius: 5px;
-  background-color: white;
+  background-color: #c1c6d4;
   color: black;
   cursor: pointer;
   font-size: 14px;
@@ -33,17 +33,17 @@
   position: relative;
 }
 
-.button.selected {
+.filterButtons button.selected {
   background-color: #939393;
   color: black;
 }
 
-.button.white.selected {
-  background-color: white;
+.filterButtons button.white.selected {
+  background-color: #c1c6d4;
   color: black;
 }
 
-.button::before {
+.filterButtons button::before {
   content: "";
   display: inline-block;
   width: 10px;
@@ -52,20 +52,24 @@
   margin-right: 5px;
 }
 
-.button.green::before {
-  background-color: #46b6c6;
-}
-
-.button.blue::before {
+.filterButtons button.sf::before {
   background-color: #5798d9;
 }
 
-.button.red::before {
+.filterButtons button.generic::before {
+  background-color: #46b6c6;
+}
+
+.filterButtons button.sn::before {
   background-color: #ac75ff;
 }
 
-.button.yellow::before {
+.filterButtons button.zendesk::before {
   background-color: #e55ecd;
+}
+
+.filterButtons button.default::before {
+  background-color: #ccc;
 }
 
 .scrollContainer {

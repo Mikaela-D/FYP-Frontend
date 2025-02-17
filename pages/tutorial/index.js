@@ -48,41 +48,41 @@ const Tutorial = () => {
       <div className={styles.container}>
         <div className={styles.filterButtons}>
           <button
-            className={`${styles.button} ${
-              selectedPlatform === "all" ? styles.selected : ""
+            className={`${selectedPlatform === "all" ? styles.selected : ""} ${
+              styles.white
             }`}
             onClick={() => handlePlatformFilter("all")}
           >
             All Platforms
           </button>
           <button
-            className={`${styles.button} ${
-              selectedPlatform === "sf" ? styles.selected : ""
+            className={`${selectedPlatform === "sf" ? styles.selected : ""} ${
+              styles.sf
             }`}
             onClick={() => handlePlatformFilter("sf")}
           >
             Salesforce
           </button>
           <button
-            className={`${styles.button} ${
+            className={`${
               selectedPlatform === "generic" ? styles.selected : ""
-            }`}
+            } ${styles.generic}`}
             onClick={() => handlePlatformFilter("generic")}
           >
             Standard
           </button>
           <button
-            className={`${styles.button} ${
-              selectedPlatform === "sn" ? styles.selected : ""
+            className={`${selectedPlatform === "sn" ? styles.selected : ""} ${
+              styles.sn
             }`}
             onClick={() => handlePlatformFilter("sn")}
           >
             ServiceNow
           </button>
           <button
-            className={`${styles.button} ${
+            className={`${
               selectedPlatform === "zendesk" ? styles.selected : ""
-            }`}
+            } ${styles.zendesk}`}
             onClick={() => handlePlatformFilter("zendesk")}
           >
             Zendesk
