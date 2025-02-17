@@ -1,5 +1,4 @@
-// pages/tutorial/index.js
-import "./tutorial.module.css";
+import styles from "./tutorial.module.css"; // ✅ Correct CSS Module Import
 import { useState, useEffect } from "react";
 
 const platformColors = {
@@ -18,27 +17,41 @@ const Tutorial = () => {
     setSelectedPlatform(platform);
   };
 
-  // Dummy component data for example purposes
   const components = [
     {
       id: 1,
-      link: "salesforce-component",
-      platforms: ["sf"],
-      name: "Salesforce Component",
-      image: "/path/to/salesforce-image.png",
-      description: "A Salesforce component description.",
+      link: "station-selection",
+      platforms: ["generic"],
+      name: "Station Selection",
+      image: "/path/to/station-selection.png",
+      description: "Manage and assign workstations efficiently.",
     },
     {
       id: 2,
-      link: "generic-component",
-      platforms: ["generic"],
-      name: "Generic Component",
-      image: "/path/to/generic-image.png",
-      description: "A generic component description.",
+      link: "agent-stats",
+      platforms: ["sf", "generic"],
+      name: "Agent Stats",
+      image: "/path/to/agent-stats.png",
+      description: "Monitor agent performance and metrics.",
+    },
+    {
+      id: 3,
+      link: "queue-activation",
+      platforms: ["zendesk", "sn"],
+      name: "Queue Activation",
+      image: "/path/to/queue-activation.png",
+      description: "Activate and manage customer service queues.",
+    },
+    {
+      id: 4,
+      link: "call-controls",
+      platforms: ["sf", "generic", "zendesk"],
+      name: "Call Controls",
+      image: "/path/to/call-controls.png",
+      description: "Control and manage live calls efficiently.",
     },
   ];
 
-  // Update filteredComponents when selectedPlatform changes
   useEffect(() => {
     const filtered =
       selectedPlatform === "all"
@@ -60,40 +73,44 @@ const Tutorial = () => {
 
   return (
     <div data-qa="library-page">
-      <div className="container">
-        <div className="filter-buttons">
+      <div className={styles.container}>
+        <div className={styles.filterButtons}>
           <button
-            className={
-              selectedPlatform === "all" ? "selected white" : "default"
-            }
+            className={`${styles.button} ${
+              selectedPlatform === "all" ? styles.selected : ""
+            }`}
             onClick={() => handlePlatformFilter("all")}
           >
             All Platforms
           </button>
           <button
-            className={selectedPlatform === "sf" ? "selected blue" : "blue"}
+            className={`${styles.button} ${
+              selectedPlatform === "sf" ? styles.selected : ""
+            }`}
             onClick={() => handlePlatformFilter("sf")}
           >
             Salesforce
           </button>
           <button
-            className={
-              selectedPlatform === "generic" ? "selected green" : "green"
-            }
+            className={`${styles.button} ${
+              selectedPlatform === "generic" ? styles.selected : ""
+            }`}
             onClick={() => handlePlatformFilter("generic")}
           >
             Standard
           </button>
           <button
-            className={selectedPlatform === "sn" ? "selected red" : "red"}
+            className={`${styles.button} ${
+              selectedPlatform === "sn" ? styles.selected : ""
+            }`}
             onClick={() => handlePlatformFilter("sn")}
           >
             ServiceNow
           </button>
           <button
-            className={
-              selectedPlatform === "zendesk" ? "selected yellow" : "yellow"
-            }
+            className={`${styles.button} ${
+              selectedPlatform === "zendesk" ? styles.selected : ""
+            }`}
             onClick={() => handlePlatformFilter("zendesk")}
           >
             Zendesk
@@ -101,24 +118,32 @@ const Tutorial = () => {
         </div>
       </div>
 
-      <div className="scroll-container">
-        <div className="content">
+      <div className={styles.scrollContainer}>
+        <div className={styles.content}>
           {filteredComponents.length > 0 && (
-            <div className="component-container">
+            <div className={styles.componentContainer}>
               {filteredComponents.map((component) => (
-                <div key={component.id} className="component">
-                  <a href={"/" + component.link} className="component">
+                <div key={component.id} className={styles.component}>
+                  <a
+                    href={"/" + component.link}
+                    className={styles.componentLink}
+                  >
                     <div
-                      className="platform-color"
+                      className={styles.platformColor}
                       style={{
                         backgroundColor: getBorderColor(component.platforms),
                       }}
                     />
-                    <div className="image-container">
-                      <img src={component.image} className="component-image" />
+                    <div className={styles.imageContainer}>
+                      <img
+                        src={component.image}
+                        className={styles.componentImage}
+                      />
                     </div>
-                    <h2 className="component-name">{component.name}</h2>
-                    <div className="description">{component.description}</div>
+                    <h2 className={styles.componentName}>{component.name}</h2>
+                    <div className={styles.description}>
+                      {component.description}
+                    </div>
                   </a>
                 </div>
               ))}
