@@ -1,10 +1,4 @@
 .container {
-  --sf-color: #5798d9;
-  --generic-color: #46b6c6;
-  --sn-color: #ac75ff;
-  --zendesk-color: #e55ecd;
-  --default-color: #ccc;
-
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -12,29 +6,66 @@
 
 .filterButtons {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  z-index: 998;
 }
 
 .button {
-  background-color: #ccc;
-  color: black;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px 20px;
   border: none;
-  padding: 10px 15px;
   border-radius: 5px;
+  background-color: white;
+  color: black;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
 }
 
-.selected {
-  background-color: #007bff;
-  color: white;
+.button.selected {
+  background-color: #939393;
+  color: black;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.button.white.selected {
+  background-color: white;
+  color: black;
+}
+
+.button::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.button.green::before {
+  background-color: #46b6c6;
+}
+
+.button.blue::before {
+  background-color: #5798d9;
+}
+
+.button.red::before {
+  background-color: #ac75ff;
+}
+
+.button.yellow::before {
+  background-color: #e55ecd;
 }
 
 .scrollContainer {
