@@ -40,10 +40,7 @@
     "platforms": ["sf", "generic"],
     "link": "agent-stats",
     "name": "Agent Stats",
-    "images": [
-      "/agent-stats-full.png",
-      "/agent-stats-mini-2.png"
-    ],
+    "images": ["/agent-stats-full.png", "/agent-stats-mini-2.png"],
     "description": "Monitor agent performance and metrics.",
     "agentStats": {
       "name": "Agent Performance & Stats",
@@ -66,6 +63,10 @@
         {
           "name": "Description",
           "content": "<p>The Genesys Cloud CX Agent Performance Stats is an embeddable component that allows an agent to view their real-time performance stats.</p>"
+        },
+        {
+          "name": "Component Details",
+          "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
         }
       ]
     }
@@ -91,6 +92,10 @@
       {
         "name": "Description",
         "content": "<p>The Genesys Cloud CX Queue Activation and Stats is an embeddable component that displays queue statistics.</p>"
+      },
+      {
+        "name": "Component Details",
+        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
       }
     ]
   },
@@ -115,6 +120,10 @@
       {
         "name": "Description",
         "content": "<p>This component allows an agent to view and interact with active and incoming conversations.</p>"
+      },
+      {
+        "name": "Component Details",
+        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
       }
     ]
   }
