@@ -46,26 +46,30 @@ const ComponentDetailPage = () => {
       )}
 
       {/* Render tabs if available */}
-      {componentData.tabs?.length > 0 && (
+      {(componentData.tabs || componentData.agentStats?.tabs)?.length > 0 && (
         <div className={styles.statsContainer}>
           <h2 className={styles.statsTitle}>Details</h2>
           <div className={styles.tabs}>
-            {componentData.tabs.map((tab, index) => (
-              <button
-                key={index}
-                className={`${styles.tab} ${
-                  activeTab === index ? styles.activeTab : ""
-                }`}
-                onClick={() => setActiveTab(index)}
-              >
-                {tab.name}
-              </button>
-            ))}
+            {(componentData.tabs || componentData.agentStats?.tabs).map(
+              (tab, index) => (
+                <button
+                  key={index}
+                  className={`${styles.tab} ${
+                    activeTab === index ? styles.activeTab : ""
+                  }`}
+                  onClick={() => setActiveTab(index)}
+                >
+                  {tab.name}
+                </button>
+              )
+            )}
           </div>
           <div
             className={styles.tabContent}
             dangerouslySetInnerHTML={{
-              __html: componentData.tabs[activeTab].content,
+              __html: (componentData.tabs || componentData.agentStats?.tabs)[
+                activeTab
+              ].content,
             }}
           />
         </div>
