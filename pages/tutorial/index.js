@@ -106,11 +106,17 @@ const Tutorial = () => {
                         }}
                       />
                       <div className={styles.imageContainer}>
-                        <img
-                          src={component.image}
-                          className={styles.componentImage}
-                          alt={component.name}
-                        />
+                        {component.images?.length > 0 ? (
+                          <img
+                            src={component.images[0]}
+                            className={styles.componentImage}
+                            alt={component.name}
+                          />
+                        ) : (
+                          <div className={styles.noImage}>
+                            No Image Available
+                          </div>
+                        )}
                       </div>
                       <h2 className={styles.componentName}>{component.name}</h2>
                       <div className={styles.description}>
