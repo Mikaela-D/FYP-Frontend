@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./call-controls.module.css";
-import { PhoneCall, MicOff, Pause, Mic, Circle, Flag } from "lucide-react";
+import { PhoneCall, PhoneOff, Pause, Mic, Circle, Flag } from "lucide-react";
 
 const CallControls = () => {
   const [activeButton, setActiveButton] = useState("call");
@@ -18,8 +18,9 @@ const CallControls = () => {
         <PhoneCall color="green" size={24} />
       </button>
       <button className={styles.button}>
-        <MicOff color="red" size={24} />
+        <PhoneOff color="red" size={24} />
       </button>
+
       <button className={styles.buttonDisabled} disabled>
         <Pause size={24} color="#ddd" />
       </button>
