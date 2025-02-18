@@ -46,30 +46,26 @@ const ComponentDetailPage = () => {
       )}
 
       {/* Render tabs if available */}
-      {(componentData.tabs || componentData.agentStats?.tabs) && (
+      {componentData.tabs?.length > 0 && (
         <div className={styles.statsContainer}>
           <h2 className={styles.statsTitle}>Details</h2>
           <div className={styles.tabs}>
-            {(componentData.tabs || componentData.agentStats?.tabs).map(
-              (tab, index) => (
-                <button
-                  key={index}
-                  className={`${styles.tab} ${
-                    activeTab === index ? styles.activeTab : ""
-                  }`}
-                  onClick={() => setActiveTab(index)}
-                >
-                  {tab.name}
-                </button>
-              )
-            )}
+            {componentData.tabs.map((tab, index) => (
+              <button
+                key={index}
+                className={`${styles.tab} ${
+                  activeTab === index ? styles.activeTab : ""
+                }`}
+                onClick={() => setActiveTab(index)}
+              >
+                {tab.name}
+              </button>
+            ))}
           </div>
           <div
             className={styles.tabContent}
             dangerouslySetInnerHTML={{
-              __html: (componentData.tabs || componentData.agentStats?.tabs)[
-                activeTab
-              ].content,
+              __html: componentData.tabs[activeTab].content,
             }}
           />
         </div>
@@ -82,9 +78,13 @@ const ComponentDetailPage = () => {
             <img
               key={index}
               ref={(el) => (componentList.current[index] = el)}
-              src={image}
+              src={image.src || image}
               alt={`${componentData.name} image ${index + 1}`}
               className={styles.componentImage}
+              style={{
+                width: image.width ? `${image.width}px` : "400px",
+                height: image.height ? `${image.height}px` : "auto",
+              }}
               onClick={() => {
                 setModalIndex(index);
                 setShowModal(true);
@@ -114,8 +114,19 @@ const ComponentDetailPage = () => {
             </button>
             <img
               className={styles.modalContent}
-              src={componentData.images[modalIndex]}
+              src={
+                componentData.images[modalIndex].src ||
+                componentData.images[modalIndex]
+              }
               alt="modal-image"
+              style={{
+                width: componentData.images[modalIndex].width
+                  ? `${componentData.images[modalIndex].width}px`
+                  : "auto",
+                height: componentData.images[modalIndex].height
+                  ? `${componentData.images[modalIndex].height}px`
+                  : "auto",
+              }}
             />
             <button
               className={styles.nextButton}
