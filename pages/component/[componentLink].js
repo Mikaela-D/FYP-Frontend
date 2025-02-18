@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./[componentLink].module.css";
 
 const ComponentDetailPage = () => {
@@ -7,6 +7,9 @@ const ComponentDetailPage = () => {
   const { componentLink } = query;
   const [componentData, setComponentData] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [modalIndex, setModalIndex] = useState(0);
+  const componentList = useRef([]);
 
   useEffect(() => {
     if (!componentLink) return;
@@ -48,6 +51,36 @@ const ComponentDetailPage = () => {
             dangerouslySetInnerHTML={{
               __html: componentData.agentStats.tabs[activeTab].content,
             }}
+          />
+          {activeTab === 0 && componentData.images?.length > 0 && (
+            <div className={styles.slideshowContainer}>
+              {componentData.images.map((image, index) => (
+                <img
+                  key={index}
+                  ref={(el) => (componentList.current[index] = el)}
+                  src={image.imgSrc}
+                  alt={image.name}
+                  className={styles.componentImage}
+                  onClick={() => {
+                    setModalIndex(index);
+                    setShowModal(true);
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {showModal && (
+        <div className={styles.modal} onClick={() => setShowModal(false)}>
+          <span className={styles.close} onClick={() => setShowModal(false)}>
+            &times;
+          </span>
+          <img
+            className={styles.modalContent}
+            src={componentData.images[modalIndex]?.imgSrc}
+            alt="modal-image"
           />
         </div>
       )}
