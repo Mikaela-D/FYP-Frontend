@@ -30,14 +30,19 @@ const ComponentDetailPage = () => {
       <p className={styles.description}>{componentData.description}</p>
 
       {/* Render attributes if available */}
-      {(componentData.attributes || componentData.agentStats?.attributes) && (
+      {((componentData.attributes && componentData.attributes.length > 0) ||
+        (componentData.agentStats?.attributes &&
+          componentData.agentStats.attributes.length > 0)) && (
         <div className={styles.statsContainer}>
           <h2 className={styles.statsTitle}>Attributes</h2>
           <ul>
-            {(
-              componentData.attributes || componentData.agentStats?.attributes
-            ).map((attr, index) => (
+            {componentData.attributes?.map((attr, index) => (
               <li key={index}>
+                <strong>{attr.name}:</strong> {attr.content}
+              </li>
+            ))}
+            {componentData.agentStats?.attributes?.map((attr, index) => (
+              <li key={`agent-${index}`}>
                 <strong>{attr.name}:</strong> {attr.content}
               </li>
             ))}
@@ -105,17 +110,19 @@ const ComponentDetailPage = () => {
             &times;
           </span>
           <div className={styles.modalImageContainer}>
-            <button
-              className={styles.prevButton}
-              onClick={(e) => {
-                e.stopPropagation();
-                setModalIndex((prev) =>
-                  prev > 0 ? prev - 1 : componentData.images.length - 1
-                );
-              }}
-            >
-              &#10094;
-            </button>
+            {componentData.images.length > 1 && (
+              <button
+                className={styles.prevButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalIndex((prev) =>
+                    prev > 0 ? prev - 1 : componentData.images.length - 1
+                  );
+                }}
+              >
+                &#10094;
+              </button>
+            )}
             <img
               className={styles.modalContent}
               src={
@@ -132,17 +139,19 @@ const ComponentDetailPage = () => {
                   : "auto",
               }}
             />
-            <button
-              className={styles.nextButton}
-              onClick={(e) => {
-                e.stopPropagation();
-                setModalIndex((prev) =>
-                  prev < componentData.images.length - 1 ? prev + 1 : 0
-                );
-              }}
-            >
-              &#10095;
-            </button>
+            {componentData.images.length > 1 && (
+              <button
+                className={styles.nextButton}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModalIndex((prev) =>
+                    prev < componentData.images.length - 1 ? prev + 1 : 0
+                  );
+                }}
+              >
+                &#10095;
+              </button>
+            )}
           </div>
         </div>
       )}
