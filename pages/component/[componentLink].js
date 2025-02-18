@@ -28,6 +28,48 @@ const ComponentDetailPage = () => {
     <div className={styles.container}>
       <h1 className={styles.header}>{componentData.name}</h1>
       <p className={styles.description}>{componentData.description}</p>
+
+      {/* Render attributes if available */}
+      {componentData.attributes && (
+        <div className={styles.statsContainer}>
+          <h2 className={styles.statsTitle}>Attributes</h2>
+          <ul>
+            {componentData.attributes.map((attr, index) => (
+              <li key={index}>
+                <strong>{attr.name}:</strong> {attr.content}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Render tabs if available */}
+      {componentData.tabs && componentData.tabs.length > 0 && (
+        <div className={styles.statsContainer}>
+          <h2 className={styles.statsTitle}>Details</h2>
+          <div className={styles.tabs}>
+            {componentData.tabs.map((tab, index) => (
+              <button
+                key={index}
+                className={`${styles.tab} ${
+                  activeTab === index ? styles.activeTab : ""
+                }`}
+                onClick={() => setActiveTab(index)}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
+          <div
+            className={styles.tabContent}
+            dangerouslySetInnerHTML={{
+              __html: componentData.tabs[activeTab].content,
+            }}
+          />
+        </div>
+      )}
+
+      {/* Render agent stats if available */}
       {componentData.agentStats && (
         <div className={styles.statsContainer}>
           <h2 className={styles.statsTitle}>
@@ -52,26 +94,29 @@ const ComponentDetailPage = () => {
               __html: componentData.agentStats.tabs[activeTab].content,
             }}
           />
-          {activeTab === 0 && componentData.images?.length > 0 && (
-            <div className={styles.slideshowContainer}>
-              {componentData.images.map((image, index) => (
-                <img
-                  key={index}
-                  ref={(el) => (componentList.current[index] = el)}
-                  src={image.imgSrc}
-                  alt={image.name}
-                  className={styles.componentImage}
-                  onClick={() => {
-                    setModalIndex(index);
-                    setShowModal(true);
-                  }}
-                />
-              ))}
-            </div>
-          )}
         </div>
       )}
 
+      {/* Render images if available */}
+      {componentData.images?.length > 0 && (
+        <div className={styles.slideshowContainer}>
+          {componentData.images.map((image, index) => (
+            <img
+              key={index}
+              ref={(el) => (componentList.current[index] = el)}
+              src={image.imgSrc}
+              alt={image.name}
+              className={styles.componentImage}
+              onClick={() => {
+                setModalIndex(index);
+                setShowModal(true);
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Modal for images */}
       {showModal && (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <span className={styles.close} onClick={() => setShowModal(false)}>
