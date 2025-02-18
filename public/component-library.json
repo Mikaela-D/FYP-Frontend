@@ -57,6 +57,10 @@
         {
           "name": "APP TYPE",
           "content": "Embeddable Desktop"
+        },
+        {
+          "name": "SELLING PARTY",
+          "content": "Genesys Billing Party"
         }
       ],
       "tabs": [
@@ -86,6 +90,14 @@
       {
         "name": "VERSION",
         "content": "1.0"
+      },
+      {
+        "name": "APP TYPE",
+        "content": "Embeddable Desktop"
+      },
+      {
+        "name": "SELLING PARTY",
+        "content": "Genesys Billing Party"
       }
     ],
     "tabs": [
@@ -114,6 +126,14 @@
       {
         "name": "VERSION",
         "content": "1.0"
+      },
+      {
+        "name": "APP TYPE",
+        "content": "Embeddable Desktop"
+      },
+      {
+        "name": "SELLING PARTY",
+        "content": "Genesys Billing Party"
       }
     ],
     "tabs": [
