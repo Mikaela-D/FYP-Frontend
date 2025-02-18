@@ -76,32 +76,59 @@ const ComponentDetailPage = () => {
       )}
 
       {/* Render images if available */}
-      {componentData.image && (
+      {componentData.images?.length > 0 && (
         <div className={styles.slideshowContainer}>
-          <img
-            ref={(el) => (componentList.current[0] = el)}
-            src={componentData.image}
-            alt={componentData.name}
-            className={styles.componentImage}
-            onClick={() => {
-              setModalIndex(0);
-              setShowModal(true);
-            }}
-          />
+          {componentData.images.map((image, index) => (
+            <img
+              key={index}
+              ref={(el) => (componentList.current[index] = el)}
+              src={image}
+              alt={`${componentData.name} image ${index + 1}`}
+              className={styles.componentImage}
+              onClick={() => {
+                setModalIndex(index);
+                setShowModal(true);
+              }}
+            />
+          ))}
         </div>
       )}
 
       {/* Modal for images */}
-      {showModal && componentData.image && (
+      {showModal && componentData.images?.length > 0 && (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <span className={styles.close} onClick={() => setShowModal(false)}>
             &times;
           </span>
           <img
             className={styles.modalContent}
-            src={componentData.image}
+            src={componentData.images[modalIndex]}
             alt="modal-image"
           />
+          <div className={styles.modalNavigation}>
+            <button
+              className={styles.prevButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalIndex((prev) =>
+                  prev > 0 ? prev - 1 : componentData.images.length - 1
+                );
+              }}
+            >
+              &#10094;
+            </button>
+            <button
+              className={styles.nextButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalIndex((prev) =>
+                  prev < componentData.images.length - 1 ? prev + 1 : 0
+                );
+              }}
+            >
+              &#10095;
+            </button>
+          </div>
         </div>
       )}
     </div>
