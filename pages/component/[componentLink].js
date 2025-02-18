@@ -76,33 +76,30 @@ const ComponentDetailPage = () => {
       )}
 
       {/* Render images if available */}
-      {componentData.images?.length > 0 && (
+      {componentData.image && (
         <div className={styles.slideshowContainer}>
-          {componentData.images.map((image, index) => (
-            <img
-              key={index}
-              ref={(el) => (componentList.current[index] = el)}
-              src={image.imgSrc}
-              alt={image.name}
-              className={styles.componentImage}
-              onClick={() => {
-                setModalIndex(index);
-                setShowModal(true);
-              }}
-            />
-          ))}
+          <img
+            ref={(el) => (componentList.current[0] = el)}
+            src={componentData.image}
+            alt={componentData.name}
+            className={styles.componentImage}
+            onClick={() => {
+              setModalIndex(0);
+              setShowModal(true);
+            }}
+          />
         </div>
       )}
 
       {/* Modal for images */}
-      {showModal && componentData.images?.length > 0 && (
+      {showModal && componentData.image && (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
           <span className={styles.close} onClick={() => setShowModal(false)}>
             &times;
           </span>
           <img
             className={styles.modalContent}
-            src={componentData.images[modalIndex]?.imgSrc}
+            src={componentData.image}
             alt="modal-image"
           />
         </div>
