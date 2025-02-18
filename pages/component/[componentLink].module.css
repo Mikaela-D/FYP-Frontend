@@ -120,3 +120,46 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.modalImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+  height: auto;
+}
+
+.modalContent {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.prevButton {
+  left: 10px;
+}
+
+.nextButton {
+  right: 10px;
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background: rgba(255, 255, 255, 0.8);
+}

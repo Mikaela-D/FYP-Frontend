@@ -100,12 +100,7 @@ const ComponentDetailPage = () => {
           <span className={styles.close} onClick={() => setShowModal(false)}>
             &times;
           </span>
-          <img
-            className={styles.modalContent}
-            src={componentData.images[modalIndex]}
-            alt="modal-image"
-          />
-          <div className={styles.modalNavigation}>
+          <div className={styles.modalImageContainer}>
             <button
               className={styles.prevButton}
               onClick={(e) => {
@@ -117,6 +112,11 @@ const ComponentDetailPage = () => {
             >
               &#10094;
             </button>
+            <img
+              className={styles.modalContent}
+              src={componentData.images[modalIndex]}
+              alt="modal-image"
+            />
             <button
               className={styles.nextButton}
               onClick={(e) => {
