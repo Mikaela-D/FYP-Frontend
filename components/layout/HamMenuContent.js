@@ -52,6 +52,11 @@ export default function HamMenuContent({ onClose = () => {} }) {
     closeMenu();
   };
 
+  const navigateToCallControls = () => {
+    router.push("/call-controls");
+    closeMenu();
+  };
+
   const navigateToSettings = () => {
     router.push("/settings");
     closeMenu();
@@ -94,6 +99,9 @@ export default function HamMenuContent({ onClose = () => {} }) {
           </div>
           <div className={classes.menuItem} onClick={navigateToSettings}>
             Settings
+          </div>
+          <div className={classes.menuItem} onClick={navigateToCallControls}>
+            Call Controls
           </div>
         </div>
       </div>
