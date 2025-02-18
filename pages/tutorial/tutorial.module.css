@@ -1,0 +1,139 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.filterButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  z-index: 998;
+}
+
+.filterButtons button {
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c1c6d4;
+  color: black;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+}
+
+.filterButtons button.selected {
+  background-color: #939393;
+  color: black;
+}
+
+.filterButtons button.white.selected {
+  background-color: #c1c6d4;
+  color: black;
+}
+
+.filterButtons button::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.filterButtons button.sf::before {
+  background-color: #5798d9;
+}
+
+.filterButtons button.generic::before {
+  background-color: #46b6c6;
+}
+
+.filterButtons button.sn::before {
+  background-color: #ac75ff;
+}
+
+.filterButtons button.zendesk::before {
+  background-color: #e55ecd;
+}
+
+.filterButtons button.default::before {
+  background-color: #ccc;
+}
+
+.scrollContainer {
+  overflow-x: auto;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.componentContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.component {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.component:hover {
+  transform: scale(1.05);
+}
+
+.componentLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.platformColor {
+  height: 5px;
+  width: 100%;
+}
+
+.imageContainer {
+  padding: 10px;
+}
+
+.componentImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.componentName {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.description {
+  font-size: 14px;
+  color: gray;
+}
+
+.componentLink a {
+    text-decoration: none;
+    color: inherit;
+  }
+  

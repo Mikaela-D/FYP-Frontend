@@ -1,12 +1,16 @@
+// HamMenuContent.js
+
 import classes from "./HamMenuContent.module.css";
 import { useState, useContext } from "react";
 import GlobalContext from "../../pages/store/globalContext";
 import ProductsPopup from "../generic/ProductsPopup";
+import { useRouter } from "next/router";
 
 export default function HamMenuContent({ onClose = () => {} }) {
   const globalCtx = useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [popupToggle, setPopupToggle] = useState(false);
+  const router = useRouter();
 
   const categories = ["Food", "Clothes", "Furniture", "Miscellaneous"];
 
@@ -26,6 +30,31 @@ export default function HamMenuContent({ onClose = () => {} }) {
     if (typeof onClose === "function") {
       onClose();
     }
+  };
+
+  const navigateToTutorial = () => {
+    router.push("/tutorial");
+    closeMenu();
+  };
+
+  const navigateToStationSelection = () => {
+    router.push("/station-selection");
+    closeMenu();
+  };
+
+  const navigateToAgentStats = () => {
+    router.push("/agent-stats");
+    closeMenu();
+  };
+
+  const navigateToQueueActivation = () => {
+    router.push("/queue-activation");
+    closeMenu();
+  };
+
+  const navigateToSettings = () => {
+    router.push("/settings");
+    closeMenu();
   };
 
   if (globalCtx.theGlobalObject.hideHamMenu) {
@@ -48,6 +77,24 @@ export default function HamMenuContent({ onClose = () => {} }) {
               {category}
             </div>
           ))}
+          <div className={classes.menuItem} onClick={navigateToTutorial}>
+            Tutorial
+          </div>
+          <div
+            className={classes.menuItem}
+            onClick={navigateToStationSelection}
+          >
+            Station Selection
+          </div>
+          <div className={classes.menuItem} onClick={navigateToAgentStats}>
+            Agent Stats
+          </div>
+          <div className={classes.menuItem} onClick={navigateToQueueActivation}>
+            Queue Activation
+          </div>
+          <div className={classes.menuItem} onClick={navigateToSettings}>
+            Settings
+          </div>
         </div>
       </div>
 

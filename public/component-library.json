@@ -1,0 +1,150 @@
+[
+  {
+    "id": 1,
+    "platforms": ["generic"],
+    "link": "station-selection",
+    "name": "Station Selection",
+    "images": ["/station-selection.png"],
+    "description": "Manage and assign workstations efficiently.",
+    "attributes": [
+      {
+        "name": "AUTHOR",
+        "content": "Genesys"
+      },
+      {
+        "name": "VERSION",
+        "content": "1.0"
+      },
+      {
+        "name": "APP TYPE",
+        "content": "Embeddable Desktop"
+      },
+      {
+        "name": "SELLING PARTY",
+        "content": "Genesys Billing Party"
+      }
+    ],
+    "tabs": [
+      {
+        "name": "Description",
+        "content": "<p>This component allows an agent to view and interact with active and incoming conversations.</p>"
+      },
+      {
+        "name": "Component Details",
+        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "platforms": ["sf", "generic"],
+    "link": "agent-stats",
+    "name": "Agent Stats",
+    "images": ["/agent-stats-full.png", "/agent-stats-mini-2.png"],
+    "description": "Monitor agent performance and metrics.",
+    "agentStats": {
+      "name": "Agent Performance & Stats",
+      "title": "Agent Performance and Stats",
+      "attributes": [
+        {
+          "name": "AUTHOR",
+          "content": "Genesys"
+        },
+        {
+          "name": "VERSION",
+          "content": "1.0"
+        },
+        {
+          "name": "APP TYPE",
+          "content": "Embeddable Desktop"
+        },
+        {
+          "name": "SELLING PARTY",
+          "content": "Genesys Billing Party"
+        }
+      ],
+      "tabs": [
+        {
+          "name": "Description",
+          "content": "<p>The Genesys Cloud CX Agent Performance Stats is an embeddable component that allows an agent to view their real-time performance stats.</p>"
+        },
+        {
+          "name": "Component Details",
+          "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "platforms": ["zendesk", "sn"],
+    "link": "queue-activation",
+    "name": "Queue Activation",
+    "images": ["/queue-activation.png"],
+    "description": "Activate and manage customer service queues.",
+    "attributes": [
+      {
+        "name": "AUTHOR",
+        "content": "Genesys"
+      },
+      {
+        "name": "VERSION",
+        "content": "1.0"
+      },
+      {
+        "name": "APP TYPE",
+        "content": "Embeddable Desktop"
+      },
+      {
+        "name": "SELLING PARTY",
+        "content": "Genesys Billing Party"
+      }
+    ],
+    "tabs": [
+      {
+        "name": "Description",
+        "content": "<p>The Genesys Cloud CX Queue Activation and Stats is an embeddable component that displays queue statistics.</p>"
+      },
+      {
+        "name": "Component Details",
+        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "platforms": ["sf", "generic", "zendesk"],
+    "link": "call-controls",
+    "name": "Call Controls",
+    "images": ["/call-controls-1.png", "/call-controls-2.png"],
+    "description": "Control and manage live calls efficiently.",
+    "attributes": [
+      {
+        "name": "AUTHOR",
+        "content": "Genesys"
+      },
+      {
+        "name": "VERSION",
+        "content": "1.0"
+      },
+      {
+        "name": "APP TYPE",
+        "content": "Embeddable Desktop"
+      },
+      {
+        "name": "SELLING PARTY",
+        "content": "Genesys Billing Party"
+      }
+    ],
+    "tabs": [
+      {
+        "name": "Description",
+        "content": "<p>This component allows an agent to view and interact with active and incoming conversations.</p>"
+      },
+      {
+        "name": "Component Details",
+        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+      }
+    ]
+  }
+]
