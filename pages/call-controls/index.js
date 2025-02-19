@@ -14,23 +14,24 @@ const CallControls = () => {
           activeButton === "call" ? styles.active : ""
         }`}
         onClick={() => setActiveButton("call")}
+        title="Pick Up"
       >
         <PhoneCall color="green" size={24} />
       </button>
-      <button className={styles.button}>
+      <button className={styles.button} title="End Call">
         <PhoneOff color="red" size={24} />
       </button>
 
-      <button className={styles.buttonDisabled} disabled>
+      <button className={styles.buttonDisabled} disabled title="Pause">
         <Pause size={24} color="#ddd" />
       </button>
-      <button className={styles.buttonDisabled} disabled>
+      <button className={styles.buttonDisabled} disabled title="Mute">
         <Mic size={24} color="#ddd" />
       </button>
-      <button className={styles.buttonDisabled} disabled>
+      <button className={styles.buttonDisabled} disabled title="Record">
         <Circle size={24} color="#ddd" />
       </button>
-      <button className={styles.buttonDisabled} disabled>
+      <button className={styles.buttonDisabled} disabled title="Report">
         <Flag size={24} color="#ddd" />
       </button>
     </div>
