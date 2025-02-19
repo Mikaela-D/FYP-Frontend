@@ -25,7 +25,23 @@
 }
 
 .themeSelect:focus {
+  border-color: #555;
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.themeSelect option {
+  background-color: white;
+  color: black;
+  padding: 8px;
+}
+
+/* Style for when the dropdown is open */
+.themeSelect:focus option {
+  background-color: white;
+}
+
+/* Styling the selected option */
+.themeSelect option:checked {
+  background-color: #ddd;
+  font-weight: bold;
 }
