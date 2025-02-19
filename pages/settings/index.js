@@ -1,20 +1,9 @@
-import { useState, useEffect } from "react";
 import styles from "./settings.module.css";
 
-const Settings = () => {
-  const [theme, setTheme] = useState("light");
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
-
+const Settings = ({ theme, setTheme }) => {
   const handleThemeChange = (e) => {
     const selectedTheme = e.target.value;
-    setTheme(selectedTheme);
-    document.documentElement.setAttribute("data-theme", selectedTheme);
-    localStorage.setItem("theme", selectedTheme);
+    setTheme(selectedTheme); // Calls global function in _app.js
   };
 
   return (
