@@ -24,13 +24,17 @@ function MyApp({ Component, pageProps }) {
   return (
     <GlobalContextProvider>
       <CartProvider>
-        <Layout>
-          <Component
-            {...pageProps}
-            theme={theme}
-            setTheme={handleThemeChange}
-          />
-        </Layout>
+        <div className="app-container">
+          <Layout>
+            <main className="content">
+              <Component
+                {...pageProps}
+                theme={theme}
+                setTheme={handleThemeChange}
+              />
+            </main>
+          </Layout>
+        </div>
       </CartProvider>
     </GlobalContextProvider>
   );
