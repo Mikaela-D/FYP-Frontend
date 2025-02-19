@@ -3,9 +3,9 @@
   color: white;
   text-align: center;
   padding: 20px 0;
-  position: relative;
   width: 100%;
-  bottom: 0;
+  position: relative;
+  margin-top: auto; /* Pushes footer to bottom */
 }
 
 .footer p {

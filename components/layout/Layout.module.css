@@ -1,6 +1,19 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the layout fills the full viewport height */
+}
+
 .main {
+  flex: 1; /* Pushes the footer to the bottom */
   margin: 3rem auto;
   width: 90%;
   max-width: 40rem;
-  
+}
+
+.header,
+.footer {
+  width: 100%;
+  margin: 0; /* Remove any unintended margin */
+  padding: 0; /* Ensure no extra spacing */
 }
