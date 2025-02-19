@@ -73,8 +73,9 @@
 }
 
 .scrollContainer {
-  overflow-x: auto;
+  overflow-x: hidden;
   padding: 20px;
+  width: 100%;
 }
 
 .content {
@@ -130,7 +131,7 @@
 .componentContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 20px;
   padding: 20px;
   max-width: 1400px;
@@ -142,11 +143,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  position: relative;
   text-align: center;
   border-radius: 15px;
   padding: 15px;
-  width: 280px;
+  width: 22%; /* Adjust width dynamically */
+  min-width: 250px;
+  max-width: 280px;
   height: 350px;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -157,27 +159,19 @@
   transform: scale(1.05);
 }
 
-/* Responsive Grid Adjustments */
 @media (max-width: 1200px) {
-  .componentContainer {
-    max-width: 1000px;
+  .component {
+    width: 30%;
   }
 }
 
 @media (max-width: 1024px) {
-  .componentContainer {
-    justify-content: center;
-  }
   .component {
     width: 45%;
   }
 }
 
 @media (max-width: 768px) {
-  .componentContainer {
-    flex-direction: column;
-    align-items: center;
-  }
   .component {
     width: 90%;
   }
