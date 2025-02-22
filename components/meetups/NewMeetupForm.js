@@ -8,31 +8,37 @@ import classes from "./NewMeetupForm.module.css";
 function NewMeetupForm(props) {
   const IdInputRef = useRef();
   const titleInputRef = useRef();
-  const imageInputRef = useRef();
-  const priceInputRef = useRef();
+  const customerPhoneInputRef = useRef();
+  const customerEmailInputRef = useRef();
   const categoryInputRef = useRef();
+  const priorityInputRef = useRef();
+  const statusInputRef = useRef();
   const descriptionInputRef = useRef();
-  const quantityInputRef = useRef();
+  const imageInputRef = useRef();
 
   function submitHandler(event) {
     event.preventDefault();
 
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
-    const enteredImage = imageInputRef.current.value;
-    const enteredPrice = priceInputRef.current.value;
+    const enteredCustomerPhone = customerPhoneInputRef.current.value;
+    const enteredCustomerEmail = customerEmailInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
+    const enteredPriority = priorityInputRef.current.value;
+    const enteredStatus = statusInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
-    const enteredQuantity = quantityInputRef.current.value;
+    const enteredImage = imageInputRef.current.value;
 
     const meetupData = {
       meetingId: enteredId,
       title: enteredTitle,
-      image: enteredImage,
-      price: enteredPrice,
+      customerPhone: enteredCustomerPhone,
+      customerEmail: enteredCustomerEmail,
       category: enteredCategory,
+      priority: enteredPriority,
+      status: enteredStatus,
       description: enteredDescription,
-      quantity: enteredQuantity,
+      image: enteredImage,
     };
 
     props.onAddMeetup(meetupData);
@@ -50,24 +56,51 @@ function NewMeetupForm(props) {
           <input type="text" required id="title" ref={titleInputRef} />
         </div>
         <div className={classes.control}>
+          <label htmlFor="customerPhone">Customer Phone</label>
+          <input
+            type="tel"
+            required
+            id="customerPhone"
+            ref={customerPhoneInputRef}
+          />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="customerEmail">Customer Email</label>
+          <input
+            type="email"
+            required
+            id="customerEmail"
+            ref={customerEmailInputRef}
+          />
+        </div>
+        <div className={classes.control}>
           <label htmlFor="category">Category</label>
           <select id="category" required ref={categoryInputRef}>
-            <option value="Food">Food</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Miscellaneous">Miscellaneous</option>
+            <option value="Technical">Technical</option>
+            <option value="Billing">Billing</option>
+            <option value="Account">Account</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div className={classes.control}>
-          <label htmlFor="quantity">Status</label>
-          <input type="number" required id="quantity" ref={quantityInputRef} />
+          <label htmlFor="priority">Priority</label>
+          <select id="priority" required ref={priorityInputRef}>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
         </div>
         <div className={classes.control}>
-          <label htmlFor="price">Priority</label>
-          <input type="number" required id="price" ref={priceInputRef} />
+          <label htmlFor="status">Status</label>
+          <select id="status" required ref={statusInputRef}>
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Awaiting Response">Awaiting Response</option>
+            <option value="Closed">Closed</option>
+          </select>
         </div>
         <div className={classes.control}>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">Issue Description</label>
           <textarea
             id="description"
             required
@@ -77,7 +110,7 @@ function NewMeetupForm(props) {
         </div>
         <div className={classes.control}>
           <label htmlFor="image">Relevant Images (if any)</label>
-          <input type="url" required id="image" ref={imageInputRef} />
+          <input type="url" id="image" ref={imageInputRef} />
         </div>
         <div className={classes.actions}>
           <button>Create Ticket</button>
