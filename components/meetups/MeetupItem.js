@@ -55,6 +55,12 @@ function MeetupItem(props) {
             <p>Category: {props.category}</p>
           </div>
           <div>
+            <p>Priority: {props.priority}</p>
+          </div>
+          <div>
+            <p>Status: {props.status}</p>
+          </div>
+          <div>
             <p>
               <strong>
                 {props.quantity > 0
