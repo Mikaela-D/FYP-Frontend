@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupDetail.js
+
 import classes from "./MeetupDetail.module.css";
 
 function MeetupDetail(props) {

@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupItem.js
+
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 import { useRouter } from "next/router";

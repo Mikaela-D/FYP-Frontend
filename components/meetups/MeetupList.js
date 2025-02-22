@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupList.js
+
 import MeetupItem from "./MeetupItem";
 import classes from "./MeetupList.module.css";
 
