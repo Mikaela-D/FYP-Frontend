@@ -11,6 +11,7 @@ function MeetupList(props) {
           key={meetup._id}
           id={meetup.meetingId}
           title={meetup.title}
+          customerName={meetup.customerName}
           customerPhone={meetup.customerPhone}
           customerEmail={meetup.customerEmail}
           category={meetup.category}

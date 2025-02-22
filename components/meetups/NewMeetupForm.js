@@ -8,6 +8,7 @@ import classes from "./NewMeetupForm.module.css";
 function NewMeetupForm(props) {
   const IdInputRef = useRef();
   const titleInputRef = useRef();
+  const customerNameInputRef = useRef();
   const customerPhoneInputRef = useRef();
   const customerEmailInputRef = useRef();
   const categoryInputRef = useRef();
@@ -21,6 +22,7 @@ function NewMeetupForm(props) {
 
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
+    const enteredCustomerName = customerNameInputRef.current.value;
     const enteredCustomerPhone = customerPhoneInputRef.current.value;
     const enteredCustomerEmail = customerEmailInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
@@ -32,6 +34,7 @@ function NewMeetupForm(props) {
     const meetupData = {
       meetingId: enteredId,
       title: enteredTitle,
+      customerName: enteredCustomerName,
       customerPhone: enteredCustomerPhone,
       customerEmail: enteredCustomerEmail,
       category: enteredCategory,
@@ -54,6 +57,15 @@ function NewMeetupForm(props) {
         <div className={classes.control}>
           <label htmlFor="title">Title</label>
           <input type="text" required id="title" ref={titleInputRef} />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="customerName">Customer Name</label>
+          <input
+            type="text"
+            required
+            id="customerName"
+            ref={customerNameInputRef}
+          />
         </div>
         <div className={classes.control}>
           <label htmlFor="customerPhone">Customer Phone</label>

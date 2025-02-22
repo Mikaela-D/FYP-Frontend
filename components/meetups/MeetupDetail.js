@@ -6,6 +6,7 @@ function MeetupDetail(props) {
   return (
     <section className={classes.detail}>
       <h1>{props.title}</h1>
+      <p>Customer Name: {props.customerName}</p>
       <p>Customer Phone: {props.customerPhone}</p>
       <p>Customer Email: {props.customerEmail}</p>
       <category>Category: {props.category}</category>
