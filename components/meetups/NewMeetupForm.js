@@ -42,24 +42,12 @@ function NewMeetupForm(props) {
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
         <div className={classes.control}>
-          <label htmlFor="Id">Product Id (must be unique)</label>
+          <label htmlFor="Id">Ticket Id (must be unique)</label>
           <input type="number" required id="Id" ref={IdInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="title">Product Name</label>
+          <label htmlFor="title">Title</label>
           <input type="text" required id="title" ref={titleInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="image">Product Image</label>
-          <input type="url" required id="image" ref={imageInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="price">Price</label>
-          <input type="number" required id="price" ref={priceInputRef} />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="quantity">Quantity</label>
-          <input type="number" required id="quantity" ref={quantityInputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor="category">Category</label>
@@ -71,7 +59,15 @@ function NewMeetupForm(props) {
           </select>
         </div>
         <div className={classes.control}>
-          <label htmlFor="description">Product Description</label>
+          <label htmlFor="quantity">Status</label>
+          <input type="number" required id="quantity" ref={quantityInputRef} />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="price">Priority</label>
+          <input type="number" required id="price" ref={priceInputRef} />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="description">Description</label>
           <textarea
             id="description"
             required
@@ -79,8 +75,12 @@ function NewMeetupForm(props) {
             ref={descriptionInputRef}
           ></textarea>
         </div>
+        <div className={classes.control}>
+          <label htmlFor="image">Relevant Images (if any)</label>
+          <input type="url" required id="image" ref={imageInputRef} />
+        </div>
         <div className={classes.actions}>
-          <button>Add Product</button>
+          <button>Create Ticket</button>
         </div>
       </form>
     </Card>
