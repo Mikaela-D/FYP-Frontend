@@ -10,11 +10,14 @@ function MeetupList(props) {
         <MeetupItem
           key={meetup._id}
           id={meetup.meetingId}
-          image={meetup.image}
           title={meetup.title}
-          price={meetup.price}
+          customerPhone={meetup.customerPhone}
+          customerEmail={meetup.customerEmail}
           category={meetup.category}
-          quantity={meetup.quantity}
+          priority={meetup.priority}
+          status={meetup.status}
+          description={meetup.description}
+          image={meetup.image}
         />
       ))}
     </ul>
