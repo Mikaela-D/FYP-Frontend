@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\components\generic\CartContext.js
+
 import { createContext, useState, useContext } from "react";
 
 // Create the Cart Context

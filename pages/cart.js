@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\pages\cart.js
+
 import { useCart } from "../components/generic/CartContext";
 import { useState } from "react";
 import classes from "../styles/Cart.module.css";
