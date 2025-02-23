@@ -17,7 +17,7 @@ export default function Cart() {
 
   return (
     <div className={classes.cart}>
-      <h1>Your Tickets</h1>
+      <h1>Your Tickets (Cart)</h1>
       {cart.length === 0 ? (
         <p>You don't have any tickets.</p>
       ) : (
