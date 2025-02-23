@@ -41,7 +41,10 @@ function MainNavigation() {
             <Link href="/new-meetup">New Ticket</Link>
           </li>
           <li>
-            <Link href="/cart">New Interaction</Link>
+            <Link href="/cart">Tickets</Link>
+          </li>
+          <li>
+            <Link href="/interaction">New Interaction</Link>
           </li>
         </ul>
       </nav>

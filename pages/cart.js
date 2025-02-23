@@ -17,9 +17,9 @@ export default function Cart() {
 
   return (
     <div className={classes.cart}>
-      <h1>Your Cart</h1>
+      <h1>Your Tickets</h1>
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p>You don't have any tickets.</p>
       ) : (
         <ul>
           {cart.map((item, index) => (
