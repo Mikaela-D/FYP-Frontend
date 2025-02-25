@@ -50,7 +50,7 @@ function MainNavigation() {
             <Link href="/tickets">Tickets</Link>
           </li>
           <li>
-            <Link href="/new-meetup">New Ticket (Your Cart)</Link>
+            <Link href="/new-meetup">New Ticket</Link>
           </li>
           <li>
             <StatusDropdown />
