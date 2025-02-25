@@ -7,7 +7,7 @@
   cursor: pointer;
   font-size: 0.9rem;
   transition: all 0.2s ease-in-out;
-  min-width: 120px;
+  min-width: 140px;
 }
 
 .statusDropdown:hover {
@@ -22,8 +22,8 @@
 }
 
 .statusDropdown option {
-  padding: 6px;
-  font-size: 0.9rem;
+  padding: 8px;
+  font-size: 1rem;
 }
 
 .statusDropdown option[value="available"] {
@@ -37,4 +37,3 @@
 .statusDropdown option[value="offline"] {
   color: #95a5a6;
 }
-
