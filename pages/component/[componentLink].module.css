@@ -185,3 +185,17 @@
   box-shadow: 0 2px 5px rgb(0, 0, 0);
   border: 2px solid black;
 }
+
+.light-theme {
+  background-color: white;
+  color: black;
+}
+
+.dark-theme {
+  background-color: black;
+  color: white;
+}
+
+.container, .header, .description, .statsTitle, .tab, .tabContent, .loading {
+  color: black !important;
+}
