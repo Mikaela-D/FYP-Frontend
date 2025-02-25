@@ -35,11 +35,17 @@ function MainNavigation() {
       <nav>
         <ul>
           <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
             <Link href="/inbox">Inbox</Link> (
             {globalCtx.theGlobalObject.meetings.length})
           </li>
           <li>
             <Link href="/new-meetup">New Interaction</Link>
+          </li>
+          <li>
+            <Link href="/tickets">Tickets</Link>
           </li>
           <li>
             <Link href="/cart">New Ticket (Your Cart)</Link>

@@ -1,14 +1,10 @@
-import MeetupList from "../components/meetups/MeetupList";
-import { useContext } from "react";
-import GlobalContext from "./store/globalContext";
-
 function HomePage() {
-  const globalCtx = useContext(GlobalContext);
-
-  if (globalCtx.theGlobalObject.dataLoaded == true) {
-    return <MeetupList meetups={globalCtx.theGlobalObject.meetings} />;
-  }
-  return <div>Loading data from database, please wait . . . </div>;
+  return (
+    <div>
+      <h1>Welcome to the Ticket Management System</h1>
+      <p>Please select an option from the navigation menu to get started.</p>
+    </div>
+  );
 }
 
 export default HomePage;
