@@ -1,13 +1,12 @@
 .statusDropdown {
-  padding: 6px 10px;
+  padding: 5px 5px;
   border-radius: 4px;
   border: 1px solid #e0e0e0;
   background-color: white;
-  margin-left: 1rem;
+  margin-left: 10px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 12px;
   transition: all 0.2s ease-in-out;
-  min-width: 140px;
 }
 
 .statusDropdown:hover {
@@ -23,17 +22,5 @@
 
 .statusDropdown option {
   padding: 8px;
-  font-size: 1rem;
-}
-
-.statusDropdown option[value="available"] {
-  color: #2ecc71;
-}
-
-.statusDropdown option[value="away"] {
-  color: #f1c40f;
-}
-
-.statusDropdown option[value="offline"] {
-  color: #95a5a6;
+  font-size: 12px;
 }
