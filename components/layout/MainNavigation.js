@@ -9,6 +9,7 @@ import HamMenuContent from "./HamMenuContent";
 import { useRouter } from "next/router";
 import classes from "./MainNavigation.module.css";
 import StatusDropdown from "../generic/StatusDropdown";
+import HomeIcon from "./HomeIcon";
 
 function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
@@ -28,6 +29,7 @@ function MainNavigation() {
 
   return (
     <header className={classes.header}>
+      <HomeIcon />
       <HamMenuContent contents={contents} />
       <HamMenu toggleMenuHide={() => toggleMenuHide()} />
       <HamMenuFAB toggleMenuHide={() => toggleMenuHide()} />
