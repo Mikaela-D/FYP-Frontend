@@ -42,13 +42,13 @@ function MainNavigation() {
             {globalCtx.theGlobalObject.meetings.length})
           </li>
           <li>
-            <Link href="/new-meetup">New Interaction</Link>
+            <Link href="/cart">New Interaction</Link>
           </li>
           <li>
             <Link href="/tickets">Tickets</Link>
           </li>
           <li>
-            <Link href="/cart">New Ticket (Your Cart)</Link>
+            <Link href="/new-meetup">New Ticket (Your Cart)</Link>
           </li>
           <li>
             <StatusDropdown />
