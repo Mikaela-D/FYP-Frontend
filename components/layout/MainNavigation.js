@@ -37,9 +37,6 @@ function MainNavigation() {
       <nav>
         <ul>
           <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
             <Link href="/inbox">Inbox</Link> (
             {globalCtx.theGlobalObject.meetings.length})
           </li>
