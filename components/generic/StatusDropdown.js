@@ -27,6 +27,7 @@ export default function StatusDropdown() {
       onChange={(e) => updateStatus(e.target.value)}
     >
       <option value="available">🟢 Available</option>
+      <option value="busy">🔴 Busy</option>
       <option value="away">🟡 Away</option>
       <option value="offline">⚫ Offline</option>
     </select>
