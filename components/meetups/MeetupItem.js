@@ -9,9 +9,8 @@ import { useCart } from "../generic/CartContext";
 function MeetupItem(props) {
   const { addToCart } = useCart();
   const router = useRouter();
-  const [selectedQuantity, setSelectedQuantity] = useState(1); // Track the user's selected quantity
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
-  // Function to handle adding the product to the cart and navigating to the cart page
   function addToCartHandler() {
     if (props.quantity <= 0) {
       alert("Sorry, this item is out of stock.");
@@ -28,12 +27,11 @@ function MeetupItem(props) {
       title: props.title,
       price: props.price,
       category: props.category,
-      quantity: selectedQuantity, // Add selected quantity to the cart item
+      quantity: selectedQuantity,
     });
     router.push("/cart");
   }
 
-  // Update the selected quantity when the user changes it
   function quantityChangeHandler(event) {
     setSelectedQuantity(Number(event.target.value));
   }
@@ -43,11 +41,8 @@ function MeetupItem(props) {
   }
 
   return (
-    <li className={classes.item}>
+    <li className={classes.item} style={{ display: "inline-block", verticalAlign: "top", margin: "10px" }}>
       <Card>
-        <div className={classes.image}>
-          <img src={props.image} alt={props.title} />
-        </div>
         <div className={classes.content}>
           <h3>{props.title}</h3>
           <p>€{props.price}</p>
@@ -63,9 +58,7 @@ function MeetupItem(props) {
           <div>
             <p>
               <strong>
-                {props.quantity > 0
-                  ? `${props.quantity} items left`
-                  : "Out of stock"}
+                {props.quantity > 0 ? `${props.quantity} items left` : "Out of stock"}
               </strong>
             </p>
           </div>
@@ -79,14 +72,11 @@ function MeetupItem(props) {
               onChange={quantityChangeHandler}
               disabled={props.quantity <= 0}
             >
-              {/* Generate options from 1 to available stock */}
-              {Array.from({ length: props.quantity }, (_, i) => i + 1).map(
-                (qty) => (
-                  <option key={qty} value={qty}>
-                    {qty}
-                  </option>
-                )
-              )}
+              {Array.from({ length: props.quantity }, (_, i) => i + 1).map((qty) => (
+                <option key={qty} value={qty}>
+                  {qty}
+                </option>
+              ))}
             </select>
           </div>
           <button onClick={showDetailsHandler}>Show Details</button>
