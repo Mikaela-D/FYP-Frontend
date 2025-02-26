@@ -17,31 +17,9 @@ export default function Cart() {
 
   return (
     <div className={classes.cart}>
-      <h1>Your Tickets (Cart)</h1>
-      {cart.length === 0 ? (
-        <p>You don't have any tickets.</p>
-      ) : (
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index} className={classes.cartItem}>
-              <img src={item.image} alt={item.title} />
-              <div className={classes.itemDetails}>
-                <h3>{item.title}</h3>
-                <p>Price: {item.price}€</p>
-                <p>Quantity: {item.quantity}</p>
-                <p>Total: {item.price * item.quantity}€</p>
-                <button
-                  onClick={() => handleBuy(item)}
-                  className={classes.buyButton}
-                >
-                  Buy
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-
+      <h1>New Interaction</h1>
+      <p>I could add a record of the calls etc here maybe, plus the call controls.</p>
+      
       {purchasedItems.length > 0 && (
         <div className={classes.purchasedMessage}>
           <h2>Purchased Items</h2>
