@@ -23,6 +23,9 @@ function MeetupItem(props) {
 
     addToCart({
       id: props.id,
+      customerName: props.customerName,
+      customerPhone: props.customerPhone,
+      customerEmail: props.customerEmail,
       image: props.image,
       title: props.title,
       price: props.price,

@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\pages\[meetupId]\index.js
+
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 import { useRouter } from "next/router";
 import GlobalContext from "../../pages/store/globalContext";
@@ -11,14 +13,14 @@ export default function () {
   let returnVal = null;
   for (let ii = 0; ii < globalCtx.theGlobalObject.meetings.length; ii++) {
     let temp = globalCtx.theGlobalObject.meetings[ii];
-    if (temp.meetingId && router.query.meetupId && temp.meetingId.trim() == router.query.meetupId.trim()) {
+    if (temp.meetingId && router.query.meetupId && temp.meetingId.trim() === router.query.meetupId.trim()) {
       returnVal = (
         <MeetupDetail
           image={temp.image}
           title={temp.title}
-          customerName={temp.customerName}
-          customerPhone={temp.customerPhone}
-          customerEmail={temp.customerEmail}
+          customerName={temp.customerName || "N/A"}
+          customerPhone={temp.customerPhone || "N/A"}
+          customerEmail={temp.customerEmail || "N/A"}
           category={temp.category}
           priority={temp.priority}
           status={temp.status}
