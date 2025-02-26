@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\pages\_app.js
+
 import "../styles/globals.css";
 import Layout from "../components/layout/Layout";
 import { GlobalContextProvider } from "./store/globalContext";
