@@ -15,6 +15,7 @@ export function GlobalContextProvider(props) {
     hideHamMenu: true,
     meetings: [],
     dataLoaded: false,
+    userStatus: "available",
   });
 
   useEffect(() => {
@@ -48,6 +49,13 @@ export function GlobalContextProvider(props) {
       setGlobals((previousGlobals) => {
         const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
         newGlobals.hideHamMenu = command.newVal;
+        return newGlobals;
+      });
+    }
+    if (command.cmd == "updateStatus") {
+      setGlobals((previousGlobals) => {
+        const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
+        newGlobals.userStatus = command.newVal;
         return newGlobals;
       });
     }

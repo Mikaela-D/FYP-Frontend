@@ -8,6 +8,7 @@ import GlobalContext from "../../pages/store/globalContext";
 import HamMenuContent from "./HamMenuContent";
 import { useRouter } from "next/router";
 import classes from "./MainNavigation.module.css";
+import StatusDropdown from "../generic/StatusDropdown";
 
 function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
@@ -45,6 +46,9 @@ function MainNavigation() {
           </li>
           <li>
             <Link href="/interaction">New Interaction</Link>
+          </li>
+          <li>
+            <StatusDropdown />
           </li>
         </ul>
       </nav>
