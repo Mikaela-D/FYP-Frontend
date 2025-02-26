@@ -9,6 +9,7 @@ import HamMenuContent from "./HamMenuContent";
 import { useRouter } from "next/router";
 import classes from "./MainNavigation.module.css";
 import StatusDropdown from "../generic/StatusDropdown";
+import HomeIcon from "./HomeIcon";
 
 function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
@@ -28,6 +29,7 @@ function MainNavigation() {
 
   return (
     <header className={classes.header}>
+      <HomeIcon />
       <HamMenuContent contents={contents} />
       <HamMenu toggleMenuHide={() => toggleMenuHide()} />
       <HamMenuFAB toggleMenuHide={() => toggleMenuHide()} />
@@ -35,14 +37,20 @@ function MainNavigation() {
       <nav>
         <ul>
           <li>
-            <Link href="/">Inbox</Link> (
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/inbox">Inbox</Link> (
             {globalCtx.theGlobalObject.meetings.length})
           </li>
           <li>
-            <Link href="/new-meetup">New Interaction</Link>
+            <Link href="/cart">New Interaction</Link>
           </li>
           <li>
-            <Link href="/cart">New Ticket (Your Cart)</Link>
+            <Link href="/tickets">Tickets</Link>
+          </li>
+          <li>
+            <Link href="/new-meetup">New Ticket</Link>
           </li>
           <li>
             <StatusDropdown />
