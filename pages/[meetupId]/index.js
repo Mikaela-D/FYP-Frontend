@@ -11,7 +11,7 @@ export default function () {
   let returnVal = null;
   for (let ii = 0; ii < globalCtx.theGlobalObject.meetings.length; ii++) {
     let temp = globalCtx.theGlobalObject.meetings[ii];
-    if (temp.meetingId.trim() == router.query.meetupId.trim()) {
+    if (temp.meetingId && router.query.meetupId && temp.meetingId.trim() == router.query.meetupId.trim()) {
       returnVal = (
         <MeetupDetail
           image={temp.image}
