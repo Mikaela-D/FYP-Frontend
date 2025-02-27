@@ -36,22 +36,37 @@ export default function Cart() {
   return (
     <div className={classes.cart}>
       <h1>Agent Work Queue</h1>
-      <p>Below are the work tickets assigned to you. Resolve them to log the interactions.</p>
 
       <ul className={classes.ticketList}>
         {cart.map((ticket) => (
           <li key={ticket.id} className={classes.cartItem}>
-            <div className={classes.itemDetails}>
+            <header className={classes.cartItemHeader}>
+              <div className={classes.headerBar}></div>
               <h3>{ticket.title}</h3>
-              <p><strong>Customer:</strong> {ticket.customerName}</p>
-              <p><strong>Priority:</strong> {ticket.priority}</p>
-              <p><strong>Status:</strong> {ticket.status}</p>
-              <p><strong>Category:</strong> {ticket.category}</p>
-              <p><strong>Assigned To:</strong> {ticket.assignedTo}</p>
+            </header>
+
+            <div className={classes.cartItemBody}>
+              <div className={classes.infoGrid}>
+                <div><strong>Customer:</strong> {ticket.customerName}</div>
+                <div><strong>Category:</strong> {ticket.category}</div>
+                <div><strong>Priority:</strong> 
+                  <span className={`${classes.badge} ${classes[`priority-${ticket.priority?.toLowerCase()}`]}`}>
+                    {ticket.priority}
+                  </span>
+                </div>
+                <div><strong>Status:</strong> 
+                  <span className={`${classes.badge} ${classes[`status-${ticket.status?.toLowerCase()}`]}`}>
+                    {ticket.status}
+                  </span>
+                </div>
+              </div>
             </div>
-            <button className={classes.resolveButton} onClick={() => handleResolve(ticket)}>
-              Resolve Ticket
-            </button>
+
+            <footer className={classes.cartItemFooter}>
+              <button className={classes.resolveButton} onClick={() => handleResolve(ticket)}>
+                Resolve Ticket
+              </button>
+            </footer>
           </li>
         ))}
       </ul>
