@@ -96,3 +96,10 @@
   font-size: 0.9rem;
   color: #555;
 }
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.1rem;
+  color: #555;
+}

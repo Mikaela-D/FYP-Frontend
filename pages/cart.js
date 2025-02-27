@@ -1,19 +1,37 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\cart.js
 
 import { useCart } from "../components/generic/CartContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "../styles/Cart.module.css";
 
 export default function Cart() {
-  const { cart, setCart } = useCart(); // Cart = work queue now
+  const { cart, removeFromCart, isHydrated } = useCart();
+
   const [resolvedTickets, setResolvedTickets] = useState([]);
 
-  const handleResolve = (ticket) => {
-    const updatedCart = cart.filter((t) => t.id !== ticket.id);
-    setCart(updatedCart);
+  useEffect(() => {
+    const saved = localStorage.getItem("resolvedTickets");
+    if (saved) {
+      setResolvedTickets(JSON.parse(saved));
+    }
+  }, []);
 
-    setResolvedTickets((prev) => [...prev, ticket]);
+  useEffect(() => {
+    localStorage.setItem("resolvedTickets", JSON.stringify(resolvedTickets));
+  }, [resolvedTickets]);
+
+  const handleResolve = (ticket) => {
+    removeFromCart(ticket.id);
+    setResolvedTickets((prev) => [...prev, {
+      ...ticket,
+      resolvedBy: "Me",
+      resolvedAt: new Date().toISOString(),
+    }]);
   };
+
+  if (!isHydrated) {
+    return <p className={classes.loading}>Loading your work queue...</p>;
+  }
 
   return (
     <div className={classes.cart}>
@@ -29,6 +47,7 @@ export default function Cart() {
               <p><strong>Priority:</strong> {ticket.priority}</p>
               <p><strong>Status:</strong> {ticket.status}</p>
               <p><strong>Category:</strong> {ticket.category}</p>
+              <p><strong>Assigned To:</strong> {ticket.assignedTo}</p>
             </div>
             <button className={classes.resolveButton} onClick={() => handleResolve(ticket)}>
               Resolve Ticket
@@ -43,7 +62,9 @@ export default function Cart() {
           <ul>
             {resolvedTickets.map((ticket, index) => (
               <li key={index}>
-                <span>{ticket.title} - <em>(Resolved)</em></span>
+                <span>
+                  {ticket.title} - Resolved by {ticket.resolvedBy} on {new Date(ticket.resolvedAt).toLocaleString()}
+                </span>
               </li>
             ))}
           </ul>

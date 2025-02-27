@@ -1,13 +1,20 @@
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupItem.js
+
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 import { useRouter } from "next/router";
 import { useCart } from "../generic/CartContext";
 
 function MeetupItem(props) {
-  const { addToCart } = useCart();
+  const { cart, addToCart } = useCart();
   const router = useRouter();
 
   function addToCartHandler() {
+    if (cart.some((ticket) => ticket.id === props.id)) {
+      alert("This ticket is already assigned to you.");
+      return;
+    }
+
     addToCart({
       id: props.id,
       customerName: props.customerName,
@@ -54,9 +61,7 @@ function MeetupItem(props) {
         <footer className={classes.footer}>
           <div className={classes.actions}>
             <button onClick={showDetailsHandler}>Details</button>
-            <button onClick={addToCartHandler}>
-              Assign to Me
-            </button>
+            <button onClick={addToCartHandler}>Assign to Me</button>
           </div>
         </footer>
       </Card>
