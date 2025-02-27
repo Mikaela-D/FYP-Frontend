@@ -87,7 +87,7 @@ function MeetupItem(props) {
 
             <button onClick={showDetailsHandler}>Details</button>
             <button onClick={addToCartHandler} disabled={props.quantity <= 0}>
-              Add to Cart
+              Assign to Me
             </button>
           </div>
         </footer>

@@ -5,32 +5,45 @@ import { useState } from "react";
 import classes from "../styles/Cart.module.css";
 
 export default function Cart() {
-  const { cart, setCart } = useCart();
-  const [purchasedItems, setPurchasedItems] = useState([]);
+  const { cart, setCart } = useCart(); // Cart = work queue now
+  const [resolvedTickets, setResolvedTickets] = useState([]);
 
-  const handleBuy = (item) => {
-    const updatedCart = cart.filter((cartItem) => cartItem.id !== item.id);
+  const handleResolve = (ticket) => {
+    const updatedCart = cart.filter((t) => t.id !== ticket.id);
     setCart(updatedCart);
 
-    setPurchasedItems((prevItems) => [...prevItems, item]);
+    setResolvedTickets((prev) => [...prev, ticket]);
   };
 
   return (
     <div className={classes.cart}>
-      <h1>New Interaction</h1>
-      <p>I could add a record of the calls etc here maybe, plus the call controls.</p>
-      
-      {purchasedItems.length > 0 && (
+      <h1>Agent Work Queue</h1>
+      <p>Below are the work tickets assigned to you. Resolve them to log the interactions.</p>
+
+      <ul className={classes.ticketList}>
+        {cart.map((ticket) => (
+          <li key={ticket.id} className={classes.cartItem}>
+            <div className={classes.itemDetails}>
+              <h3>{ticket.title}</h3>
+              <p><strong>Customer:</strong> {ticket.customerName}</p>
+              <p><strong>Priority:</strong> {ticket.priority}</p>
+              <p><strong>Status:</strong> {ticket.status}</p>
+              <p><strong>Category:</strong> {ticket.category}</p>
+            </div>
+            <button className={classes.resolveButton} onClick={() => handleResolve(ticket)}>
+              Resolve Ticket
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {resolvedTickets.length > 0 && (
         <div className={classes.purchasedMessage}>
-          <h2>Purchased Items</h2>
+          <h2>Resolved Tickets</h2>
           <ul>
-            {purchasedItems.map((item, index) => (
+            {resolvedTickets.map((ticket, index) => (
               <li key={index}>
-                <span>
-                  {item.title} - {item.price}€ x {item.quantity} ={" "}
-                  {item.price * item.quantity}€
-                </span>{" "}
-                <em>(Purchased)</em>
+                <span>{ticket.title} - <em>(Resolved)</em></span>
               </li>
             ))}
           </ul>

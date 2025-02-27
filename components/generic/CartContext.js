@@ -2,15 +2,14 @@
 
 import { createContext, useState, useContext } from "react";
 
-// Create the Cart Context
+// CartContext still exists, but now holds work tickets (interactions)
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]); // This is now the agent's work queue
 
-  // Add a product to the cart
-  function addToCart(product) {
-    setCart((prevCart) => [...prevCart, product]);
+  function addToCart(ticket) { // Ticket = a work ticket (support request)
+    setCart((prevCart) => [...prevCart, ticket]);
   }
 
   return (
@@ -20,7 +19,7 @@ export function CartProvider({ children }) {
   );
 }
 
-// Hook to use the Cart Context
+// Still called useCart (for compatibility), but means "use work queue"
 export function useCart() {
   return useContext(CartContext);
 }
