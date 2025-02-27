@@ -189,3 +189,33 @@
   background-color: #6b778c;
   color: white;
 }
+
+.filterBar {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.filterBar label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.filterBar select {
+  padding: 6px 10px;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.noTickets {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+  margin-top: 16px;
+}
