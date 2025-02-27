@@ -81,8 +81,13 @@ export default function Cart() {
         </label>
       </div>
 
+      {/* No Tickets Message (if no tickets at all) */}
+      {cart.length === 0 && priorityFilter === "all" && categoryFilter === "all" && statusFilter === "all" && (
+        <p className={classes.noTickets}>No tickets are currently assigned to you.</p>
+      )}
+
       {/* Ticket List */}
-      {filteredTickets.length === 0 ? (
+      {filteredTickets.length === 0 && cart.length > 0 ? (
         <p className={classes.noTickets}>No tickets found matching your filters.</p>
       ) : (
         <ul className={classes.ticketList}>
