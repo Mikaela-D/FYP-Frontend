@@ -112,6 +112,7 @@ export default function Cart() {
                       {ticket.status}
                     </span>
                   </div>
+                  <div><strong>Assigned To:</strong> {ticket.assignedTo || "Unassigned"}</div>
                 </div>
               </div>
 
