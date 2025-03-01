@@ -2,7 +2,7 @@
 
 async function handler(req, res) {
   // can be called anything you like
-  /* const response = await fetch('http://localhost:8000/saveMeeting', {
+  /* const response = await fetch('http://localhost:8000/saveTicket', {
     method: 'POST',
     body: JSON.stringify(req.body),
     headers: {
