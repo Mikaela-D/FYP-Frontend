@@ -3,7 +3,7 @@
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 import { useRouter } from "next/router";
-import { useAgentTickets } from "../generic/CartContext";
+import { useAgentTickets } from "../generic/AgentTicketsContext";
 
 function MeetupItem(props) {
   const { agentTickets, addToAgentTickets } = useAgentTickets();

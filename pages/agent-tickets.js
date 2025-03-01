@@ -1,4 +1,4 @@
-import { useAgentTickets } from "../components/generic/CartContext";
+import { useAgentTickets } from "../components/generic/AgentTicketsContext";
 import { useEffect, useState } from "react";
 import classes from "../styles/Cart.module.css";
 

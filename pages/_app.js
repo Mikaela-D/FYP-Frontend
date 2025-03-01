@@ -3,7 +3,7 @@
 import "../styles/globals.css";
 import Layout from "../components/layout/Layout";
 import { GlobalContextProvider } from "./store/globalContext";
-import { AgentTicketsProvider } from "../components/generic/CartContext";
+import { AgentTicketsProvider } from "../components/generic/AgentTicketsContext";
 import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps }) {
