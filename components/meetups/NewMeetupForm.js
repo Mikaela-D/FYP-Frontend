@@ -32,7 +32,7 @@ function NewMeetupForm(props) {
     const enteredImage = imageInputRef.current.value;
 
     const meetupData = {
-      meetingId: enteredId,
+      ticketId: enteredId,
       title: enteredTitle,
       customerName: enteredCustomerName,
       customerPhone: enteredCustomerPhone,

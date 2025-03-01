@@ -23,7 +23,7 @@ function MainNavigation() {
   globalCtx.theGlobalObject.meetings.forEach((element) => {
     contents.push({
       title: element.title,
-      webAddress: "/" + element.meetingId,
+      webAddress: "/" + element.ticketId,
     });
   });
 

@@ -9,7 +9,7 @@ function MeetupList(props) {
       {props.meetups.map((meetup) => (
         <MeetupItem
           key={meetup._id}
-          id={meetup.meetingId}
+          id={meetup.ticketId}
           title={meetup.title}
           customerName={meetup.customerName}
           customerPhone={meetup.customerPhone}
