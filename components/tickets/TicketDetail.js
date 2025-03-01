@@ -12,17 +12,35 @@ function TicketDetail(props) {
 
       <div className={classes["ticket-body"]}>
         <div className={classes["ticket-info-grid"]}>
-          <div><strong>Customer Name:</strong> {props.customerName}</div>
-          <div><strong>Phone:</strong> {props.customerPhone}</div>
-          <div><strong>Email:</strong> {props.customerEmail}</div>
-          <div><strong>Category:</strong> {props.category}</div>
-          <div><strong>Priority:</strong> 
-            <span className={`${classes.badge} ${classes[`priority-${props.priority?.toLowerCase()}`]}`}>
+          <div>
+            <strong>Customer Name:</strong> {props.customerName}
+          </div>
+          <div>
+            <strong>Phone:</strong> {props.customerPhone}
+          </div>
+          <div>
+            <strong>Email:</strong> {props.customerEmail}
+          </div>
+          <div>
+            <strong>Category:</strong> {props.category}
+          </div>
+          <div>
+            <strong>Priority:</strong>
+            <span
+              className={`${classes.badge} ${
+                classes[`priority-${props.priority?.toLowerCase()}`]
+              }`}
+            >
               {props.priority}
             </span>
           </div>
-          <div><strong>Status:</strong> 
-            <span className={`${classes.badge} ${classes[`status-${props.status?.toLowerCase()}`]}`}>
+          <div>
+            <strong>Status:</strong>
+            <span
+              className={`${classes.badge} ${
+                classes[`status-${props.status?.toLowerCase()}`]
+              }`}
+            >
               {props.status}
             </span>
           </div>
@@ -41,7 +59,9 @@ function TicketDetail(props) {
       </div>
 
       <footer className={classes["ticket-footer"]}>
-        <p><strong>Generated on:</strong> {new Date().toLocaleDateString()}</p>
+        <p>
+          <strong>Generated on:</strong> {new Date().toLocaleDateString()}
+        </p>
       </footer>
     </section>
   );

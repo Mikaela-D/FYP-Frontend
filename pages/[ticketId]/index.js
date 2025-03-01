@@ -12,7 +12,11 @@ export default function TicketPage() {
   let returnVal = null;
   for (let ii = 0; ii < globalCtx.theGlobalObject.tickets.length; ii++) {
     let temp = globalCtx.theGlobalObject.tickets[ii];
-    if (temp.ticketId && router.query.ticketId && temp.ticketId.trim() === router.query.ticketId.trim()) {
+    if (
+      temp.ticketId &&
+      router.query.ticketId &&
+      temp.ticketId.trim() === router.query.ticketId.trim()
+    ) {
       returnVal = (
         <TicketDetail
           image={temp.image}

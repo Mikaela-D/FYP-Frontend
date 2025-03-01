@@ -35,7 +35,10 @@ function TicketItem(props) {
   }
 
   return (
-    <li className={classes.item} style={{ display: "inline-block", verticalAlign: "top", margin: "10px" }}>
+    <li
+      className={classes.item}
+      style={{ display: "inline-block", verticalAlign: "top", margin: "10px" }}
+    >
       <Card>
         <header className={classes.header}>
           <div className={classes.headerBar}></div>
@@ -44,14 +47,26 @@ function TicketItem(props) {
 
         <div className={classes.body}>
           <div className={classes.infoGrid}>
-            <div><strong>Category:</strong> {props.category}</div>
-            <div><strong>Priority:</strong> 
-              <span className={`${classes.badge} ${classes[`priority-${props.priority?.toLowerCase()}`]}`}>
+            <div>
+              <strong>Category:</strong> {props.category}
+            </div>
+            <div>
+              <strong>Priority:</strong>
+              <span
+                className={`${classes.badge} ${
+                  classes[`priority-${props.priority?.toLowerCase()}`]
+                }`}
+              >
                 {props.priority}
               </span>
             </div>
-            <div><strong>Status:</strong> 
-              <span className={`${classes.badge} ${classes[`status-${props.status?.toLowerCase()}`]}`}>
+            <div>
+              <strong>Status:</strong>
+              <span
+                className={`${classes.badge} ${
+                  classes[`status-${props.status?.toLowerCase()}`]
+                }`}
+              >
                 {props.status}
               </span>
             </div>
