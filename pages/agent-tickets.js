@@ -39,12 +39,12 @@ export default function AgentTickets() {
   });
 
   if (!isHydrated) {
-    return <p className={classes.loading}>Loading your work queue...</p>;
+    return <p className={classes.loading}>Loading your tickets...</p>;
   }
 
   return (
     <div className={classes.cart}>
-      <h1>Agent Work Queue</h1>
+      <h1>Agent's Assigned Tickets</h1>
 
       {/* Filter Bar */}
       <div className={classes.filterBar}>
