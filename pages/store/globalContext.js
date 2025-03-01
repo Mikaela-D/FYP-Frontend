@@ -13,19 +13,19 @@ export function GlobalContextProvider(props) {
     aString: "init val",
     count: 0,
     hideHamMenu: true,
-    meetings: [],
+    tickets: [],
     dataLoaded: false,
     userStatus: "available",
   });
 
   useEffect(() => {
-    getAllMeetings();
+    getAllTickets();
   }, []);
 
-  async function getAllMeetings() {
+  async function getAllTickets() {
     const response = await fetch("/api/get-tickets", {
       method: "POST",
-      body: JSON.stringify({ meetups: "all" }),
+      body: JSON.stringify({ tickets: "all" }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -33,7 +33,7 @@ export function GlobalContextProvider(props) {
     let data = await response.json();
     setGlobals((previousGlobals) => {
       const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
-      newGlobals.meetings = data.meetings;
+      newGlobals.tickets = data.tickets;
       newGlobals.dataLoaded = true;
       return newGlobals;
     });
@@ -59,7 +59,7 @@ export function GlobalContextProvider(props) {
         return newGlobals;
       });
     }
-    if (command.cmd == "addMeeting") {
+    if (command.cmd == "addTicket") {
       const response = await fetch("/api/new-ticket", {
         method: "POST",
         body: JSON.stringify(command.newVal),
@@ -70,7 +70,7 @@ export function GlobalContextProvider(props) {
       const data = await response.json(); // Should check here that it worked OK
       setGlobals((previousGlobals) => {
         const newGlobals = JSON.parse(JSON.stringify(previousGlobals));
-        newGlobals.meetings.push(command.newVal);
+        newGlobals.tickets.push(command.newVal);
         return newGlobals;
       });
     }

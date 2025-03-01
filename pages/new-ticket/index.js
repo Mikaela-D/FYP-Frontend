@@ -4,19 +4,19 @@ import { useRouter } from "next/router";
 import GlobalContext from "../store/globalContext";
 import { useContext } from "react";
 
-function NewMeetupPage() {
+function NewTicketPage() {
   const router = useRouter();
   const globalCtx = useContext(GlobalContext);
 
-  async function addMeetupHandler(enteredticketData) {
+  async function addTicketHandler(enteredticketData) {
     await globalCtx.updateGlobals({
-      cmd: "addMeeting",
+      cmd: "addTicket",
       newVal: enteredticketData,
     });
     router.push("/");
   }
 
-  return <NewTicketForm onAddMeetup={addMeetupHandler} />;
+  return <NewTicketForm onAddTicket={addTicketHandler} />;
 }
 
-export default NewMeetupPage;
+export default NewTicketPage;

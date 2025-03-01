@@ -6,19 +6,19 @@ import classes from "./TicketList.module.css";
 function TicketList(props) {
   return (
     <ul className={classes.list}>
-      {props.meetups.map((meetup) => (
+      {props.tickets.map((ticket) => (
         <TicketItem
-          key={meetup._id}
-          id={meetup.ticketId}
-          title={meetup.title}
-          customerName={meetup.customerName}
-          customerPhone={meetup.customerPhone}
-          customerEmail={meetup.customerEmail}
-          category={meetup.category}
-          priority={meetup.priority}
-          status={meetup.status}
-          description={meetup.description}
-          image={meetup.image}
+          key={ticket._id}
+          id={ticket.ticketId}
+          title={ticket.title}
+          customerName={ticket.customerName}
+          customerPhone={ticket.customerPhone}
+          customerEmail={ticket.customerEmail}
+          category={ticket.category}
+          priority={ticket.priority}
+          status={ticket.status}
+          description={ticket.description}
+          image={ticket.image}
         />
       ))}
     </ul>

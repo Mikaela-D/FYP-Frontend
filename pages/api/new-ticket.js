@@ -11,7 +11,7 @@ async function handler(req, res) {
   });
   const data = await response.json();
   res.json(data)*/
-  const response = await fetch("http://localhost:8000/createMeeting", {
+  const response = await fetch("http://localhost:8000/createTicket", {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: {

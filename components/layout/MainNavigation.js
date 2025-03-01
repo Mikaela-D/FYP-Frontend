@@ -20,7 +20,7 @@ function MainNavigation() {
   }
 
   const contents = [];
-  globalCtx.theGlobalObject.meetings.forEach((element) => {
+  globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
       title: element.title,
       webAddress: "/" + element.ticketId,
@@ -38,7 +38,7 @@ function MainNavigation() {
         <ul>
           <li>
             <Link href="/inbox">Inbox</Link> (
-            {globalCtx.theGlobalObject.meetings.length})
+            {globalCtx.theGlobalObject.tickets.length})
           </li>
           <li>
             <Link href="/agent-tickets">Agent's Tickets</Link>

@@ -8,7 +8,7 @@ function TicketsPage() {
   const globalCtx = useContext(GlobalContext);
 
   if (globalCtx.theGlobalObject.dataLoaded == true) {
-    return <TicketList meetups={globalCtx.theGlobalObject.meetings} />;
+    return <TicketList tickets={globalCtx.theGlobalObject.tickets} />;
   }
   return <div>Loading data from database, please wait . . . </div>;
 }
