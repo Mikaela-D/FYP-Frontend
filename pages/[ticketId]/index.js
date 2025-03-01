@@ -1,6 +1,6 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\[ticketId]\index.js
 
-import TicketDetail from "../../components/meetups/TicketDetail";
+import TicketDetail from "../../components/tickets/TicketDetail";
 import { useRouter } from "next/router";
 import GlobalContext from "../store/globalContext";
 import { useContext } from "react";
