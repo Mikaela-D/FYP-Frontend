@@ -1,6 +1,8 @@
+// C:\Users\Mikaela\FYP-Frontend\pages\AgentTickets.js
+
 import { useAgentTickets } from "../components/generic/AgentTicketsContext";
 import { useEffect, useState } from "react";
-import classes from "../styles/Cart.module.css";
+import classes from "../styles/AgentTickets.module.css";
 
 export default function AgentTickets() {
   const { agentTickets, removeFromAgentTickets, isHydrated } = useAgentTickets();

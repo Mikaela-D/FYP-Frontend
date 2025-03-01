@@ -1,6 +1,6 @@
-/* C:\Users\Mikaela\FYP-Frontend\styles\Cart.module.css */
+/* C:\Users\Mikaela\FYP-Frontend\styles\AgentTickets.module.css */
 
-.cart {
+.ticketsContainer {
   padding: 20px;
   max-width: 900px;
   margin: 0 auto;
@@ -8,12 +8,13 @@
   line-height: 1.5;
 }
 
-.cart h1 {
+.ticketsContainer h1 {
   margin-bottom: 20px;
   color: #333;
   text-align: center;
 }
 
+/* Ticket List Grid */
 .ticketList {
   display: flex;
   flex-wrap: wrap;
@@ -25,7 +26,8 @@
   list-style: none;
 }
 
-.cartItem {
+/* Individual Ticket Card */
+.ticketCard {
   flex: 1 1 260px;
   max-width: 260px;
   background-color: #ffffff;
@@ -36,13 +38,13 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cartItem:hover {
+.ticketCard:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Header styling */
-.cartItemHeader {
+/* Header */
+.ticketHeader {
   position: relative;
   background-color: #f4f5f7;
   padding: 12px;
@@ -51,7 +53,7 @@
   font-weight: bold;
 }
 
-.headerBar {
+.headerIndicator {
   position: absolute;
   top: 0;
   left: 0;
@@ -60,19 +62,19 @@
   background-color: #0052cc;
 }
 
-.cartItemHeader h3 {
+.ticketHeader h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #172b4d;
-  line-height: 1.4;
 }
 
-/* Body content */
-.cartItemBody {
+/* Ticket Body */
+.ticketBody {
   padding: 12px;
   background-color: #ffffff;
 }
 
+/* Info Grid */
 .infoGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -86,11 +88,10 @@
 .infoGrid div {
   font-size: 0.875rem;
   color: #344563;
-  line-height: 1.4;
 }
 
-/* Footer (Actions) */
-.cartItemFooter {
+/* Footer (Resolve Button) */
+.ticketFooter {
   background-color: #f4f5f7;
   padding: 12px;
   border-top: 1px solid #dfe1e6;
@@ -114,7 +115,7 @@
 }
 
 /* Resolved Tickets Section */
-.purchasedMessage {
+.resolvedTicketsSection {
   margin-top: 24px;
   padding: 16px;
   background-color: #f1f1f1;
@@ -122,18 +123,18 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.purchasedMessage h2 {
+.resolvedTicketsSection h2 {
   margin-bottom: 10px;
   color: #333;
 }
 
-.purchasedMessage ul {
+.resolvedTicketsSection ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.purchasedMessage li {
+.resolvedTicketsSection li {
   margin-bottom: 6px;
   font-size: 0.9rem;
   color: #555;
@@ -147,7 +148,7 @@
   color: #555;
 }
 
-/* Badge styles */
+/* Priority & Status Badges */
 .badge {
   display: inline-block;
   padding: 4px 8px;
@@ -173,7 +174,7 @@
 }
 
 /* Status colors */
-.status-open {
+.status-todo {
   background-color: #0052cc;
   color: white;
 }
@@ -181,15 +182,16 @@
   background-color: #ffab00;
   color: #172b4d;
 }
-.status-done {
-  background-color: #36b37e;
-  color: white;
+.status-awaitingresponse {
+  background-color: #ffab00;
+  color: #172b4d;
 }
 .status-closed {
   background-color: #6b778c;
   color: white;
 }
 
+/* Filters */
 .filterBar {
   display: flex;
   gap: 16px;
@@ -213,6 +215,7 @@
   cursor: pointer;
 }
 
+/* No Tickets Found */
 .noTickets {
   text-align: center;
   color: #555;
