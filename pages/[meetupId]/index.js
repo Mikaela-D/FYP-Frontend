@@ -1,6 +1,6 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\[meetupId]\index.js
 
-import MeetupDetail from "../../components/meetups/MeetupDetail";
+import TicketDetail from "../../components/meetups/TicketDetail";
 import { useRouter } from "next/router";
 import GlobalContext from "../../pages/store/globalContext";
 import { useContext } from "react";
@@ -15,7 +15,7 @@ export default function () {
     let temp = globalCtx.theGlobalObject.meetings[ii];
     if (temp.meetingId && router.query.meetupId && temp.meetingId.trim() === router.query.meetupId.trim()) {
       returnVal = (
-        <MeetupDetail
+        <TicketDetail
           image={temp.image}
           title={temp.title}
           customerName={temp.customerName || "N/A"}

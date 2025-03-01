@@ -1,8 +1,8 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupDetail.js
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\TicketDetail.js
 
-import classes from "./MeetupDetail.module.css";
+import classes from "./TicketDetail.module.css";
 
-function MeetupDetail(props) {
+function TicketDetail(props) {
   return (
     <section className={classes.ticket}>
       <header className={classes["ticket-header"]}>
@@ -47,4 +47,4 @@ function MeetupDetail(props) {
   );
 }
 
-export default MeetupDetail;
+export default TicketDetail;
