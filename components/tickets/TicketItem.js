@@ -1,4 +1,4 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\TicketItem.js
+// C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketItem.js
 
 import Card from "../ui/Card";
 import classes from "./TicketItem.module.css";

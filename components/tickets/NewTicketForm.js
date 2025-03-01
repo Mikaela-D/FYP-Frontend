@@ -1,4 +1,4 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\NewTicketForm.js
+// C:\Users\Mikaela\FYP-Frontend\components\tickets\NewTicketForm.js
 
 import { useRef } from "react";
 

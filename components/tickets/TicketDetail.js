@@ -1,4 +1,4 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\TicketDetail.js
+// C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketDetail.js
 
 import classes from "./TicketDetail.module.css";
 
