@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import classes from "../styles/agent-tickets.module.css";
 
 export default function AgentTickets() {
-  const { agentTickets, removeFromAgentTickets, isHydrated } = useAgentTickets();
+  const { agentTickets, removeFromAgentTickets, isHydrated } =
+    useAgentTickets();
 
   const [resolvedTickets, setResolvedTickets] = useState([]);
   const [priorityFilter, setPriorityFilter] = useState("all");
@@ -25,11 +26,14 @@ export default function AgentTickets() {
 
   const handleResolve = (ticket) => {
     removeFromAgentTickets(ticket.id);
-    setResolvedTickets((prev) => [...prev, {
-      ...ticket,
-      resolvedBy: "Me",
-      resolvedAt: new Date().toISOString(),
-    }]);
+    setResolvedTickets((prev) => [
+      ...prev,
+      {
+        ...ticket,
+        resolvedBy: "Me",
+        resolvedAt: new Date().toISOString(),
+      },
+    ]);
   };
 
   const filteredTickets = agentTickets.filter((ticket) => {
@@ -45,14 +49,17 @@ export default function AgentTickets() {
   }
 
   return (
-    <div className={classes.cart}>
+    <div className={classes.agentTickets}>
       <h1>Agent's Assigned Tickets</h1>
 
       {/* Filter Bar */}
       <div className={classes.filterBar}>
         <label>
           Filter by Priority:
-          <select value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)}>
+          <select
+            value={priorityFilter}
+            onChange={(e) => setPriorityFilter(e.target.value)}
+          >
             <option value="all">All</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
@@ -62,7 +69,10 @@ export default function AgentTickets() {
 
         <label>
           Filter by Category:
-          <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+          >
             <option value="all">All</option>
             <option value="Technical">Technical</option>
             <option value="Billing">Billing</option>
@@ -73,7 +83,10 @@ export default function AgentTickets() {
 
         <label>
           Filter by Status:
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
             <option value="all">All</option>
             <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
@@ -83,43 +96,69 @@ export default function AgentTickets() {
         </label>
       </div>
 
-      {/* No Tickets Message (if no tickets at all) */}
-      {agentTickets.length === 0 && priorityFilter === "all" && categoryFilter === "all" && statusFilter === "all" && (
-        <p className={classes.noTickets}>No tickets are currently assigned to you.</p>
-      )}
+      {agentTickets.length === 0 &&
+        priorityFilter === "all" &&
+        categoryFilter === "all" &&
+        statusFilter === "all" && (
+          <p className={classes.noTickets}>
+            No tickets are currently assigned to you.
+          </p>
+        )}
 
       {/* Ticket List */}
       {filteredTickets.length === 0 && agentTickets.length > 0 ? (
-        <p className={classes.noTickets}>No tickets found matching your filters.</p>
+        <p className={classes.noTickets}>
+          No tickets found matching your filters.
+        </p>
       ) : (
         <ul className={classes.ticketList}>
           {filteredTickets.map((ticket) => (
-            <li key={ticket.id} className={classes.cartItem}>
-              <header className={classes.cartItemHeader}>
+            <li key={ticket.id} className={classes.agentTicketsItem}>
+              <header className={classes.agentTicketsItemHeader}>
                 <div className={classes.headerBar}></div>
                 <h3>{ticket.title}</h3>
               </header>
 
-              <div className={classes.cartItemBody}>
+              <div className={classes.agentTicketsItemBody}>
                 <div className={classes.infoGrid}>
-                  <div><strong>Customer:</strong> {ticket.customerName}</div>
-                  <div><strong>Category:</strong> {ticket.category}</div>
-                  <div><strong>Priority:</strong> 
-                    <span className={`${classes.badge} ${classes[`priority-${ticket.priority?.toLowerCase()}`]}`}>
+                  <div>
+                    <strong>Customer:</strong> {ticket.customerName}
+                  </div>
+                  <div>
+                    <strong>Category:</strong> {ticket.category}
+                  </div>
+                  <div>
+                    <strong>Priority:</strong>
+                    <span
+                      className={`${classes.badge} ${
+                        classes[`priority-${ticket.priority?.toLowerCase()}`]
+                      }`}
+                    >
                       {ticket.priority}
                     </span>
                   </div>
-                  <div><strong>Status:</strong> 
-                    <span className={`${classes.badge} ${classes[`status-${ticket.status?.toLowerCase()}`]}`}>
+                  <div>
+                    <strong>Status:</strong>
+                    <span
+                      className={`${classes.badge} ${
+                        classes[`status-${ticket.status?.toLowerCase()}`]
+                      }`}
+                    >
                       {ticket.status}
                     </span>
                   </div>
-                  <div><strong>Assigned To:</strong> {ticket.assignedTo || "Unassigned"}</div>
+                  <div>
+                    <strong>Assigned To:</strong>{" "}
+                    {ticket.assignedTo || "Unassigned"}
+                  </div>
                 </div>
               </div>
 
-              <footer className={classes.cartItemFooter}>
-                <button className={classes.resolveButton} onClick={() => handleResolve(ticket)}>
+              <footer className={classes.agentTicketsItemFooter}>
+                <button
+                  className={classes.resolveButton}
+                  onClick={() => handleResolve(ticket)}
+                >
                   Resolve Ticket
                 </button>
               </footer>
@@ -136,7 +175,8 @@ export default function AgentTickets() {
             {resolvedTickets.map((ticket, index) => (
               <li key={index}>
                 <span>
-                  {ticket.title} - Resolved by {ticket.resolvedBy} on {new Date(ticket.resolvedAt).toLocaleString()}
+                  {ticket.title} - Resolved by {ticket.resolvedBy} on{" "}
+                  {new Date(ticket.resolvedAt).toLocaleString()}
                 </span>
               </li>
             ))}
