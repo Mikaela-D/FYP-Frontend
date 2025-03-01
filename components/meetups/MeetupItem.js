@@ -3,19 +3,19 @@
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 import { useRouter } from "next/router";
-import { useCart } from "../generic/CartContext";
+import { useAgentTickets } from "../generic/CartContext";
 
 function MeetupItem(props) {
-  const { cart, addToCart } = useCart();
+  const { agentTickets, addToAgentTickets } = useAgentTickets();
   const router = useRouter();
 
-  function addToCartHandler() {
-    if (cart.some((ticket) => ticket.id === props.id)) {
+  function addToAgentTicketsHandler() {
+    if (agentTickets.some((ticket) => ticket.id === props.id)) {
       alert("This ticket is already assigned to you.");
       return;
     }
 
-    addToCart({
+    addToAgentTickets({
       id: props.id,
       customerName: props.customerName,
       customerPhone: props.customerPhone,
@@ -27,7 +27,7 @@ function MeetupItem(props) {
       status: props.status,
       description: props.description,
     });
-    router.push("/cart");
+    router.push("/agent-tickets");
   }
 
   function showDetailsHandler() {
@@ -61,7 +61,7 @@ function MeetupItem(props) {
         <footer className={classes.footer}>
           <div className={classes.actions}>
             <button onClick={showDetailsHandler}>Details</button>
-            <button onClick={addToCartHandler}>Assign to Me</button>
+            <button onClick={addToAgentTicketsHandler}>Assign to Me</button>
           </div>
         </footer>
       </Card>

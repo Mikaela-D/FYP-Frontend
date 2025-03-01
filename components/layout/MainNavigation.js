@@ -41,7 +41,7 @@ function MainNavigation() {
             {globalCtx.theGlobalObject.meetings.length})
           </li>
           <li>
-            <Link href="/cart">Agent's Tickets</Link>
+            <Link href="/agent-tickets">Agent's Tickets</Link>
           </li>
           <li>
             <Link href="/tickets">Tickets</Link>

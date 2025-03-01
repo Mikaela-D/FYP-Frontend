@@ -2,47 +2,47 @@
 
 import { createContext, useState, useContext, useEffect } from "react";
 
-const CartContext = createContext();
+const AgentTicketsContext = createContext();
 
-export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);  // Starts empty for SSR safety
+export function AgentTicketsProvider({ children }) {
+  const [agentTickets, setAgentTickets] = useState([]);  // Starts empty for SSR safety
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("assignedTickets");
     if (saved) {
-      setCart(JSON.parse(saved));
+      setAgentTickets(JSON.parse(saved));
     }
     setIsHydrated(true);
   }, []);
 
   useEffect(() => {
     if (isHydrated) {
-      localStorage.setItem("assignedTickets", JSON.stringify(cart));
+      localStorage.setItem("assignedTickets", JSON.stringify(agentTickets));
     }
-  }, [cart, isHydrated]);
+  }, [agentTickets, isHydrated]);
 
-  function addToCart(ticket) {
-    setCart((prevCart) => {
-      if (prevCart.some((t) => t.id === ticket.id)) {
+  function addToAgentTickets(ticket) {
+    setAgentTickets((prevTickets) => {
+      if (prevTickets.some((t) => t.id === ticket.id)) {
         alert("This ticket is already assigned to you.");
-        return prevCart;
+        return prevTickets;
       }
-      return [...prevCart, { ...ticket, assignedTo: "Me" }];
+      return [...prevTickets, { ...ticket, assignedTo: "Me" }];
     });
   }
 
-  function removeFromCart(ticketId) {
-    setCart((prevCart) => prevCart.filter((t) => t.id !== ticketId));
+  function removeFromAgentTickets(ticketId) {
+    setAgentTickets((prevTickets) => prevTickets.filter((t) => t.id !== ticketId));
   }
 
   return (
-    <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart, isHydrated }}>
+    <AgentTicketsContext.Provider value={{ agentTickets, setAgentTickets, addToAgentTickets, removeFromAgentTickets, isHydrated }}>
       {children}
-    </CartContext.Provider>
+    </AgentTicketsContext.Provider>
   );
 }
 
-export function useCart() {
-  return useContext(CartContext);
+export function useAgentTickets() {
+  return useContext(AgentTicketsContext);
 }
