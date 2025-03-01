@@ -1,39 +1,33 @@
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupItem.js
+
 import Card from "../ui/Card";
 import classes from "./MeetupItem.module.css";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useCart } from "../generic/CartContext";
 
 function MeetupItem(props) {
-  const { addToCart } = useCart();
+  const { cart, addToCart } = useCart();
   const router = useRouter();
-  const [selectedQuantity, setSelectedQuantity] = useState(1); // Track the user's selected quantity
 
-  // Function to handle adding the product to the cart and navigating to the cart page
   function addToCartHandler() {
-    if (props.quantity <= 0) {
-      alert("Sorry, this item is out of stock.");
-      return;
-    }
-    if (selectedQuantity > props.quantity) {
-      alert(`Only ${props.quantity} items are available.`);
+    if (cart.some((ticket) => ticket.id === props.id)) {
+      alert("This ticket is already assigned to you.");
       return;
     }
 
     addToCart({
       id: props.id,
+      customerName: props.customerName,
+      customerPhone: props.customerPhone,
+      customerEmail: props.customerEmail,
       image: props.image,
       title: props.title,
-      price: props.price,
       category: props.category,
-      quantity: selectedQuantity, // Add selected quantity to the cart item
+      priority: props.priority,
+      status: props.status,
+      description: props.description,
     });
     router.push("/cart");
-  }
-
-  // Update the selected quantity when the user changes it
-  function quantityChangeHandler(event) {
-    setSelectedQuantity(Number(event.target.value));
   }
 
   function showDetailsHandler() {
@@ -41,51 +35,35 @@ function MeetupItem(props) {
   }
 
   return (
-    <li className={classes.item}>
+    <li className={classes.item} style={{ display: "inline-block", verticalAlign: "top", margin: "10px" }}>
       <Card>
-        <div className={classes.image}>
-          <img src={props.image} alt={props.title} />
-        </div>
-        <div className={classes.content}>
+        <header className={classes.header}>
+          <div className={classes.headerBar}></div>
           <h3>{props.title}</h3>
-          <p>€{props.price}</p>
-          <div>
-            <p>Category: {props.category}</p>
-          </div>
-          <div>
-            <p>
-              <strong>
-                {props.quantity > 0
-                  ? `${props.quantity} items left`
-                  : "Out of stock"}
-              </strong>
-            </p>
+        </header>
+
+        <div className={classes.body}>
+          <div className={classes.infoGrid}>
+            <div><strong>Category:</strong> {props.category}</div>
+            <div><strong>Priority:</strong> 
+              <span className={`${classes.badge} ${classes[`priority-${props.priority?.toLowerCase()}`]}`}>
+                {props.priority}
+              </span>
+            </div>
+            <div><strong>Status:</strong> 
+              <span className={`${classes.badge} ${classes[`status-${props.status?.toLowerCase()}`]}`}>
+                {props.status}
+              </span>
+            </div>
           </div>
         </div>
-        <div className={classes.actions}>
-          <div>
-            <label htmlFor={`quantity_${props.id}`}>Select Quantity: </label>
-            <select
-              id={`quantity_${props.id}`}
-              value={selectedQuantity}
-              onChange={quantityChangeHandler}
-              disabled={props.quantity <= 0}
-            >
-              {/* Generate options from 1 to available stock */}
-              {Array.from({ length: props.quantity }, (_, i) => i + 1).map(
-                (qty) => (
-                  <option key={qty} value={qty}>
-                    {qty}
-                  </option>
-                )
-              )}
-            </select>
+
+        <footer className={classes.footer}>
+          <div className={classes.actions}>
+            <button onClick={showDetailsHandler}>Details</button>
+            <button onClick={addToCartHandler}>Assign to Me</button>
           </div>
-          <button onClick={showDetailsHandler}>Show Details</button>
-          <button onClick={addToCartHandler} disabled={props.quantity <= 0}>
-            Add to Cart
-          </button>
-        </div>
+        </footer>
       </Card>
     </li>
   );

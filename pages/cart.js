@@ -1,56 +1,141 @@
 import { useCart } from "../components/generic/CartContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "../styles/Cart.module.css";
 
 export default function Cart() {
-  const { cart, setCart } = useCart();
-  const [purchasedItems, setPurchasedItems] = useState([]);
+  const { cart, removeFromCart, isHydrated } = useCart();
 
-  const handleBuy = (item) => {
-    const updatedCart = cart.filter((cartItem) => cartItem.id !== item.id);
-    setCart(updatedCart);
+  const [resolvedTickets, setResolvedTickets] = useState([]);
+  const [priorityFilter, setPriorityFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
 
-    setPurchasedItems((prevItems) => [...prevItems, item]);
+  useEffect(() => {
+    const saved = localStorage.getItem("resolvedTickets");
+    if (saved) {
+      setResolvedTickets(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("resolvedTickets", JSON.stringify(resolvedTickets));
+  }, [resolvedTickets]);
+
+  const handleResolve = (ticket) => {
+    removeFromCart(ticket.id);
+    setResolvedTickets((prev) => [...prev, {
+      ...ticket,
+      resolvedBy: "Me",
+      resolvedAt: new Date().toISOString(),
+    }]);
   };
+
+  const filteredTickets = cart.filter((ticket) => {
+    return (
+      (priorityFilter === "all" || ticket.priority === priorityFilter) &&
+      (categoryFilter === "all" || ticket.category === categoryFilter) &&
+      (statusFilter === "all" || ticket.status === statusFilter)
+    );
+  });
+
+  if (!isHydrated) {
+    return <p className={classes.loading}>Loading your work queue...</p>;
+  }
 
   return (
     <div className={classes.cart}>
-      <h1>Your Cart</h1>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+      <h1>Agent Work Queue</h1>
+
+      {/* Filter Bar */}
+      <div className={classes.filterBar}>
+        <label>
+          Filter by Priority:
+          <select value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)}>
+            <option value="all">All</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </label>
+
+        <label>
+          Filter by Category:
+          <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+            <option value="all">All</option>
+            <option value="Technical">Techical</option>
+            <option value="Billing">Billing</option>
+            <option value="Account">Account</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+
+        <label>
+          Filter by Status:
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+            <option value="all">All</option>
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Awaiting Response">Awaiting Response</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </label>
+      </div>
+
+      {/* No Tickets Message (if no tickets at all) */}
+      {cart.length === 0 && priorityFilter === "all" && categoryFilter === "all" && statusFilter === "all" && (
+        <p className={classes.noTickets}>No tickets are currently assigned to you.</p>
+      )}
+
+      {/* Ticket List */}
+      {filteredTickets.length === 0 && cart.length > 0 ? (
+        <p className={classes.noTickets}>No tickets found matching your filters.</p>
       ) : (
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index} className={classes.cartItem}>
-              <img src={item.image} alt={item.title} />
-              <div className={classes.itemDetails}>
-                <h3>{item.title}</h3>
-                <p>Price: {item.price}€</p>
-                <p>Quantity: {item.quantity}</p>
-                <p>Total: {item.price * item.quantity}€</p>
-                <button
-                  onClick={() => handleBuy(item)}
-                  className={classes.buyButton}
-                >
-                  Buy
-                </button>
+        <ul className={classes.ticketList}>
+          {filteredTickets.map((ticket) => (
+            <li key={ticket.id} className={classes.cartItem}>
+              <header className={classes.cartItemHeader}>
+                <div className={classes.headerBar}></div>
+                <h3>{ticket.title}</h3>
+              </header>
+
+              <div className={classes.cartItemBody}>
+                <div className={classes.infoGrid}>
+                  <div><strong>Customer:</strong> {ticket.customerName}</div>
+                  <div><strong>Category:</strong> {ticket.category}</div>
+                  <div><strong>Priority:</strong> 
+                    <span className={`${classes.badge} ${classes[`priority-${ticket.priority?.toLowerCase()}`]}`}>
+                      {ticket.priority}
+                    </span>
+                  </div>
+                  <div><strong>Status:</strong> 
+                    <span className={`${classes.badge} ${classes[`status-${ticket.status?.toLowerCase()}`]}`}>
+                      {ticket.status}
+                    </span>
+                  </div>
+                  <div><strong>Assigned To:</strong> {ticket.assignedTo || "Unassigned"}</div>
+                </div>
               </div>
+
+              <footer className={classes.cartItemFooter}>
+                <button className={classes.resolveButton} onClick={() => handleResolve(ticket)}>
+                  Resolve Ticket
+                </button>
+              </footer>
             </li>
           ))}
         </ul>
       )}
 
-      {purchasedItems.length > 0 && (
+      {/* Resolved Tickets Section */}
+      {resolvedTickets.length > 0 && (
         <div className={classes.purchasedMessage}>
-          <h2>Purchased Items</h2>
+          <h2>Resolved Tickets</h2>
           <ul>
-            {purchasedItems.map((item, index) => (
+            {resolvedTickets.map((ticket, index) => (
               <li key={index}>
                 <span>
-                  {item.title} - {item.price}€ x {item.quantity} ={" "}
-                  {item.price * item.quantity}€
-                </span>{" "}
-                <em>(Purchased)</em>
+                  {ticket.title} - Resolved by {ticket.resolvedBy} on {new Date(ticket.resolvedAt).toLocaleString()}
+                </span>
               </li>
             ))}
           </ul>

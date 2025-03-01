@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupList.js
+
 import MeetupItem from "./MeetupItem";
 import classes from "./MeetupList.module.css";
 
@@ -8,11 +10,15 @@ function MeetupList(props) {
         <MeetupItem
           key={meetup._id}
           id={meetup.meetingId}
-          image={meetup.image}
           title={meetup.title}
-          price={meetup.price}
+          customerName={meetup.customerName}
+          customerPhone={meetup.customerPhone}
+          customerEmail={meetup.customerEmail}
           category={meetup.category}
-          quantity={meetup.quantity}
+          priority={meetup.priority}
+          status={meetup.status}
+          description={meetup.description}
+          image={meetup.image}
         />
       ))}
     </ul>

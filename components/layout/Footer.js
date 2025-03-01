@@ -3,6 +3,7 @@ import {
   faFacebook,
   faInstagram,
   faXTwitter,
+  faLinkedin
 } from "@fortawesome/free-brands-svg-icons";
 import classes from "./Footer.module.css";
 
@@ -34,6 +35,13 @@ const Footer = () => {
           rel="noopener noreferrer"
         >
           <FontAwesomeIcon icon={faInstagram} className={classes.socialIcon} />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/genesys/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faLinkedin} className={classes.socialIcon} />
         </a>
       </div>
     </footer>
