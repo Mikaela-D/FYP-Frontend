@@ -1,11 +1,11 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupItem.js
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\TicketItem.js
 
 import Card from "../ui/Card";
-import classes from "./MeetupItem.module.css";
+import classes from "./TicketItem.module.css";
 import { useRouter } from "next/router";
 import { useAgentTickets } from "../generic/AgentTicketsContext";
 
-function MeetupItem(props) {
+function TicketItem(props) {
   const { agentTickets, addToAgentTickets } = useAgentTickets();
   const router = useRouter();
 
@@ -69,4 +69,4 @@ function MeetupItem(props) {
   );
 }
 
-export default MeetupItem;
+export default TicketItem;

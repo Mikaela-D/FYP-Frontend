@@ -1,13 +1,13 @@
 // C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupList.js
 
-import MeetupItem from "./MeetupItem";
+import TicketItem from "./TicketItem";
 import classes from "./MeetupList.module.css";
 
 function MeetupList(props) {
   return (
     <ul className={classes.list}>
       {props.meetups.map((meetup) => (
-        <MeetupItem
+        <TicketItem
           key={meetup._id}
           id={meetup.ticketId}
           title={meetup.title}
