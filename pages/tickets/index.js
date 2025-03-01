@@ -1,4 +1,6 @@
-import TicketList from "../../components/meetups/TicketList";
+// C:\Users\Mikaela\FYP-Frontend\pages\tickets\index.js
+
+import TicketList from "../../components/tickets/TicketList";
 import { useContext } from "react";
 import GlobalContext from "../store/globalContext";
 
