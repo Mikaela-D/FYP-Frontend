@@ -23,7 +23,7 @@ export function GlobalContextProvider(props) {
   }, []);
 
   async function getAllMeetings() {
-    const response = await fetch("/api/get-meetings", {
+    const response = await fetch("/api/get-tickets", {
       method: "POST",
       body: JSON.stringify({ meetups: "all" }),
       headers: {
