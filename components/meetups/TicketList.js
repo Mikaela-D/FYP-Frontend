@@ -1,9 +1,9 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupList.js
+// C:\Users\Mikaela\FYP-Frontend\components\meetups\TicketList.js
 
 import TicketItem from "./TicketItem";
-import classes from "./MeetupList.module.css";
+import classes from "./TicketList.module.css";
 
-function MeetupList(props) {
+function TicketList(props) {
   return (
     <ul className={classes.list}>
       {props.meetups.map((meetup) => (
@@ -25,4 +25,4 @@ function MeetupList(props) {
   );
 }
 
-export default MeetupList;
+export default TicketList;
