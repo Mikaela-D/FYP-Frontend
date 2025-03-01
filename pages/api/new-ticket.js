@@ -1,4 +1,4 @@
-// /api/new-meetup
+// /api/new-ticket
 
 async function handler(req, res) {
   // can be called anything you like

@@ -1,4 +1,4 @@
-// our-dimain.com/new-meetup
+// our-dimain.com/new-ticket
 import NewTicketForm from "../../components/tickets/NewTicketForm";
 import { useRouter } from "next/router";
 import GlobalContext from "../../pages/store/globalContext";

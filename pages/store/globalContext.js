@@ -60,7 +60,7 @@ export function GlobalContextProvider(props) {
       });
     }
     if (command.cmd == "addMeeting") {
-      const response = await fetch("/api/new-meetup", {
+      const response = await fetch("/api/new-ticket", {
         method: "POST",
         body: JSON.stringify(command.newVal),
         headers: {

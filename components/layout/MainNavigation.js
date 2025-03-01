@@ -47,7 +47,7 @@ function MainNavigation() {
             <Link href="/tickets">Tickets</Link>
           </li>
           <li>
-            <Link href="/new-meetup">New Ticket</Link>
+            <Link href="/new-ticket">New Ticket</Link>
           </li>
           <li>
             <StatusDropdown />
