@@ -27,13 +27,15 @@ function TicketItem(props) {
   async function assignAgentHandler(agentId) {
     setAssignedTo(agentId);
 
-    await fetch(`/api/tickets/${props.id}/assign`, {
+    // /api/tickets/ or /tickets/ ?
+    const response = await fetch(`/tickets/${props.id}/assign`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ agentId }),
     });
+    if (!response.ok) {
+      alert("Failed to assign agent");
+    }
   }
 
   // "Assign to me" handler (for agents themselves)
