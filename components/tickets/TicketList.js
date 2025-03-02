@@ -4,6 +4,12 @@ import TicketItem from "./TicketItem";
 import classes from "./TicketList.module.css";
 
 function TicketList(props) {
+  if (props.tickets.length === 0) {
+    return (
+      <p className={classes.noTickets}>No tickets are currently available.</p>
+    );
+  }
+
   return (
     <ul className={classes.list}>
       {props.tickets.map((ticket) => (
