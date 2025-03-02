@@ -30,7 +30,8 @@ function TicketItem(props) {
       return;
     }
 
-    if (!props.id || typeof props.id !== "string" || props.id.length !== 24) {
+    if (!props.id || props.id.length !== 24) {
+      // Validate `_id`, not `ticketId`
       alert("Invalid ticket ID format.");
       console.error("Invalid ticket ID:", props.id);
       return;
@@ -43,8 +44,8 @@ function TicketItem(props) {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ticketId: props.id.trim(), // Ensure 24-character string
-          agentId: agentId.trim(),
+          ticketId: props.id, // Correct: Sending `_id` instead of `ticketId`
+          agentId: agentId,
         }),
       });
 
@@ -57,7 +58,7 @@ function TicketItem(props) {
       } else {
         const data = JSON.parse(responseText);
         console.log("Response from server:", data);
-        setAssignedTo(agentId); // Update UI state
+        setAssignedTo(agentId); // Update UI
       }
     } catch (error) {
       console.error("Error assigning agent:", error);
