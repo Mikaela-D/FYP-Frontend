@@ -1,4 +1,4 @@
-// MainNavigation.js
+// C:\Users\Mikaela\FYP-Frontend\components\layout\MainNavigation.js
 
 import { useState, useEffect, useContext, useRef } from "react";
 import Link from "next/link";
