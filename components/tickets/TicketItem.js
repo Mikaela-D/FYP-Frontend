@@ -25,23 +25,39 @@ function TicketItem(props) {
 
   // Handle assigning the ticket to an agent
   async function assignAgentHandler(agentId) {
+    if (!agentId) {
+      alert("Invalid agent selected.");
+      return;
+    }
+
+    if (!props.id || typeof props.id !== "string" || props.id.length !== 24) {
+      alert("Invalid ticket ID format.");
+      console.error("Invalid ticket ID:", props.id);
+      return;
+    }
+
     console.log("Assigning agent:", agentId, "to ticket:", props.id);
-    setAssignedTo(agentId);
 
     try {
       const response = await fetch(`/api/assign-agent`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ticketId: props.id, agentId }),
+        body: JSON.stringify({
+          ticketId: props.id.trim(), // Ensure 24-character string
+          agentId: agentId.trim(),
+        }),
       });
+
       const responseText = await response.text();
       console.log("Response status:", response.status);
       console.log("Response text:", responseText);
+
       if (!response.ok) {
         alert("Failed to assign agent");
       } else {
         const data = JSON.parse(responseText);
         console.log("Response from server:", data);
+        setAssignedTo(agentId); // Update UI state
       }
     } catch (error) {
       console.error("Error assigning agent:", error);
