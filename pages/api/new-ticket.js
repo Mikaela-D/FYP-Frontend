@@ -1,4 +1,4 @@
-// /api/new-ticket
+// C:\Users\Mikaela\FYP-Frontend\pages\api\new-ticket.js
 
 async function handler(req, res) {
   // can be called anything you like
