@@ -1,11 +1,11 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\NewMeetupForm.js
+// C:\Users\Mikaela\FYP-Frontend\components\tickets\NewTicketForm.js
 
 import { useRef } from "react";
 
 import Card from "../ui/Card";
-import classes from "./NewMeetupForm.module.css";
+import classes from "./NewTicketForm.module.css";
 
-function NewMeetupForm(props) {
+function NewTicketForm(props) {
   const IdInputRef = useRef();
   const titleInputRef = useRef();
   const customerNameInputRef = useRef();
@@ -31,8 +31,8 @@ function NewMeetupForm(props) {
     const enteredDescription = descriptionInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
 
-    const meetupData = {
-      meetingId: enteredId,
+    const ticketData = {
+      ticketId: enteredId,
       title: enteredTitle,
       customerName: enteredCustomerName,
       customerPhone: enteredCustomerPhone,
@@ -44,7 +44,7 @@ function NewMeetupForm(props) {
       image: enteredImage,
     };
 
-    props.onAddMeetup(meetupData);
+    props.onAddTicket(ticketData);
   }
 
   return (
@@ -132,4 +132,4 @@ function NewMeetupForm(props) {
   );
 }
 
-export default NewMeetupForm;
+export default NewTicketForm;

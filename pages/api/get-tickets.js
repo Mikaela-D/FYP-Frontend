@@ -1,5 +1,5 @@
 async function handler(req, res) {
-  const response = await fetch("http://localhost:8000/readMeeting", {
+  const response = await fetch("http://localhost:8000/readTicket", {
     method: "POST",
     body: JSON.stringify({ cmd: "all" }),
     headers: {

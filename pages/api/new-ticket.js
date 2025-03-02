@@ -1,8 +1,8 @@
-// /api/new-meetup
+// /api/new-ticket
 
 async function handler(req, res) {
   // can be called anything you like
-  /* const response = await fetch('http://localhost:8000/saveMeeting', {
+  /* const response = await fetch('http://localhost:8000/saveTicket', {
     method: 'POST',
     body: JSON.stringify(req.body),
     headers: {
@@ -11,7 +11,7 @@ async function handler(req, res) {
   });
   const data = await response.json();
   res.json(data)*/
-  const response = await fetch("http://localhost:8000/createMeeting", {
+  const response = await fetch("http://localhost:8000/createTicket", {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: {

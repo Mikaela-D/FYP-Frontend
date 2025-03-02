@@ -3,7 +3,7 @@
 import "../styles/globals.css";
 import Layout from "../components/layout/Layout";
 import { GlobalContextProvider } from "./store/globalContext";
-import { CartProvider } from "../components/generic/CartContext";
+import { AgentTicketsProvider } from "../components/generic/AgentTicketsContext";
 import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps }) {
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <GlobalContextProvider>
-      <CartProvider>
+      <AgentTicketsProvider>
         <div className="app-container">
           <Layout>
             <main className="content">
@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
             </main>
           </Layout>
         </div>
-      </CartProvider>
+      </AgentTicketsProvider>
     </GlobalContextProvider>
   );
 }

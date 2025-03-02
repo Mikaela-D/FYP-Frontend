@@ -1,21 +1,21 @@
-// C:\Users\Mikaela\FYP-Frontend\components\meetups\MeetupItem.js
+// C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketItem.js
 
 import Card from "../ui/Card";
-import classes from "./MeetupItem.module.css";
+import classes from "./TicketItem.module.css";
 import { useRouter } from "next/router";
-import { useCart } from "../generic/CartContext";
+import { useAgentTickets } from "../generic/AgentTicketsContext";
 
-function MeetupItem(props) {
-  const { cart, addToCart } = useCart();
+function TicketItem(props) {
+  const { agentTickets, addToAgentTickets } = useAgentTickets();
   const router = useRouter();
 
-  function addToCartHandler() {
-    if (cart.some((ticket) => ticket.id === props.id)) {
+  function addToAgentTicketsHandler() {
+    if (agentTickets.some((ticket) => ticket.id === props.id)) {
       alert("This ticket is already assigned to you.");
       return;
     }
 
-    addToCart({
+    addToAgentTickets({
       id: props.id,
       customerName: props.customerName,
       customerPhone: props.customerPhone,
@@ -27,7 +27,7 @@ function MeetupItem(props) {
       status: props.status,
       description: props.description,
     });
-    router.push("/cart");
+    router.push("/agent-tickets");
   }
 
   function showDetailsHandler() {
@@ -35,7 +35,10 @@ function MeetupItem(props) {
   }
 
   return (
-    <li className={classes.item} style={{ display: "inline-block", verticalAlign: "top", margin: "10px" }}>
+    <li
+      className={classes.item}
+      style={{ display: "inline-block", verticalAlign: "top", margin: "10px" }}
+    >
       <Card>
         <header className={classes.header}>
           <div className={classes.headerBar}></div>
@@ -44,14 +47,26 @@ function MeetupItem(props) {
 
         <div className={classes.body}>
           <div className={classes.infoGrid}>
-            <div><strong>Category:</strong> {props.category}</div>
-            <div><strong>Priority:</strong> 
-              <span className={`${classes.badge} ${classes[`priority-${props.priority?.toLowerCase()}`]}`}>
+            <div>
+              <strong>Category:</strong> {props.category}
+            </div>
+            <div>
+              <strong>Priority:</strong>
+              <span
+                className={`${classes.badge} ${
+                  classes[`priority-${props.priority?.toLowerCase()}`]
+                }`}
+              >
                 {props.priority}
               </span>
             </div>
-            <div><strong>Status:</strong> 
-              <span className={`${classes.badge} ${classes[`status-${props.status?.toLowerCase()}`]}`}>
+            <div>
+              <strong>Status:</strong>
+              <span
+                className={`${classes.badge} ${
+                  classes[`status-${props.status?.toLowerCase()}`]
+                }`}
+              >
                 {props.status}
               </span>
             </div>
@@ -61,7 +76,7 @@ function MeetupItem(props) {
         <footer className={classes.footer}>
           <div className={classes.actions}>
             <button onClick={showDetailsHandler}>Details</button>
-            <button onClick={addToCartHandler}>Assign to Me</button>
+            <button onClick={addToAgentTicketsHandler}>Assign to Me</button>
           </div>
         </footer>
       </Card>
@@ -69,4 +84,4 @@ function MeetupItem(props) {
   );
 }
 
-export default MeetupItem;
+export default TicketItem;

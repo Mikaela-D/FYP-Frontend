@@ -1,4 +1,6 @@
-import MeetupList from "../../components/meetups/MeetupList";
+// C:\Users\Mikaela\FYP-Frontend\pages\tickets\index.js
+
+import TicketList from "../../components/tickets/TicketList";
 import { useContext } from "react";
 import GlobalContext from "../store/globalContext";
 
@@ -6,7 +8,7 @@ function TicketsPage() {
   const globalCtx = useContext(GlobalContext);
 
   if (globalCtx.theGlobalObject.dataLoaded == true) {
-    return <MeetupList meetups={globalCtx.theGlobalObject.meetings} />;
+    return <TicketList tickets={globalCtx.theGlobalObject.tickets} />;
   }
   return <div>Loading data from database, please wait . . . </div>;
 }

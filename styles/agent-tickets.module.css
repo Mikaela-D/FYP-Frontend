@@ -1,6 +1,6 @@
-/* C:\Users\Mikaela\FYP-Frontend\styles\Cart.module.css */
+/* C:\Users\Mikaela\FYP-Frontend\styles\AgentTickets.module.css */
 
-.cart {
+.agentTickets {
   padding: 20px;
   max-width: 900px;
   margin: 0 auto;
@@ -8,7 +8,7 @@
   line-height: 1.5;
 }
 
-.cart h1 {
+.agentTickets h1 {
   margin-bottom: 20px;
   color: #333;
   text-align: center;
@@ -25,7 +25,7 @@
   list-style: none;
 }
 
-.cartItem {
+.agentTicketsItem {
   flex: 1 1 260px;
   max-width: 260px;
   background-color: #ffffff;
@@ -36,13 +36,13 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cartItem:hover {
+.agentTicketsItem:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 /* Header styling */
-.cartItemHeader {
+.agentTicketsItemHeader {
   position: relative;
   background-color: #f4f5f7;
   padding: 12px;
@@ -60,7 +60,7 @@
   background-color: #0052cc;
 }
 
-.cartItemHeader h3 {
+.agentTicketsItemHeader h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #172b4d;
@@ -68,7 +68,7 @@
 }
 
 /* Body content */
-.cartItemBody {
+.agentTicketsItemBody {
   padding: 12px;
   background-color: #ffffff;
 }
@@ -90,7 +90,7 @@
 }
 
 /* Footer (Actions) */
-.cartItemFooter {
+.agentTicketsItemFooter {
   background-color: #f4f5f7;
   padding: 12px;
   border-top: 1px solid #dfe1e6;

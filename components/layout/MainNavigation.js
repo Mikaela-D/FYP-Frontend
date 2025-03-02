@@ -20,10 +20,10 @@ function MainNavigation() {
   }
 
   const contents = [];
-  globalCtx.theGlobalObject.meetings.forEach((element) => {
+  globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
       title: element.title,
-      webAddress: "/" + element.meetingId,
+      webAddress: "/" + element.ticketId,
     });
   });
 
@@ -38,16 +38,16 @@ function MainNavigation() {
         <ul>
           <li>
             <Link href="/inbox">Inbox</Link> (
-            {globalCtx.theGlobalObject.meetings.length})
+            {globalCtx.theGlobalObject.tickets.length})
           </li>
           <li>
-            <Link href="/cart">Agent's Tickets</Link>
+            <Link href="/agent-tickets">Agent's Tickets</Link>
           </li>
           <li>
             <Link href="/tickets">Tickets</Link>
           </li>
           <li>
-            <Link href="/new-meetup">New Ticket</Link>
+            <Link href="/new-ticket">New Ticket</Link>
           </li>
           <li>
             <StatusDropdown />
