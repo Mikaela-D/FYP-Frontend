@@ -25,16 +25,26 @@ function TicketItem(props) {
 
   // Handle assigning the ticket to an agent
   async function assignAgentHandler(agentId) {
+    console.log("Assigning agent:", agentId, "to ticket:", props.id);
     setAssignedTo(agentId);
 
-    // /api/tickets/ or /tickets/ ?
-    const response = await fetch(`/tickets/${props.id}/assign`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ agentId }),
-    });
-    if (!response.ok) {
-      alert("Failed to assign agent");
+    try {
+      const response = await fetch(`/api/assign-agent`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ticketId: props.id, agentId }),
+      });
+      const responseText = await response.text();
+      console.log("Response status:", response.status);
+      console.log("Response text:", responseText);
+      if (!response.ok) {
+        alert("Failed to assign agent");
+      } else {
+        const data = JSON.parse(responseText);
+        console.log("Response from server:", data);
+      }
+    } catch (error) {
+      console.error("Error assigning agent:", error);
     }
   }
 
