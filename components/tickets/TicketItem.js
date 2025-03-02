@@ -4,11 +4,39 @@ import Card from "../ui/Card";
 import classes from "./TicketItem.module.css";
 import { useRouter } from "next/router";
 import { useAgentTickets } from "../generic/AgentTicketsContext";
+import { useEffect, useState } from "react";
 
 function TicketItem(props) {
   const { agentTickets, addToAgentTickets } = useAgentTickets();
   const router = useRouter();
 
+  const [agents, setAgents] = useState([]);
+  const [assignedTo, setAssignedTo] = useState(props.assignedTo || "");
+
+  // Fetch agents from the database
+  useEffect(() => {
+    async function fetchAgents() {
+      const response = await fetch("/api/agents");
+      const data = await response.json();
+      setAgents(data);
+    }
+    fetchAgents();
+  }, []);
+
+  // Handle assigning the ticket to an agent
+  async function assignAgentHandler(agentId) {
+    setAssignedTo(agentId);
+
+    await fetch(`/api/tickets/${props.id}/assign`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ agentId }),
+    });
+  }
+
+  // "Assign to me" handler (for agents themselves)
   function addToAgentTicketsHandler() {
     if (agentTickets.some((ticket) => ticket.id === props.id)) {
       alert("This ticket is already assigned to you.");
@@ -27,9 +55,11 @@ function TicketItem(props) {
       status: props.status,
       description: props.description,
     });
+
     router.push("/agent-tickets");
   }
 
+  // Show ticket details
   function showDetailsHandler() {
     router.push("/" + props.id);
   }
@@ -70,6 +100,10 @@ function TicketItem(props) {
                 {props.status}
               </span>
             </div>
+            <div>
+              <strong>Assigned To:</strong>{" "}
+              {agents.find((a) => a._id === assignedTo)?.name || "Unassigned"}
+            </div>
           </div>
         </div>
 
@@ -77,6 +111,19 @@ function TicketItem(props) {
           <div className={classes.actions}>
             <button onClick={showDetailsHandler}>Details</button>
             <button onClick={addToAgentTicketsHandler}>Assign to Me</button>
+
+            <select
+              value={assignedTo}
+              onChange={(e) => assignAgentHandler(e.target.value)}
+              className={classes.assignDropdown}
+            >
+              <option value="">Assign to...</option>
+              {agents.map((agent) => (
+                <option key={agent._id} value={agent._id}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
           </div>
         </footer>
       </Card>

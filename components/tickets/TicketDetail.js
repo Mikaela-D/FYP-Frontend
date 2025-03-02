@@ -43,6 +43,7 @@ function TicketDetail(props) {
             >
               {props.status}
             </span>
+            <strong>Assigned To:</strong> {props.assignedTo}
           </div>
         </div>
 
