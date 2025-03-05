@@ -26,6 +26,7 @@ function TicketList(props) {
           status={ticket.status}
           description={ticket.description}
           image={ticket.image}
+          assignedTo={ticket.assignedTo}
         />
       ))}
     </ul>
