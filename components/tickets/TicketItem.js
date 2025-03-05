@@ -90,7 +90,12 @@ function TicketItem(props) {
 
   // Show ticket details
   function showDetailsHandler() {
-    router.push("/" + props.id);
+    const clientId = props.clientId.clientId; // Extract clientId from the object
+    if (typeof clientId === "string") {
+      router.push("/" + clientId);
+    } else {
+      console.error("Invalid clientId:", JSON.stringify(props));
+    }
   }
 
   return (

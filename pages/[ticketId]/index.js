@@ -23,9 +23,10 @@ export default function TicketPage() {
   for (let ii = 0; ii < globalCtx.theGlobalObject.tickets.length; ii++) {
     let temp = globalCtx.theGlobalObject.tickets[ii];
     if (
-      temp.ticketId &&
+      temp.clientId &&
+      typeof temp.clientId.clientId === "string" &&
       router.query.ticketId &&
-      temp.ticketId.trim() === router.query.ticketId.trim()
+      temp.clientId.clientId.trim() === router.query.ticketId.trim()
     ) {
       const assignedAgent =
         agents.find((a) => a._id === temp.assignedTo)?.name || "Unassigned";
@@ -45,5 +46,9 @@ export default function TicketPage() {
       );
     }
   }
-  return returnVal;
+  return (
+    returnVal || (
+      <p>Ticket not found or you do not have access to view this ticket.</p>
+    )
+  );
 }
