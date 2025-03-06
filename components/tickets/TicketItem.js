@@ -66,26 +66,51 @@ function TicketItem(props) {
   }
 
   // "Assign to me" handler (for agents themselves)
-  function addToAgentTicketsHandler() {
-    if (agentTickets.some((ticket) => ticket.id === props.id)) {
-      alert("This ticket is already assigned to you.");
-      return;
+  async function addToAgentTicketsHandler() {
+    const agentName = "Mikaela"; // Hard-coded since Mikaela is the logged-in agent.
+
+    try {
+      // 1. Fetch Mikaela's agent ID
+      const agentResponse = await fetch(`/api/agent-by-name?name=${agentName}`);
+      if (!agentResponse.ok) {
+        alert("Could not find your agent profile.");
+        return;
+      }
+      const agent = await agentResponse.json();
+      const agentId = agent._id;
+
+      // 2. Assign Mikaela to the ticket
+      const assignResponse = await fetch(`/api/assign-agent`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ticketId: props.id, agentId }),
+      });
+
+      if (!assignResponse.ok) {
+        alert("Failed to assign ticket to you.");
+        return;
+      }
+
+      // 3. Add to local context (AgentTicketsContext) for immediate UI feedback
+      addToAgentTickets({
+        id: props.id,
+        customerName: props.customerName,
+        customerPhone: props.customerPhone,
+        customerEmail: props.customerEmail,
+        image: props.image,
+        title: props.title,
+        category: props.category,
+        priority: props.priority,
+        status: props.status,
+        description: props.description,
+        assignedTo: "Me", // Display "Me" in agent-tickets page
+      });
+
+      router.push("/agent-tickets");
+    } catch (error) {
+      console.error("Error assigning ticket to Mikaela:", error);
+      alert("Something went wrong. Check console for details.");
     }
-
-    addToAgentTickets({
-      id: props.id,
-      customerName: props.customerName,
-      customerPhone: props.customerPhone,
-      customerEmail: props.customerEmail,
-      image: props.image,
-      title: props.title,
-      category: props.category,
-      priority: props.priority,
-      status: props.status,
-      description: props.description,
-    });
-
-    router.push("/agent-tickets");
   }
 
   // Show ticket details
