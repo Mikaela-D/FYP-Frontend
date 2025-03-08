@@ -1,6 +1,6 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\EditTicketForm.js
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import classes from "./EditTicketForm.module.css";
 
 function EditTicketForm(props) {
@@ -13,6 +13,26 @@ function EditTicketForm(props) {
   const statusInputRef = useRef();
   const descriptionInputRef = useRef();
   const imageInputRef = useRef();
+
+  const [isDirty, setIsDirty] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isDirty) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isDirty]);
+
+  function handleInputChange() {
+    setIsDirty(true);
+  }
 
   async function submitHandler(event) {
     event.preventDefault();
@@ -50,9 +70,22 @@ function EditTicketForm(props) {
     if (data.response === "success") {
       // Call the onUpdate function to update the ticket details
       props.onUpdate(updatedTicketData);
+      setIsDirty(false);
     } else {
       alert("Failed to update ticket: " + data.error);
     }
+  }
+
+  function cancelHandler() {
+    if (isDirty) {
+      const confirmCancel = window.confirm(
+        "You have unsaved changes. Are you sure you want to close the popup?"
+      );
+      if (!confirmCancel) {
+        return;
+      }
+    }
+    props.onClose();
   }
 
   return (
@@ -65,6 +98,7 @@ function EditTicketForm(props) {
           id="title"
           defaultValue={props.ticketData.title}
           ref={titleInputRef}
+          onChange={handleInputChange}
         />
       </div>
       <div className={classes.control}>
@@ -75,6 +109,7 @@ function EditTicketForm(props) {
           id="customerName"
           defaultValue={props.ticketData.customerName}
           ref={customerNameInputRef}
+          onChange={handleInputChange}
         />
       </div>
       <div className={classes.control}>
@@ -85,6 +120,7 @@ function EditTicketForm(props) {
           id="customerPhone"
           defaultValue={props.ticketData.customerPhone}
           ref={customerPhoneInputRef}
+          onChange={handleInputChange}
         />
       </div>
       <div className={classes.control}>
@@ -95,6 +131,7 @@ function EditTicketForm(props) {
           id="customerEmail"
           defaultValue={props.ticketData.customerEmail}
           ref={customerEmailInputRef}
+          onChange={handleInputChange}
         />
       </div>
       <div className={classes.control}>
@@ -104,6 +141,7 @@ function EditTicketForm(props) {
           required
           defaultValue={props.ticketData.category}
           ref={categoryInputRef}
+          onChange={handleInputChange}
         >
           <option value="Technical">Technical</option>
           <option value="Billing">Billing</option>
@@ -118,6 +156,7 @@ function EditTicketForm(props) {
           required
           defaultValue={props.ticketData.priority}
           ref={priorityInputRef}
+          onChange={handleInputChange}
         >
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -131,6 +170,7 @@ function EditTicketForm(props) {
           required
           defaultValue={props.ticketData.status}
           ref={statusInputRef}
+          onChange={handleInputChange}
         >
           <option value="To Do">To Do</option>
           <option value="In Progress">In Progress</option>
@@ -146,6 +186,7 @@ function EditTicketForm(props) {
           rows="5"
           defaultValue={props.ticketData.description}
           ref={descriptionInputRef}
+          onChange={handleInputChange}
         ></textarea>
       </div>
       <div className={classes.control}>
@@ -155,11 +196,12 @@ function EditTicketForm(props) {
           id="image"
           defaultValue={props.ticketData.image}
           ref={imageInputRef}
+          onChange={handleInputChange}
         />
       </div>
       <div className={classes.actions}>
         <button type="submit">Save Changes</button>
-        <button type="button" onClick={props.onClose}>
+        <button type="button" onClick={cancelHandler}>
           Cancel
         </button>
       </div>
