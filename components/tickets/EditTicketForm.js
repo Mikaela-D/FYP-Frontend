@@ -1,3 +1,5 @@
+// C:\Users\Mikaela\FYP-Frontend\components\tickets\EditTicketForm.js
+
 import { useRef } from "react";
 import classes from "./EditTicketForm.module.css";
 
@@ -12,10 +14,11 @@ function EditTicketForm(props) {
   const descriptionInputRef = useRef();
   const imageInputRef = useRef();
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
 
     const updatedTicketData = {
+      _id: props.ticketData._id,
       title: titleInputRef.current.value,
       customerName: customerNameInputRef.current.value,
       customerPhone: customerPhoneInputRef.current.value,
@@ -27,8 +30,22 @@ function EditTicketForm(props) {
       image: imageInputRef.current.value,
     };
 
-    // Call the onClose function to close the popup
-    props.onClose();
+    const response = await fetch("/api/update-ticket", {
+      method: "PUT", // Use PUT method for updates
+      body: JSON.stringify(updatedTicketData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.response === "success") {
+      // Call the onClose function to close the popup
+      props.onClose();
+    } else {
+      alert("Failed to update ticket: " + data.error);
+    }
   }
 
   return (
