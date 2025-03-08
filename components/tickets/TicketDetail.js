@@ -1,8 +1,20 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketDetail.js
 
+import { useState } from "react";
 import classes from "./TicketDetail.module.css";
+import EditTicketForm from "./EditTicketForm";
 
 function TicketDetail(props) {
+  const [isEditing, setIsEditing] = useState(false);
+
+  function startEditHandler() {
+    setIsEditing(true);
+  }
+
+  function stopEditHandler() {
+    setIsEditing(false);
+  }
+
   return (
     <section className={classes.ticket}>
       <header className={classes["ticket-header"]}>
@@ -65,7 +77,13 @@ function TicketDetail(props) {
         <p>
           <strong>Generated on:</strong> {new Date().toLocaleDateString()}
         </p>
+        <button onClick={startEditHandler}>Edit Ticket</button>
       </footer>
+      {isEditing && (
+        <div className={classes.popup}>
+          <EditTicketForm ticketData={props} onClose={stopEditHandler} />
+        </div>
+      )}
     </section>
   );
 }
