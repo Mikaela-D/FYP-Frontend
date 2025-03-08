@@ -1,8 +1,38 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketDetail.js
 
+import { useState, useRef, useEffect } from "react";
 import classes from "./TicketDetail.module.css";
+import EditTicketForm from "./EditTicketForm";
 
 function TicketDetail(props) {
+  const [isEditing, setIsEditing] = useState(false);
+  const popupRef = useRef();
+
+  function startEditHandler() {
+    setIsEditing(true);
+  }
+
+  function stopEditHandler() {
+    setIsEditing(false);
+  }
+
+  function handleClickOutside(event) {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      stopEditHandler();
+    }
+  }
+
+  useEffect(() => {
+    if (isEditing) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isEditing]);
+
   return (
     <section className={classes.ticket}>
       <header className={classes["ticket-header"]}>
@@ -65,7 +95,18 @@ function TicketDetail(props) {
         <p>
           <strong>Generated on:</strong> {new Date().toLocaleDateString()}
         </p>
+        <button className={classes["edit-button"]} onClick={startEditHandler}>
+          Edit Ticket
+        </button>
       </footer>
+      {isEditing && (
+        <>
+          <div className={classes.backdrop} onClick={stopEditHandler}></div>
+          <div className={classes.popup} ref={popupRef}>
+            <EditTicketForm ticketData={props} onClose={stopEditHandler} />
+          </div>
+        </>
+      )}
     </section>
   );
 }
