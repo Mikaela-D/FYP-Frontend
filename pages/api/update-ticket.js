@@ -2,7 +2,7 @@
 
 async function handler(req, res) {
   const response = await fetch("http://localhost:8000/updateTicket", {
-    method: "POST",
+    method: "PUT",
     body: JSON.stringify(req.body),
     headers: {
       "Content-Type": "application/json",
