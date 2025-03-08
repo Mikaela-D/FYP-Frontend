@@ -152,4 +152,6 @@
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   z-index: 100;
+  width: 35%; /* Make the popup wider */
+  max-width: 800px;
 }

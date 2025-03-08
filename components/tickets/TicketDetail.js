@@ -1,11 +1,12 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketDetail.js
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import classes from "./TicketDetail.module.css";
 import EditTicketForm from "./EditTicketForm";
 
 function TicketDetail(props) {
   const [isEditing, setIsEditing] = useState(false);
+  const popupRef = useRef();
 
   function startEditHandler() {
     setIsEditing(true);
@@ -14,6 +15,23 @@ function TicketDetail(props) {
   function stopEditHandler() {
     setIsEditing(false);
   }
+
+  function handleClickOutside(event) {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      stopEditHandler();
+    }
+  }
+
+  useEffect(() => {
+    if (isEditing) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isEditing]);
 
   return (
     <section className={classes.ticket}>
@@ -80,7 +98,7 @@ function TicketDetail(props) {
         <button onClick={startEditHandler}>Edit Ticket</button>
       </footer>
       {isEditing && (
-        <div className={classes.popup}>
+        <div className={classes.popup} ref={popupRef}>
           <EditTicketForm ticketData={props} onClose={stopEditHandler} />
         </div>
       )}
