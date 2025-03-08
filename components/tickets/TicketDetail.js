@@ -6,6 +6,7 @@ import EditTicketForm from "./EditTicketForm";
 
 function TicketDetail(props) {
   const [isEditing, setIsEditing] = useState(false);
+  const [ticketData, setTicketData] = useState(props);
   const popupRef = useRef();
 
   function startEditHandler() {
@@ -33,60 +34,65 @@ function TicketDetail(props) {
     };
   }, [isEditing]);
 
+  function updateTicketData(updatedData) {
+    setTicketData(updatedData);
+    stopEditHandler();
+  }
+
   return (
     <section className={classes.ticket}>
       <header className={classes["ticket-header"]}>
         <div className={classes["header-bar"]}></div>
-        <h1>{props.title}</h1>
+        <h1>{ticketData.title}</h1>
       </header>
 
       <div className={classes["ticket-body"]}>
         <div className={classes["ticket-info-grid"]}>
           <div>
-            <strong>Customer Name:</strong> {props.customerName}
+            <strong>Customer Name:</strong> {ticketData.customerName}
           </div>
           <div>
-            <strong>Phone:</strong> {props.customerPhone}
+            <strong>Phone:</strong> {ticketData.customerPhone}
           </div>
           <div>
-            <strong>Email:</strong> {props.customerEmail}
+            <strong>Email:</strong> {ticketData.customerEmail}
           </div>
           <div>
-            <strong>Category:</strong> {props.category}
+            <strong>Category:</strong> {ticketData.category}
           </div>
           <div>
             <strong>Priority:</strong>
             <span
               className={`${classes.badge} ${
-                classes[`priority-${props.priority?.toLowerCase()}`]
+                classes[`priority-${ticketData.priority?.toLowerCase()}`]
               }`}
             >
-              {props.priority}
+              {ticketData.priority}
             </span>
           </div>
           <div>
             <strong>Status:</strong>
             <span
               className={`${classes.badge} ${
-                classes[`status-${props.status?.toLowerCase()}`]
+                classes[`status-${ticketData.status?.toLowerCase()}`]
               }`}
             >
-              {props.status}
+              {ticketData.status}
             </span>
           </div>
           <div>
-            <strong>Assigned To:</strong> {props.assignedTo}
+            <strong>Assigned To:</strong> {ticketData.assignedTo}
           </div>
         </div>
 
         <div className={classes["ticket-description"]}>
           <h2>Description</h2>
-          <p>{props.description}</p>
+          <p>{ticketData.description}</p>
         </div>
 
-        {props.image && (
+        {ticketData.image && (
           <div className={classes["ticket-image"]}>
-            <img src={props.image} alt={props.title} />
+            <img src={ticketData.image} alt={ticketData.title} />
           </div>
         )}
       </div>
@@ -103,7 +109,11 @@ function TicketDetail(props) {
         <>
           <div className={classes.backdrop} onClick={stopEditHandler}></div>
           <div className={classes.popup} ref={popupRef}>
-            <EditTicketForm ticketData={props} onClose={stopEditHandler} />
+            <EditTicketForm
+              ticketData={ticketData}
+              onClose={stopEditHandler}
+              onUpdate={updateTicketData}
+            />
           </div>
         </>
       )}

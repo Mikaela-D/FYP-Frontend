@@ -48,8 +48,8 @@ function EditTicketForm(props) {
     const data = await response.json();
 
     if (data.response === "success") {
-      // Call the onClose function to close the popup
-      props.onClose();
+      // Call the onUpdate function to update the ticket details
+      props.onUpdate(updatedTicketData);
     } else {
       alert("Failed to update ticket: " + data.error);
     }
