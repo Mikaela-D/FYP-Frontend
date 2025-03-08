@@ -100,9 +100,12 @@ function TicketDetail(props) {
         </button>
       </footer>
       {isEditing && (
-        <div className={classes.popup} ref={popupRef}>
-          <EditTicketForm ticketData={props} onClose={stopEditHandler} />
-        </div>
+        <>
+          <div className={classes.backdrop} onClick={stopEditHandler}></div>
+          <div className={classes.popup} ref={popupRef}>
+            <EditTicketForm ticketData={props} onClose={stopEditHandler} />
+          </div>
+        </>
       )}
     </section>
   );
