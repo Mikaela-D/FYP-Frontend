@@ -18,7 +18,7 @@ function EditTicketForm(props) {
     event.preventDefault();
 
     const updatedTicketData = {
-      _id: props.ticketData._id,
+      _id: props.ticketData._id || "", // Ensure `_id` exists
       title: titleInputRef.current.value,
       customerName: customerNameInputRef.current.value,
       customerPhone: customerPhoneInputRef.current.value,
@@ -29,6 +29,13 @@ function EditTicketForm(props) {
       description: descriptionInputRef.current.value,
       image: imageInputRef.current.value,
     };
+
+    if (!updatedTicketData._id) {
+      alert("Error: Ticket ID (_id) is missing!");
+      return;
+    }
+
+    console.log("Sending update request:", updatedTicketData);
 
     const response = await fetch("/api/update-ticket", {
       method: "PUT", // Use PUT method for updates
