@@ -1,4 +1,4 @@
-// MainNavigation.js
+// C:\Users\Mikaela\FYP-Frontend\components\layout\MainNavigation.js
 
 import { useState, useEffect, useContext, useRef } from "react";
 import Link from "next/link";
@@ -23,7 +23,7 @@ function MainNavigation() {
   globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
       title: element.title,
-      webAddress: "/" + element.ticketId,
+      webAddress: "/" + element.clientId, // Use clientId instead of ticketId
     });
   });
 

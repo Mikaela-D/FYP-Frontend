@@ -4,34 +4,123 @@ import Card from "../ui/Card";
 import classes from "./TicketItem.module.css";
 import { useRouter } from "next/router";
 import { useAgentTickets } from "../generic/AgentTicketsContext";
+import { useEffect, useState } from "react";
 
 function TicketItem(props) {
   const { agentTickets, addToAgentTickets } = useAgentTickets();
   const router = useRouter();
 
-  function addToAgentTicketsHandler() {
-    if (agentTickets.some((ticket) => ticket.id === props.id)) {
-      alert("This ticket is already assigned to you.");
+  const [agents, setAgents] = useState([]);
+  const [assignedTo, setAssignedTo] = useState(props.assignedTo || "");
+
+  // Fetch agents from the database
+  useEffect(() => {
+    async function fetchAgents() {
+      const response = await fetch("/api/agents");
+      const data = await response.json();
+      setAgents(data);
+    }
+    fetchAgents();
+  }, []);
+
+  // Handle assigning the ticket to an agent
+  async function assignAgentHandler(agentId) {
+    if (!agentId) {
+      alert("Invalid agent selected.");
       return;
     }
 
-    addToAgentTickets({
-      id: props.id,
-      customerName: props.customerName,
-      customerPhone: props.customerPhone,
-      customerEmail: props.customerEmail,
-      image: props.image,
-      title: props.title,
-      category: props.category,
-      priority: props.priority,
-      status: props.status,
-      description: props.description,
-    });
-    router.push("/agent-tickets");
+    if (!props.id || props.id.length !== 24) {
+      // Validate `_id`, not `ticketId`
+      alert("Invalid ticket ID format.");
+      console.error("Invalid ticket ID:", props.id);
+      return;
+    }
+
+    console.log("Assigning agent:", agentId, "to ticket:", props.id);
+
+    try {
+      const response = await fetch(`/api/assign-agent`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ticketId: props.id, // Correct: Sending `_id` instead of `ticketId`
+          agentId: agentId,
+        }),
+      });
+
+      const responseText = await response.text();
+      console.log("Response status:", response.status);
+      console.log("Response text:", responseText);
+
+      if (!response.ok) {
+        alert("Failed to assign agent");
+      } else {
+        const data = JSON.parse(responseText);
+        console.log("Response from server:", data);
+        setAssignedTo(agentId); // Update UI
+      }
+    } catch (error) {
+      console.error("Error assigning agent:", error);
+    }
   }
 
+  // "Assign to me" handler (for agents themselves)
+  async function addToAgentTicketsHandler() {
+    const agentName = "Mikaela"; // Hard-coded since Mikaela is the logged-in agent.
+
+    try {
+      // 1. Fetch Mikaela's agent ID
+      const agentResponse = await fetch(`/api/agent-by-name?name=${agentName}`);
+      if (!agentResponse.ok) {
+        alert("Could not find your agent profile.");
+        return;
+      }
+      const agent = await agentResponse.json();
+      const agentId = agent._id;
+
+      // 2. Assign Mikaela to the ticket
+      const assignResponse = await fetch(`/api/assign-agent`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ticketId: props.id, agentId }),
+      });
+
+      if (!assignResponse.ok) {
+        alert("Failed to assign ticket to you.");
+        return;
+      }
+
+      // 3. Add to local context (AgentTicketsContext) for immediate UI feedback
+      addToAgentTickets({
+        id: props.id,
+        customerName: props.customerName,
+        customerPhone: props.customerPhone,
+        customerEmail: props.customerEmail,
+        image: props.image,
+        title: props.title,
+        category: props.category,
+        priority: props.priority,
+        status: props.status,
+        description: props.description,
+        assignedTo: "Me", // Display "Me" in agent-tickets page
+      });
+
+      router.push("/agent-tickets");
+    } catch (error) {
+      console.error("Error assigning ticket to Mikaela:", error);
+      alert("Something went wrong. Check console for details.");
+    }
+  }
+
+  // Show ticket details
   function showDetailsHandler() {
-    router.push("/" + props.id);
+    const clientId = props.clientId.clientId; // Extract clientId from the object
+    if (typeof clientId === "string") {
+      router.push("/" + clientId);
+    } else {
+      console.error("Invalid clientId:", JSON.stringify(props));
+    }
   }
 
   return (
@@ -70,6 +159,10 @@ function TicketItem(props) {
                 {props.status}
               </span>
             </div>
+            <div>
+              <strong>Assigned To:</strong>{" "}
+              {agents.find((a) => a._id === assignedTo)?.name || "Unassigned"}
+            </div>
           </div>
         </div>
 
@@ -77,6 +170,19 @@ function TicketItem(props) {
           <div className={classes.actions}>
             <button onClick={showDetailsHandler}>Details</button>
             <button onClick={addToAgentTicketsHandler}>Assign to Me</button>
+
+            <select
+              value={assignedTo}
+              onChange={(e) => assignAgentHandler(e.target.value)}
+              className={classes.assignDropdown}
+            >
+              <option value="">Assign to...</option>
+              {agents.map((agent) => (
+                <option key={agent._id} value={agent._id}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
           </div>
         </footer>
       </Card>

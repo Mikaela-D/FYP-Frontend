@@ -44,6 +44,9 @@ function TicketDetail(props) {
               {props.status}
             </span>
           </div>
+          <div>
+            <strong>Assigned To:</strong> {props.assignedTo}
+          </div>
         </div>
 
         <div className={classes["ticket-description"]}>

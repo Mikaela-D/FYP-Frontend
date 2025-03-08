@@ -14,8 +14,9 @@ function TicketList(props) {
     <ul className={classes.list}>
       {props.tickets.map((ticket) => (
         <TicketItem
-          key={ticket._id}
-          id={ticket.ticketId}
+          key={ticket._id} // Correct: Use `_id` instead of `ticketId`
+          id={ticket._id} // Correct: Pass `_id`, not `ticketId`
+          clientId={ticket.clientId} // Pass clientId instead of ticketId
           title={ticket.title}
           customerName={ticket.customerName}
           customerPhone={ticket.customerPhone}
@@ -25,6 +26,7 @@ function TicketList(props) {
           status={ticket.status}
           description={ticket.description}
           image={ticket.image}
+          assignedTo={ticket.assignedTo}
         />
       ))}
     </ul>

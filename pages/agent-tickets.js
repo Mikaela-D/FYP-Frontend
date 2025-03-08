@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import classes from "../styles/agent-tickets.module.css";
 
 export default function AgentTickets() {
-  const { agentTickets, removeFromAgentTickets, isHydrated } =
+  const { agentTickets, setAgentTickets, removeFromAgentTickets, isHydrated } =
     useAgentTickets();
 
   const [resolvedTickets, setResolvedTickets] = useState([]);
@@ -14,11 +14,37 @@ export default function AgentTickets() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
+    async function fetchAssignedTickets() {
+      const response = await fetch("/api/tickets-by-agent?name=Mikaela");
+      const data = await response.json();
+      if (response.ok) {
+        setAgentTickets(
+          data.tickets.map((ticket) => ({
+            id: ticket._id,
+            customerName: ticket.customerName,
+            customerPhone: ticket.customerPhone,
+            customerEmail: ticket.customerEmail,
+            image: ticket.image,
+            title: ticket.title,
+            category: ticket.category,
+            priority: ticket.priority,
+            status: ticket.status,
+            description: ticket.description,
+            assignedTo: "Me",
+          }))
+        );
+      } else {
+        console.error("Failed to load assigned tickets:", data.error);
+      }
+    }
+
+    fetchAssignedTickets();
+
     const saved = localStorage.getItem("resolvedTickets");
     if (saved) {
       setResolvedTickets(JSON.parse(saved));
     }
-  }, []);
+  }, [setAgentTickets]);
 
   useEffect(() => {
     localStorage.setItem("resolvedTickets", JSON.stringify(resolvedTickets));
@@ -96,17 +122,7 @@ export default function AgentTickets() {
         </label>
       </div>
 
-      {agentTickets.length === 0 &&
-        priorityFilter === "all" &&
-        categoryFilter === "all" &&
-        statusFilter === "all" && (
-          <p className={classes.noTickets}>
-            No tickets are currently assigned to you.
-          </p>
-        )}
-
-      {/* Ticket List */}
-      {filteredTickets.length === 0 && agentTickets.length > 0 ? (
+      {filteredTickets.length === 0 ? (
         <p className={classes.noTickets}>
           No tickets found matching your filters.
         </p>
