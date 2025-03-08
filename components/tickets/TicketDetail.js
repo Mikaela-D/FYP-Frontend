@@ -95,7 +95,9 @@ function TicketDetail(props) {
         <p>
           <strong>Generated on:</strong> {new Date().toLocaleDateString()}
         </p>
-        <button onClick={startEditHandler}>Edit Ticket</button>
+        <button className={classes["edit-button"]} onClick={startEditHandler}>
+          Edit Ticket
+        </button>
       </footer>
       {isEditing && (
         <div className={classes.popup} ref={popupRef}>
