@@ -61,7 +61,6 @@ function TicketDetail(props) {
     const data = await response.json();
 
     if (data.response === "success") {
-      alert("Ticket resolved successfully!");
       // Redirect or update UI as needed
     } else {
       alert("Failed to resolve ticket: " + data.error);
