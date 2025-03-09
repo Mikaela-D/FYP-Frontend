@@ -12,6 +12,7 @@ function TicketItem(props) {
 
   const [agents, setAgents] = useState([]);
   const [assignedTo, setAssignedTo] = useState(props.assignedTo || "");
+  const [routerReady, setRouterReady] = useState(false);
 
   // Fetch agents from the database
   useEffect(() => {
@@ -22,6 +23,12 @@ function TicketItem(props) {
     }
     fetchAgents();
   }, []);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setRouterReady(true);
+    }
+  }, [router.isReady]);
 
   // Handle assigning the ticket to an agent
   async function assignAgentHandler(agentId) {
@@ -115,9 +122,13 @@ function TicketItem(props) {
 
   // Show ticket details
   function showDetailsHandler() {
-    const clientId = props.clientId.clientId; // Extract clientId from the object
-    if (typeof clientId === "string") {
-      router.push("/" + clientId);
+    if (props.clientId && typeof props.clientId.clientId === "string") {
+      const clientId = props.clientId.clientId; // Extract clientId from the object
+      if (routerReady) {
+        router.push("/" + clientId);
+      } else {
+        console.error("Router is not ready:", JSON.stringify(props));
+      }
     } else {
       console.error("Invalid clientId:", JSON.stringify(props));
     }
