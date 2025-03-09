@@ -1,6 +1,7 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketDetail.js
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import classes from "./TicketDetail.module.css";
 import EditTicketForm from "./EditTicketForm";
 import ConfirmationModal from "../ui/ConfirmationModal";
@@ -10,6 +11,7 @@ function TicketDetail(props) {
   const [ticketData, setTicketData] = useState(props);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const popupRef = useRef();
+  const router = useRouter();
 
   function startEditHandler() {
     setIsEditing(true);
@@ -61,7 +63,7 @@ function TicketDetail(props) {
     const data = await response.json();
 
     if (data.response === "success") {
-      // Redirect or update UI as needed
+      router.push("/tickets");
     } else {
       alert("Failed to resolve ticket: " + data.error);
     }

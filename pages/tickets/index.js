@@ -1,16 +1,24 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\tickets\index.js
 
 import TicketList from "../../components/tickets/TicketList";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../store/globalContext";
 
 function TicketsPage() {
   const globalCtx = useContext(GlobalContext);
+  const [tickets, setTickets] = useState([]);
 
-  if (globalCtx.theGlobalObject.dataLoaded == true) {
-    return <TicketList tickets={globalCtx.theGlobalObject.tickets} />;
-  }
-  return <div>Loading data from database, please wait . . . </div>;
+  useEffect(() => {
+    if (globalCtx.theGlobalObject.dataLoaded) {
+      setTickets(globalCtx.theGlobalObject.tickets);
+    }
+  }, [globalCtx.theGlobalObject.dataLoaded, globalCtx.theGlobalObject.tickets]);
+
+  return globalCtx.theGlobalObject.dataLoaded ? (
+    <TicketList tickets={tickets} />
+  ) : (
+    <div>Loading data from database, please wait . . . </div>
+  );
 }
 
 export default TicketsPage;
