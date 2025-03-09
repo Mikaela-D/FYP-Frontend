@@ -63,7 +63,7 @@ function TicketDetail(props) {
     const data = await response.json();
 
     if (data.response === "success") {
-      router.push("/tickets");
+      router.push("/tickets").then(() => window.location.reload()); // Reload the page
     } else {
       alert("Failed to resolve ticket: " + data.error);
     }
