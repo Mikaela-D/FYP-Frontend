@@ -3,10 +3,12 @@
 import { useState, useRef, useEffect } from "react";
 import classes from "./TicketDetail.module.css";
 import EditTicketForm from "./EditTicketForm";
+import ConfirmationModal from "../ui/ConfirmationModal";
 
 function TicketDetail(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [ticketData, setTicketData] = useState(props);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const popupRef = useRef();
 
   function startEditHandler() {
@@ -39,6 +41,14 @@ function TicketDetail(props) {
     stopEditHandler();
   }
 
+  function confirmDeleteHandler() {
+    setShowDeleteModal(true);
+  }
+
+  function cancelDeleteHandler() {
+    setShowDeleteModal(false);
+  }
+
   async function resolveTicketHandler() {
     const response = await fetch("/api/delete-ticket", {
       method: "POST",
@@ -56,6 +66,7 @@ function TicketDetail(props) {
     } else {
       alert("Failed to resolve ticket: " + data.error);
     }
+    setShowDeleteModal(false);
   }
 
   return (
@@ -125,7 +136,7 @@ function TicketDetail(props) {
         </button>
         <button
           className={classes["resolve-button"]}
-          onClick={resolveTicketHandler}
+          onClick={confirmDeleteHandler}
         >
           Resolve Ticket
         </button>
@@ -141,6 +152,13 @@ function TicketDetail(props) {
             />
           </div>
         </>
+      )}
+      {showDeleteModal && (
+        <ConfirmationModal
+          message="Are you sure you want to delete this ticket? This action is irreversible."
+          onConfirm={resolveTicketHandler}
+          onCancel={cancelDeleteHandler}
+        />
       )}
     </section>
   );
