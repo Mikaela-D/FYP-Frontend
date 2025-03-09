@@ -39,6 +39,25 @@ function TicketDetail(props) {
     stopEditHandler();
   }
 
+  async function resolveTicketHandler() {
+    const response = await fetch("/api/delete-ticket", {
+      method: "POST",
+      body: JSON.stringify({ _id: ticketData._id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.response === "success") {
+      alert("Ticket resolved successfully!");
+      // Redirect or update UI as needed
+    } else {
+      alert("Failed to resolve ticket: " + data.error);
+    }
+  }
+
   return (
     <section className={classes.ticket}>
       <header className={classes["ticket-header"]}>
@@ -103,6 +122,12 @@ function TicketDetail(props) {
         </p>
         <button className={classes["edit-button"]} onClick={startEditHandler}>
           Edit Ticket
+        </button>
+        <button
+          className={classes["resolve-button"]}
+          onClick={resolveTicketHandler}
+        >
+          Resolve Ticket
         </button>
       </footer>
       {isEditing && (
