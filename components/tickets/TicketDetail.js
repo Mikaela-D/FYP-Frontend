@@ -1,12 +1,17 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\TicketDetail.js
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import classes from "./TicketDetail.module.css";
 import EditTicketForm from "./EditTicketForm";
+import ConfirmationModal from "../ui/ConfirmationModal";
 
 function TicketDetail(props) {
   const [isEditing, setIsEditing] = useState(false);
+  const [ticketData, setTicketData] = useState(props);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const popupRef = useRef();
+  const router = useRouter();
 
   function startEditHandler() {
     setIsEditing(true);
@@ -33,60 +38,92 @@ function TicketDetail(props) {
     };
   }, [isEditing]);
 
+  function updateTicketData(updatedData) {
+    setTicketData(updatedData);
+    stopEditHandler();
+  }
+
+  function confirmDeleteHandler() {
+    setShowDeleteModal(true);
+  }
+
+  function cancelDeleteHandler() {
+    setShowDeleteModal(false);
+  }
+
+  async function resolveTicketHandler() {
+    const response = await fetch("/api/delete-ticket", {
+      method: "POST",
+      body: JSON.stringify({ _id: ticketData._id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.response === "success") {
+      router.push("/tickets").then(() => window.location.reload()); // Reload the page
+    } else {
+      alert("Failed to resolve ticket: " + data.error);
+    }
+    setShowDeleteModal(false);
+  }
+
   return (
     <section className={classes.ticket}>
       <header className={classes["ticket-header"]}>
         <div className={classes["header-bar"]}></div>
-        <h1>{props.title}</h1>
+        <h1>{ticketData.title}</h1>
       </header>
 
       <div className={classes["ticket-body"]}>
         <div className={classes["ticket-info-grid"]}>
           <div>
-            <strong>Customer Name:</strong> {props.customerName}
+            <strong>Customer Name:</strong> {ticketData.customerName}
           </div>
           <div>
-            <strong>Phone:</strong> {props.customerPhone}
+            <strong>Phone:</strong> {ticketData.customerPhone}
           </div>
           <div>
-            <strong>Email:</strong> {props.customerEmail}
+            <strong>Email:</strong> {ticketData.customerEmail}
           </div>
           <div>
-            <strong>Category:</strong> {props.category}
+            <strong>Category:</strong> {ticketData.category}
           </div>
           <div>
             <strong>Priority:</strong>
             <span
               className={`${classes.badge} ${
-                classes[`priority-${props.priority?.toLowerCase()}`]
+                classes[`priority-${ticketData.priority?.toLowerCase()}`]
               }`}
             >
-              {props.priority}
+              {ticketData.priority}
             </span>
           </div>
           <div>
             <strong>Status:</strong>
             <span
               className={`${classes.badge} ${
-                classes[`status-${props.status?.toLowerCase()}`]
+                classes[`status-${ticketData.status?.toLowerCase()}`]
               }`}
             >
-              {props.status}
+              {ticketData.status}
             </span>
           </div>
           <div>
-            <strong>Assigned To:</strong> {props.assignedTo}
+            <strong>Assigned To:</strong> {ticketData.assignedTo}
           </div>
         </div>
 
         <div className={classes["ticket-description"]}>
           <h2>Description</h2>
-          <p>{props.description}</p>
+          <p>{ticketData.description}</p>
         </div>
 
-        {props.image && (
+        {ticketData.image && (
           <div className={classes["ticket-image"]}>
-            <img src={props.image} alt={props.title} />
+            <img src={ticketData.image} alt={ticketData.title} />
           </div>
         )}
       </div>
@@ -98,14 +135,31 @@ function TicketDetail(props) {
         <button className={classes["edit-button"]} onClick={startEditHandler}>
           Edit Ticket
         </button>
+        <button
+          className={classes["resolve-button"]}
+          onClick={confirmDeleteHandler}
+        >
+          Resolve Ticket
+        </button>
       </footer>
       {isEditing && (
         <>
           <div className={classes.backdrop} onClick={stopEditHandler}></div>
           <div className={classes.popup} ref={popupRef}>
-            <EditTicketForm ticketData={props} onClose={stopEditHandler} />
+            <EditTicketForm
+              ticketData={ticketData}
+              onClose={stopEditHandler}
+              onUpdate={updateTicketData}
+            />
           </div>
         </>
+      )}
+      {showDeleteModal && (
+        <ConfirmationModal
+          message="Are you sure you want to delete this ticket? This action is irreversible."
+          onConfirm={resolveTicketHandler}
+          onCancel={cancelDeleteHandler}
+        />
       )}
     </section>
   );

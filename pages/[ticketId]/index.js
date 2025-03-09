@@ -32,6 +32,7 @@ export default function TicketPage() {
         agents.find((a) => a._id === temp.assignedTo)?.name || "Unassigned";
       returnVal = (
         <TicketDetail
+          _id={temp._id}
           image={temp.image}
           title={temp.title}
           customerName={temp.customerName || "N/A"}
