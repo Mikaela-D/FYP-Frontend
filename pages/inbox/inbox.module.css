@@ -65,7 +65,7 @@
 
 .tab-button.active {
   color: white;
-  background-color: #8a5ecc; /* Updated color */
+  background-color: #8a5ecc;
   font-weight: 600;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -131,7 +131,7 @@
 
 .message-input button {
   padding: 12px 24px;
-  background-color: #8a5ecc; /* Updated color */
+  background-color: #8a5ecc;
   color: white;
   border: none;
   border-radius: 8px;
@@ -140,7 +140,7 @@
 }
 
 .message-input button:hover {
-  background-color: #cdacff; /* Updated color */
+  background-color: #cdacff;
 }
 
 .chat-container {
