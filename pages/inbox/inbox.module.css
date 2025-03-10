@@ -65,7 +65,7 @@
 
 .tab-button.active {
   color: white;
-  background-color: #007bff;
+  background-color: #8a5ecc; /* Updated color */
   font-weight: 600;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -131,7 +131,7 @@
 
 .message-input button {
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: #8a5ecc; /* Updated color */
   color: white;
   border: none;
   border-radius: 8px;
@@ -140,7 +140,7 @@
 }
 
 .message-input button:hover {
-  background-color: #0056b3;
+  background-color: #cdacff; /* Updated color */
 }
 
 .chat-container {
@@ -165,11 +165,11 @@
 }
 
 .contact:hover {
-  background-color: #e9ecef;
+  background-color: #cdacff; /* Updated color */
 }
 
 .active-contact {
-  background-color: #007bff;
+  background-color: #8a5ecc; /* Updated color */
   color: white;
 }
 
