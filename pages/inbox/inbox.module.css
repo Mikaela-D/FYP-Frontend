@@ -5,13 +5,17 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #f4f6f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .inbox-label {
   padding: 0 16px;
   font-weight: 600;
-  font-size: 12px;
-  color: #333;
+  font-size: 14px;
+  color: #495057;
   display: flex;
   align-items: center;
   min-width: 35px;
@@ -23,6 +27,8 @@
   background-color: #f8f9fa;
   border-bottom: 1px solid #e9ecef;
   padding: 0 8px;
+  border-radius: 8px;
+  margin-bottom: 16px;
 }
 
 .tab-button {
@@ -41,6 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 4px;
 }
 
 .tab-button:hover {
@@ -52,6 +59,7 @@
   color: white;
   background-color: #2143a2;
   font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tab-content {
@@ -59,6 +67,8 @@
   flex: 1;
   overflow-y: auto;
   background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .messages {
@@ -66,17 +76,22 @@
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .message {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px;
+  border-radius: 8px;
   max-width: 70%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .agent {
   align-self: flex-end;
-  background-color: #d1e7dd;
+  background-color: #cfe2ff;
 }
 
 .client {
@@ -87,12 +102,16 @@
 .message-input {
   display: flex;
   gap: 10px;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .message-input input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ced4da;
+  border: 1px solid #adb5bd;
   border-radius: 5px;
 }
 
@@ -103,6 +122,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .message-input button:hover {
