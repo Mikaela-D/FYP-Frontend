@@ -54,6 +54,12 @@ export default function Inbox() {
     setNewMessage("");
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   return (
     <div className={styles["inbox-container"]}>
       <div className={styles["tab-bar"]}>
@@ -124,6 +130,7 @@ export default function Inbox() {
                       type="text"
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyPress={handleKeyPress}
                       placeholder="Type a message..."
                     />
                     <button onClick={sendMessage}>Send</button>
