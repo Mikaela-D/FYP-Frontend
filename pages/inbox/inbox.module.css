@@ -128,3 +128,43 @@
 .message-input button:hover {
   background-color: #1a3578;
 }
+
+.chat-container {
+  display: flex;
+  height: 100%;
+}
+
+.contacts-list {
+  width: 200px;
+  border-right: 1px solid #e9ecef;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.contact:hover {
+  background-color: #e9ecef;
+}
+
+.active-contact {
+  background-color: #2143a2;
+  color: white;
+}
+
+.chat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: white;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
