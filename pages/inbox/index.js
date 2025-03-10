@@ -16,13 +16,20 @@ export default function Inbox() {
     setMessages([...messages, userMessage]);
 
     try {
-      const response = await fetch("/sendMessage", {
+      const response = await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ message: newMessage }),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error response from server:", errorText);
+        throw new Error("Failed to send message");
+      }
+
       const data = await response.json();
       const aiReply = { sender: "client", text: data.reply };
       setMessages((prevMessages) => [...prevMessages, aiReply]);
