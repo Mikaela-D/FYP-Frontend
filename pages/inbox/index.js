@@ -1,4 +1,4 @@
-"use client";
+// C:\Users\Mikaela\FYP-Frontend\pages\inbox\index.js
 
 import { useState } from "react";
 import { Voicemail, FileAudio, MessageSquare } from "lucide-react";
