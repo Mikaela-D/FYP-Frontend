@@ -13,7 +13,9 @@ export default async function handler(req, res) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({
+        message: `You are a client needing product support for your mobile device and you are contacting an agent that will help you. ${message}`,
+      }),
     });
 
     if (!response.ok) {
