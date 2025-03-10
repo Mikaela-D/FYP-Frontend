@@ -27,7 +27,7 @@ export default function Inbox() {
     }));
 
     try {
-      const response = await fetch("/api/message", {
+      const response = await fetch("/api/sendMessage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
