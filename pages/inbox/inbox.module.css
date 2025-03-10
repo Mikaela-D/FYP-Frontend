@@ -97,6 +97,16 @@
   border-radius: 8px;
   max-width: 70%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.message::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 0;
+  height: 0;
 }
 
 .agent {
@@ -104,9 +114,23 @@
   background-color: #d1e7dd;
 }
 
+.agent::before {
+  right: -10px;
+  border-left: 10px solid #d1e7dd;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
 .client {
   align-self: flex-start;
   background-color: #f8d7da;
+}
+
+.client::before {
+  left: -10px;
+  border-right: 10px solid #f8d7da;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
 
 .message-input {
