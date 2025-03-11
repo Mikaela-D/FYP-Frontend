@@ -18,9 +18,14 @@ function NewTicketForm(props) {
   const imageInputRef = useRef();
 
   const [isCustomerSelected, setIsCustomerSelected] = useState(false);
+  const [selectedCustomerId, setSelectedCustomerId] = useState("");
 
   function handleCustomerChange(event) {
+    const selectedCustomer = props.customers.find(
+      (customer) => customer.customerName === event.target.value
+    );
     setIsCustomerSelected(event.target.value !== "");
+    setSelectedCustomerId(selectedCustomer ? selectedCustomer._id : "");
   }
 
   function submitHandler(event) {
@@ -44,6 +49,7 @@ function NewTicketForm(props) {
     const ticketData = {
       ticketId: enteredId,
       title: enteredTitle,
+      customerId: selectedCustomerId,
       customerName: enteredCustomerName,
       customerPhone: enteredCustomerPhone,
       customerEmail: enteredCustomerEmail,
