@@ -1,8 +1,8 @@
-// C:\Users\Mikaela\FYP-Frontend\pages\add-client\index.js
+// C:\Users\Mikaela\FYP-Frontend\pages\add-customer\index.js
 
 import { useRef } from "react";
 import { useRouter } from "next/router";
-import classes from "./AddClient.module.css";
+import classes from "./AddCustomer.module.css";
 
 function AddCustomerPage() {
   const router = useRouter();

@@ -24,7 +24,7 @@ function MainNavigation() {
   globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
       title: element.title,
-      webAddress: "/" + element.clientId, // Use clientId instead of ticketId
+      webAddress: "/" + element.customerId, // Use customerId instead of ticketId
     });
   });
 

@@ -42,7 +42,7 @@ export default function Inbox() {
       }
 
       const data = await response.json();
-      const aiReply = { sender: "client", text: data.reply };
+      const aiReply = { sender: "customer", text: data.reply };
       setChats((prevChats) => ({
         ...prevChats,
         [activeChat]: [...prevChats[activeChat], aiReply],
@@ -118,7 +118,7 @@ export default function Inbox() {
                         className={`${styles["message"]} ${
                           msg.sender === "agent"
                             ? styles["agent"]
-                            : styles["client"]
+                            : styles["customer"]
                         }`}
                       >
                         {msg.text}

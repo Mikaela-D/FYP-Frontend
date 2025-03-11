@@ -16,7 +16,7 @@ function TicketList(props) {
         <TicketItem
           key={ticket._id} // Correct: Use `_id` instead of `ticketId`
           id={ticket._id} // Correct: Pass `_id`, not `ticketId`
-          clientId={ticket.clientId} // Pass clientId instead of ticketId
+          customerId={ticket.customerId} // Pass customerId instead of ticketId
           title={ticket.title}
           customerName={ticket.customerName}
           customerPhone={ticket.customerPhone}
