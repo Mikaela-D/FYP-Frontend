@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import classes from "./AddClient.module.css";
 
 function AddClientPage() {
   const router = useRouter();
@@ -40,20 +41,22 @@ function AddClientPage() {
   }
 
   return (
-    <form onSubmit={addClientHandler}>
-      <div>
+    <form className={classes.form} onSubmit={addClientHandler}>
+      <div className={classes.control}>
         <label htmlFor="name">Name</label>
         <input type="text" id="name" required ref={nameInputRef} />
       </div>
-      <div>
+      <div className={classes.control}>
         <label htmlFor="phone">Phone</label>
         <input type="tel" id="phone" required ref={phoneInputRef} />
       </div>
-      <div>
+      <div className={classes.control}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" required ref={emailInputRef} />
       </div>
-      <button type="submit">Add Client</button>
+      <div className={classes.actions}>
+        <button type="submit">Add Client</button>
+      </div>
     </form>
   );
 }
