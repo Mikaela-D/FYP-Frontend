@@ -1,6 +1,6 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\NewTicketForm.js
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Card from "../ui/Card";
 import classes from "./NewTicketForm.module.css";
@@ -16,6 +16,12 @@ function NewTicketForm(props) {
   const statusInputRef = useRef();
   const descriptionInputRef = useRef();
   const imageInputRef = useRef();
+
+  const [isCustomerSelected, setIsCustomerSelected] = useState(false);
+
+  function handleCustomerChange(event) {
+    setIsCustomerSelected(event.target.value !== "");
+  }
 
   function submitHandler(event) {
     event.preventDefault();
@@ -60,31 +66,39 @@ function NewTicketForm(props) {
         </div>
         <div className={classes.control}>
           <label htmlFor="customerName">Customer Name</label>
-          <input
-            type="text"
-            required
+          <select
             id="customerName"
             ref={customerNameInputRef}
-          />
+            onChange={handleCustomerChange}
+          >
+            <option value="">Select Customer</option>
+            {props.customers.map((customer) => (
+              <option key={customer._id} value={customer.customerName}>
+                {customer.customerName}
+              </option>
+            ))}
+          </select>
         </div>
-        <div className={classes.control}>
-          <label htmlFor="customerPhone">Customer Phone</label>
-          <input
-            type="tel"
-            required
-            id="customerPhone"
-            ref={customerPhoneInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="customerEmail">Customer Email</label>
-          <input
-            type="email"
-            required
-            id="customerEmail"
-            ref={customerEmailInputRef}
-          />
-        </div>
+        {!isCustomerSelected && (
+          <>
+            <div className={classes.control}>
+              <label htmlFor="customerPhone">Customer Phone</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                ref={customerPhoneInputRef}
+              />
+            </div>
+            <div className={classes.control}>
+              <label htmlFor="customerEmail">Customer Email</label>
+              <input
+                type="email"
+                id="customerEmail"
+                ref={customerEmailInputRef}
+              />
+            </div>
+          </>
+        )}
         <div className={classes.control}>
           <label htmlFor="category">Category</label>
           <select id="category" required ref={categoryInputRef}>
