@@ -29,8 +29,12 @@ function NewTicketForm(props) {
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
     const enteredCustomerName = customerNameInputRef.current.value;
-    const enteredCustomerPhone = customerPhoneInputRef.current.value;
-    const enteredCustomerEmail = customerEmailInputRef.current.value;
+    const enteredCustomerPhone = isCustomerSelected
+      ? ""
+      : customerPhoneInputRef.current.value;
+    const enteredCustomerEmail = isCustomerSelected
+      ? ""
+      : customerEmailInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
     const enteredPriority = priorityInputRef.current.value;
     const enteredStatus = statusInputRef.current.value;
