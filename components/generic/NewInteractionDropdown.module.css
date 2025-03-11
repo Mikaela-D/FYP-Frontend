@@ -6,7 +6,7 @@
 .dropbtn {
   background-color: #ff451a;
   color: white;
-  padding: 16px;
+  padding: 0px;
   font-size: 20px;
   border: none;
   cursor: pointer;
@@ -28,7 +28,8 @@
 
 .dropdownContent a {
   color: #333;
-  padding: 12px 16px;
+  padding: 8px 12px;
+  font-size: 14px;
   text-decoration: none;
   display: block;
   transition: background-color 0.3s ease, color 0.3s ease;
