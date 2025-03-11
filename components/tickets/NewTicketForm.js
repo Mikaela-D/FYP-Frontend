@@ -33,7 +33,9 @@ function NewTicketForm(props) {
 
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
-    const enteredCustomerName = customerNameInputRef.current.value;
+    const enteredCustomerName = isCustomerSelected
+      ? ""
+      : customerNameInputRef.current.value; // Ensure customer name is saved
     const enteredCustomerPhone = isCustomerSelected
       ? ""
       : customerPhoneInputRef.current.value;
@@ -75,9 +77,9 @@ function NewTicketForm(props) {
           <input type="text" required id="title" ref={titleInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="customerName">Customer Name</label>
+          <label htmlFor="existingCustomer">Existing Customer</label>
           <select
-            id="customerName"
+            id="existingCustomer"
             ref={customerNameInputRef}
             onChange={handleCustomerChange}
           >
@@ -91,6 +93,10 @@ function NewTicketForm(props) {
         </div>
         {!isCustomerSelected && (
           <>
+            <div className={classes.control}>
+              <label htmlFor="customerName">Customer Name</label>
+              <input type="text" id="customerName" ref={customerNameInputRef} />
+            </div>
             <div className={classes.control}>
               <label htmlFor="customerPhone">Customer Phone</label>
               <input
