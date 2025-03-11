@@ -9,8 +9,6 @@ function NewTicketForm(props) {
   const IdInputRef = useRef();
   const titleInputRef = useRef();
   const customerNameInputRef = useRef();
-  const customerPhoneInputRef = useRef();
-  const customerEmailInputRef = useRef();
   const categoryInputRef = useRef();
   const priorityInputRef = useRef();
   const statusInputRef = useRef();
@@ -33,15 +31,6 @@ function NewTicketForm(props) {
 
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
-    const enteredCustomerName = isCustomerSelected
-      ? ""
-      : customerNameInputRef.current.value; // Ensure customer name is saved
-    const enteredCustomerPhone = isCustomerSelected
-      ? ""
-      : customerPhoneInputRef.current.value;
-    const enteredCustomerEmail = isCustomerSelected
-      ? ""
-      : customerEmailInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
     const enteredPriority = priorityInputRef.current.value;
     const enteredStatus = statusInputRef.current.value;
@@ -52,9 +41,6 @@ function NewTicketForm(props) {
       ticketId: enteredId,
       title: enteredTitle,
       customerId: selectedCustomerId,
-      customerName: enteredCustomerName,
-      customerPhone: enteredCustomerPhone,
-      customerEmail: enteredCustomerEmail,
       category: enteredCategory,
       priority: enteredPriority,
       status: enteredStatus,
@@ -91,30 +77,6 @@ function NewTicketForm(props) {
             ))}
           </select>
         </div>
-        {!isCustomerSelected && (
-          <>
-            <div className={classes.control}>
-              <label htmlFor="customerName">Customer Name</label>
-              <input type="text" id="customerName" ref={customerNameInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="customerPhone">Customer Phone</label>
-              <input
-                type="tel"
-                id="customerPhone"
-                ref={customerPhoneInputRef}
-              />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="customerEmail">Customer Email</label>
-              <input
-                type="email"
-                id="customerEmail"
-                ref={customerEmailInputRef}
-              />
-            </div>
-          </>
-        )}
         <div className={classes.control}>
           <label htmlFor="category">Category</label>
           <select id="category" required ref={categoryInputRef}>
