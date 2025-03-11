@@ -1,7 +1,7 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\api\get-tickets.js
 
 async function handler(req, res) {
-  const response = await fetch("http://localhost:8000/readTicket", {
+  const response = await fetch("http://localhost:8000/tickets/readTicket", {
     method: "POST",
     body: JSON.stringify({ cmd: "all" }),
     headers: {

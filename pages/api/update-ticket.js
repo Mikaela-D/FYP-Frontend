@@ -9,7 +9,7 @@ async function handler(req, res) {
     return res.status(400).json({ response: "fail", error: "Missing _id" });
   }
 
-  const response = await fetch("http://localhost:8000/updateTicket", {
+  const response = await fetch("http://localhost:8000/tickets/updateTicket", {
     method: "PUT",
     body: JSON.stringify(req.body),
     headers: {
