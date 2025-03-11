@@ -1,7 +1,7 @@
-// C:\Users\Mikaela\FYP-Frontend\pages\api\create-client.js
+// C:\Users\Mikaela\FYP-Frontend\pages\api\create-customer.js
 
 async function handler(req, res) {
-  const response = await fetch("http://localhost:8000/createClient", {
+  const response = await fetch("http://localhost:8000/createCustomer", {
     method: "POST",
     body: JSON.stringify(req.body),
     headers: {
