@@ -17,7 +17,7 @@ async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `http://localhost:8000/tickets/${ticketId}/assign`,
+      `http://localhost:8000/tickets/tickets/${ticketId}/assign`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
