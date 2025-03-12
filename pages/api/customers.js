@@ -8,7 +8,7 @@ async function handler(req, res) {
     },
   });
   const data = await response.json();
-  res.json(data);
+  res.json(data.customers);
 }
 
 export default handler;

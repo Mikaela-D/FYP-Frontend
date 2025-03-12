@@ -1,21 +1,37 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\inbox\index.js
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Voicemail, FileAudio, MessageSquare } from "lucide-react";
 import styles from "./inbox.module.css";
 
 export default function Inbox() {
   const [activeTab, setActiveTab] = useState("direct-message");
   const [activeChat, setActiveChat] = useState(null);
-  const [contacts, setContacts] = useState([
-    { id: 1, name: "John Doe" },
-    { id: 2, name: "Jane Smith" },
-  ]);
-  const [chats, setChats] = useState({
-    1: [],
-    2: [],
-  });
+  const [contacts, setContacts] = useState([]);
+  const [chats, setChats] = useState({});
   const [newMessage, setNewMessage] = useState("");
+
+  useEffect(() => {
+    async function fetchContacts() {
+      try {
+        const response = await fetch("/api/customers");
+        const data = await response.json();
+        if (data) {
+          setContacts(data);
+          const initialChats = data.reduce((acc, customer) => {
+            acc[customer._id] = [];
+            return acc;
+          }, {});
+          setChats(initialChats);
+        } else {
+          console.error("No customers found in the response");
+        }
+      } catch (error) {
+        console.error("Error fetching customers:", error);
+      }
+    }
+    fetchContacts();
+  }, []);
 
   const sendMessage = async () => {
     if (newMessage.trim() === "" || activeChat === null) return;
@@ -96,17 +112,21 @@ export default function Inbox() {
         {activeTab === "direct-message" && (
           <div className={styles["chat-container"]}>
             <div className={styles["contacts-list"]}>
-              {contacts.map((contact) => (
-                <div
-                  key={contact.id}
-                  className={`${styles["contact"]} ${
-                    activeChat === contact.id ? styles["active-contact"] : ""
-                  }`}
-                  onClick={() => setActiveChat(contact.id)}
-                >
-                  {contact.name}
-                </div>
-              ))}
+              {contacts && contacts.length > 0 ? (
+                contacts.map((contact) => (
+                  <div
+                    key={contact._id}
+                    className={`${styles["contact"]} ${
+                      activeChat === contact._id ? styles["active-contact"] : ""
+                    }`}
+                    onClick={() => setActiveChat(contact._id)}
+                  >
+                    {contact.customerName}
+                  </div>
+                ))
+              ) : (
+                <p>No contacts available</p>
+              )}
             </div>
             <div className={styles["chat-content"]}>
               {activeChat !== null ? (
