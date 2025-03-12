@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const { message } = req.body;
 
   try {
-    const response = await fetch("http://localhost:8000/sendMessage", {
+    const response = await fetch("http://localhost:8000/openai/sendMessage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
