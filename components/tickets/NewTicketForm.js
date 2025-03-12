@@ -29,6 +29,11 @@ function NewTicketForm(props) {
   function submitHandler(event) {
     event.preventDefault();
 
+    if (!selectedCustomerId) {
+      alert("Please select a valid customer.");
+      return;
+    }
+
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
