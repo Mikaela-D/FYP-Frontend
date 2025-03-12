@@ -7,17 +7,17 @@ import styles from "./inbox.module.css";
 export default function Inbox() {
   const [activeTab, setActiveTab] = useState("direct-message");
   const [activeChat, setActiveChat] = useState(null);
-  const [contacts, setContacts] = useState([]);
+  const [customers, setCustomers] = useState([]);
   const [chats, setChats] = useState({});
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
-    async function fetchContacts() {
+    async function fetchCustomers() {
       try {
         const response = await fetch("/api/customers");
         const data = await response.json();
         if (data) {
-          setContacts(data);
+          setCustomers(data);
           const initialChats = data.reduce((acc, customer) => {
             acc[customer._id] = [];
             return acc;
@@ -30,7 +30,7 @@ export default function Inbox() {
         console.error("Error fetching customers:", error);
       }
     }
-    fetchContacts();
+    fetchCustomers();
   }, []);
 
   const sendMessage = async () => {
@@ -111,21 +111,23 @@ export default function Inbox() {
       <div className={styles["tab-content"]}>
         {activeTab === "direct-message" && (
           <div className={styles["chat-container"]}>
-            <div className={styles["contacts-list"]}>
-              {contacts && contacts.length > 0 ? (
-                contacts.map((contact) => (
+            <div className={styles["customers-list"]}>
+              {customers && customers.length > 0 ? (
+                customers.map((customer) => (
                   <div
-                    key={contact._id}
-                    className={`${styles["contact"]} ${
-                      activeChat === contact._id ? styles["active-contact"] : ""
+                    key={customer._id}
+                    className={`${styles["customer"]} ${
+                      activeChat === customer._id
+                        ? styles["active-customer"]
+                        : ""
                     }`}
-                    onClick={() => setActiveChat(contact._id)}
+                    onClick={() => setActiveChat(customer._id)}
                   >
-                    {contact.customerName}
+                    {customer.customerName}
                   </div>
                 ))
               ) : (
-                <p>No contacts available</p>
+                <p>No customers available</p>
               )}
             </div>
             <div className={styles["chat-content"]}>
@@ -157,7 +159,7 @@ export default function Inbox() {
                   </div>
                 </>
               ) : (
-                <p>Select a contact to start chatting</p>
+                <p>Select a customer to start chatting</p>
               )}
             </div>
           </div>

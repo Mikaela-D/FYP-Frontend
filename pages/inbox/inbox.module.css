@@ -148,7 +148,7 @@
   height: 100%;
 }
 
-.contacts-list {
+.customers-list {
   width: 220px;
   border-right: 1px solid #dee2e6;
   padding: 16px;
@@ -157,19 +157,19 @@
   box-shadow: none;
 }
 
-.contact {
+.customer {
   padding: 12px;
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }
 
-.contact:hover {
-  background-color: #cdacff; /* Updated color */
+.customer:hover {
+  background-color: #cdacff;
 }
 
-.active-contact {
-  background-color: #8a5ecc; /* Updated color */
+.active-customer {
+  background-color: #8a5ecc;
   color: white;
 }
 
