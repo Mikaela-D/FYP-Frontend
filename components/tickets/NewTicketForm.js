@@ -75,7 +75,7 @@ function NewTicketForm(props) {
             onChange={handleCustomerChange}
           >
             <option value="">Select Customer</option>
-            {props.customers.map((customer) => (
+            {props.customers && props.customers.map((customer) => (
               <option key={customer._id} value={customer.customerName}>
                 {customer.customerName}
               </option>
