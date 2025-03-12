@@ -106,7 +106,7 @@
 
 .customer {
   align-self: flex-start;
-  background-color: #f9d3da;
+  background-color: #f1f3f5; /* Changed from #f9d3da to #f1f3f5 */
 }
 
 .message-input {
