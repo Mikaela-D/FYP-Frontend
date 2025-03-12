@@ -139,8 +139,8 @@ export default function Inbox() {
                         key={index}
                         className={`${styles["message"]} ${
                           msg.sender === "agent"
-                            ? styles["agent"]
-                            : styles["customer"]
+                            ? styles["agent-message"]
+                            : styles["customer-message"]
                         }`}
                       >
                         {msg.text}

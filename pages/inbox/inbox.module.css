@@ -99,14 +99,18 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.agent {
+.agent-message {
   align-self: flex-end;
   background-color: #fef4d8;
 }
 
-.customer {
+.customer-message {
   align-self: flex-start;
-  background-color: #f1f3f5; /* Changed from #f9d3da to #f1f3f5 */
+  background-color: #f9d3da;
+  border-radius: 8px;
+  padding: 12px;
+  max-width: 70%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .message-input {
