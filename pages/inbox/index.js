@@ -48,7 +48,10 @@ export default function Inbox() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: newMessage }),
+        body: JSON.stringify({
+          message: newMessage,
+          conversation: chats[activeChat], // Include conversation history
+        }),
       });
 
       if (!response.ok) {
