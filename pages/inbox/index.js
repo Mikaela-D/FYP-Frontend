@@ -51,6 +51,7 @@ export default function Inbox() {
         body: JSON.stringify({
           message: newMessage,
           conversation: chats[activeChat], // Include conversation history
+          customerId: activeChat, // Include customerId
         }),
       });
 
