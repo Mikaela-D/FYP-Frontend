@@ -12,10 +12,16 @@ export default async function handler(req, res) {
       body: JSON.stringify({ name, password }),
     });
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Backend error:", errorText);
+      return res.status(response.status).json({ error: errorText });
+    }
+
     const data = await response.json();
-    res.status(response.status).json(data);
+    res.status(200).json(data);
   } catch (error) {
     console.error("Error registering agent:", error);
-    res.status(500).json({ success: false, message: "Failed to register agent" });
+    res.status(500).json({ error: "Failed to register agent" });
   }
 }
