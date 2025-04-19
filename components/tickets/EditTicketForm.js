@@ -59,22 +59,27 @@ function EditTicketForm(props) {
 
     console.log("Sending update request:", updatedTicketData);
 
-    const response = await fetch("/api/update-ticket", {
-      method: "PUT", // Use PUT method for updates
-      body: JSON.stringify(updatedTicketData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const response = await fetch("/api/update-ticket", {
+        method: "PUT", // Use PUT method for updates
+        body: JSON.stringify(updatedTicketData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (data.response === "success") {
-      // Call the onUpdate function to update the ticket details
-      props.onUpdate(updatedTicketData);
-      setIsDirty(false);
-    } else {
-      alert("Failed to update ticket: " + data.error);
+      if (data.response === "success") {
+        // Call the onUpdate function to update the ticket details
+        props.onUpdate(updatedTicketData);
+        setIsDirty(false);
+      } else {
+        alert("Failed to update ticket: " + data.error);
+      }
+    } catch (error) {
+      console.error("Error updating ticket:", error);
+      alert("An error occurred while updating the ticket.");
     }
   }
 

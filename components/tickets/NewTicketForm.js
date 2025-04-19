@@ -1,6 +1,6 @@
 // C:\Users\Mikaela\FYP-Frontend\components\tickets\NewTicketForm.js
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Card from "../ui/Card";
 import classes from "./NewTicketForm.module.css";
@@ -9,22 +9,33 @@ function NewTicketForm(props) {
   const IdInputRef = useRef();
   const titleInputRef = useRef();
   const customerNameInputRef = useRef();
-  const customerPhoneInputRef = useRef();
-  const customerEmailInputRef = useRef();
   const categoryInputRef = useRef();
   const priorityInputRef = useRef();
   const statusInputRef = useRef();
   const descriptionInputRef = useRef();
   const imageInputRef = useRef();
 
+  const [isCustomerSelected, setIsCustomerSelected] = useState(false);
+  const [selectedCustomerId, setSelectedCustomerId] = useState("");
+
+  function handleCustomerChange(event) {
+    const selectedCustomer = props.customers.find(
+      (customer) => customer.customerName === event.target.value
+    );
+    setIsCustomerSelected(event.target.value !== "");
+    setSelectedCustomerId(selectedCustomer ? selectedCustomer._id : "");
+  }
+
   function submitHandler(event) {
     event.preventDefault();
 
+    if (!selectedCustomerId) {
+      alert("Please select a valid customer.");
+      return;
+    }
+
     const enteredId = IdInputRef.current.value;
     const enteredTitle = titleInputRef.current.value;
-    const enteredCustomerName = customerNameInputRef.current.value;
-    const enteredCustomerPhone = customerPhoneInputRef.current.value;
-    const enteredCustomerEmail = customerEmailInputRef.current.value;
     const enteredCategory = categoryInputRef.current.value;
     const enteredPriority = priorityInputRef.current.value;
     const enteredStatus = statusInputRef.current.value;
@@ -34,9 +45,7 @@ function NewTicketForm(props) {
     const ticketData = {
       ticketId: enteredId,
       title: enteredTitle,
-      customerName: enteredCustomerName,
-      customerPhone: enteredCustomerPhone,
-      customerEmail: enteredCustomerEmail,
+      customerId: selectedCustomerId,
       category: enteredCategory,
       priority: enteredPriority,
       status: enteredStatus,
@@ -59,31 +68,19 @@ function NewTicketForm(props) {
           <input type="text" required id="title" ref={titleInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="customerName">Customer Name</label>
-          <input
-            type="text"
-            required
-            id="customerName"
+          <label htmlFor="existingCustomer">Existing Customer</label>
+          <select
+            id="existingCustomer"
             ref={customerNameInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="customerPhone">Customer Phone</label>
-          <input
-            type="tel"
-            required
-            id="customerPhone"
-            ref={customerPhoneInputRef}
-          />
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="customerEmail">Customer Email</label>
-          <input
-            type="email"
-            required
-            id="customerEmail"
-            ref={customerEmailInputRef}
-          />
+            onChange={handleCustomerChange}
+          >
+            <option value="">Select Customer</option>
+            {props.customers && props.customers.map((customer) => (
+              <option key={customer._id} value={customer.customerName}>
+                {customer.customerName}
+              </option>
+            ))}
+          </select>
         </div>
         <div className={classes.control}>
           <label htmlFor="category">Category</label>

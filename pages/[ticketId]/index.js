@@ -23,10 +23,10 @@ export default function TicketPage() {
   for (let ii = 0; ii < globalCtx.theGlobalObject.tickets.length; ii++) {
     let temp = globalCtx.theGlobalObject.tickets[ii];
     if (
-      temp.clientId &&
-      typeof temp.clientId.clientId === "string" &&
+      temp.customerId &&
+      typeof temp.customerId.customerId === "string" &&
       router.query.ticketId &&
-      temp.clientId.clientId.trim() === router.query.ticketId.trim()
+      temp.customerId.customerId.trim() === router.query.ticketId.trim()
     ) {
       const assignedAgent =
         agents.find((a) => a._id === temp.assignedTo)?.name || "Unassigned";

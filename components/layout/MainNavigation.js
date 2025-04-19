@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import classes from "./MainNavigation.module.css";
 import StatusDropdown from "../generic/StatusDropdown";
 import HomeIcon from "./HomeIcon";
+import NewInteractionDropdown from "../generic/NewInteractionDropdown";
 
 function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
@@ -23,7 +24,7 @@ function MainNavigation() {
   globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
       title: element.title,
-      webAddress: "/" + element.clientId, // Use clientId instead of ticketId
+      webAddress: "/" + element.customerId, // Use customerId instead of ticketId
     });
   });
 
@@ -47,7 +48,7 @@ function MainNavigation() {
             <Link href="/tickets">Tickets</Link>
           </li>
           <li>
-            <Link href="/new-ticket">New Ticket</Link>
+            <NewInteractionDropdown />
           </li>
           <li>
             <StatusDropdown />

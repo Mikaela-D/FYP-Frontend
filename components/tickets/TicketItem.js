@@ -122,15 +122,15 @@ function TicketItem(props) {
 
   // Show ticket details
   function showDetailsHandler() {
-    if (props.clientId && typeof props.clientId.clientId === "string") {
-      const clientId = props.clientId.clientId; // Extract clientId from the object
+    if (props.customerId && typeof props.customerId.customerId === "string") {
+      const customerId = props.customerId.customerId; // Extract customerId from the object
       if (routerReady) {
-        router.push("/" + clientId);
+        router.push("/" + customerId);
       } else {
         console.error("Router is not ready:", JSON.stringify(props));
       }
     } else {
-      console.error("Invalid clientId:", JSON.stringify(props));
+      console.error("Invalid customerId:", JSON.stringify(props));
     }
   }
 

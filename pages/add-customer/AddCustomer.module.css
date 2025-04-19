@@ -1,0 +1,50 @@
+/* C:\Users\Mikaela\FYP-Frontend\pages\add-client\AddCustomer.module.css */
+
+.form {
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.control {
+  margin-bottom: 1rem;
+}
+
+.control label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.control input {
+  display: block;
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.actions {
+  text-align: right;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #ff451a;
+  border: 1px solid #ff451a;
+  color: white;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #e03e1a;
+  border-color: #e03e1a;
+}
