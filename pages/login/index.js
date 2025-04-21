@@ -3,8 +3,30 @@ import styles from "./login.module.css";
 
 const LoginPage = () => {
   const [isRegistering, setIsRegistering] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("/api/login-agent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, password }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert("Login successful!");
+        // Redirect or perform further actions here
+      } else {
+        alert(data.message || "Login failed.");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert("An error occurred during login.");
+    }
+  };
 
   const handleRegister = async () => {
     try {
@@ -48,7 +70,35 @@ const LoginPage = () => {
           <button onClick={handleRegister} className={styles.button}>
             Submit
           </button>
-          <button onClick={() => setIsRegistering(false)} className={styles.button}>
+          <button
+            onClick={() => setIsRegistering(false)}
+            className={styles.button}
+          >
+            Cancel
+          </button>
+        </div>
+      ) : isLoggingIn ? (
+        <div className={styles.registerForm}>
+          <h2>Login</h2>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={handleLogin} className={styles.button}>
+            Submit
+          </button>
+          <button
+            onClick={() => setIsLoggingIn(false)}
+            className={styles.button}
+          >
             Cancel
           </button>
         </div>
@@ -56,7 +106,12 @@ const LoginPage = () => {
         <>
           <p>Please log in or register to continue.</p>
           <div className={styles.buttonContainer}>
-            <button className={styles.button}>Login</button>
+            <button
+              className={styles.button}
+              onClick={() => setIsLoggingIn(true)}
+            >
+              Login
+            </button>
             <button
               className={styles.button}
               onClick={() => setIsRegistering(true)}
