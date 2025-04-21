@@ -6,11 +6,14 @@ export default async function handler(req, res) {
   const { name, password } = req.body;
 
   try {
-    const response = await fetch("http://localhost:8000/agents/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, password }),
-    });
+    const response = await fetch(
+      "http://localhost:8000/agents/agents/register",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, password }),
+      }
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
