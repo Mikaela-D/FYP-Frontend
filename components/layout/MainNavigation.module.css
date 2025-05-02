@@ -52,3 +52,17 @@
 .homeIcon svg:hover {
   color: black;
 }
+
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  border: 2px solid black; 
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: #cc0000;
+}

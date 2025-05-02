@@ -20,6 +20,11 @@ function MainNavigation() {
     globalCtx.updateGlobals({ cmd: "hideHamMenu", newVal: false });
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn"); // Clear login flag
+    router.push("/login"); // Redirect to login page
+  };
+
   const contents = [];
   globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
@@ -52,6 +57,11 @@ function MainNavigation() {
           </li>
           <li>
             <StatusDropdown />
+          </li>
+          <li>
+            <button className={classes.logoutButton} onClick={handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
       </nav>
