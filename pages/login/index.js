@@ -17,6 +17,7 @@ const LoginPage = () => {
 
       const data = await response.json();
       if (data.success) {
+        localStorage.setItem("isLoggedIn", "true"); // Login flag
         alert("Login successful!");
         // Redirect or perform further actions here
       } else {
