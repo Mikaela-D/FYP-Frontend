@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./login.module.css";
 
 const LoginPage = () => {
@@ -6,6 +7,7 @@ const LoginPage = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -19,7 +21,7 @@ const LoginPage = () => {
       if (data.success) {
         localStorage.setItem("isLoggedIn", "true"); // Login flag
         alert("Login successful!");
-        // Redirect or perform further actions here
+        router.push("/"); // Redirect to homepage
       } else {
         alert(data.message || "Login failed.");
       }
