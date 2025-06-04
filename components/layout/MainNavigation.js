@@ -15,6 +15,13 @@ import NewInteractionDropdown from "../generic/NewInteractionDropdown";
 function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
   const router = useRouter();
+  const [agentName, setAgentName] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setAgentName(localStorage.getItem("agentName") || "");
+    }
+  }, [router]);
 
   function toggleMenuHide() {
     globalCtx.updateGlobals({ cmd: "hideHamMenu", newVal: false });
@@ -39,6 +46,14 @@ function MainNavigation() {
       <HamMenuContent contents={contents} />
       <HamMenu toggleMenuHide={() => toggleMenuHide()} />
       <HamMenuFAB toggleMenuHide={() => toggleMenuHide()} />
+
+      {agentName && (
+        <div className={classes.agentNameDisplay}>
+          <span>
+            Logged in: <strong>{agentName}</strong>
+          </span>
+        </div>
+      )}
 
       <nav>
         <ul>
