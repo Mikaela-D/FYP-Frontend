@@ -28,6 +28,8 @@
   background-color: #09b581;
   color: white;
   transition: background-color 0.3s;
+  min-width: 120px;
+  box-sizing: border-box;
 }
 
 .button:hover {
