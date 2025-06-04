@@ -15,7 +15,10 @@ export default function AgentTickets() {
 
   useEffect(() => {
     async function fetchAssignedTickets() {
-      const response = await fetch("/api/tickets-by-agent?name=Mikaela");
+      const loggedInAgentId = localStorage.getItem("agentId");
+      const response = await fetch(
+        `/api/tickets-by-agent?agentId=${loggedInAgentId}`
+      );
       const data = await response.json();
       if (response.ok) {
         setAgentTickets(
