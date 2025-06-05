@@ -19,7 +19,11 @@ function TicketItem(props) {
     async function fetchAgents() {
       const response = await fetch("/api/agents");
       const data = await response.json();
-      setAgents(data);
+      // Only include agents who can login (have password or canLogin flag)
+      const realAgents = data.filter(
+        (agent) => agent.password || agent.canLogin
+      );
+      setAgents(realAgents);
     }
     fetchAgents();
   }, []);
@@ -34,6 +38,12 @@ function TicketItem(props) {
   async function assignAgentHandler(agentId) {
     if (!agentId) {
       alert("Invalid agent selected.");
+      return;
+    }
+    // Check if agent is a real agent
+    const selectedAgent = agents.find((a) => a._id === agentId);
+    if (!selectedAgent) {
+      alert("Selected agent is not a real agent.");
       return;
     }
 
