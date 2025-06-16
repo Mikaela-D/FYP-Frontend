@@ -16,10 +16,12 @@ function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
   const router = useRouter();
   const [agentName, setAgentName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setAgentName(localStorage.getItem("agentName") || "");
+      setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
     }
   }, [router]);
 
@@ -78,11 +80,13 @@ function MainNavigation() {
           <li>
             <StatusDropdown />
           </li>
-          <li>
-            <button className={classes.logoutButton} onClick={handleLogout}>
-              Logout
-            </button>
-          </li>
+          {isLoggedIn && (
+            <li>
+              <button className={classes.logoutButton} onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
