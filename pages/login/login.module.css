@@ -25,7 +25,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #09b581;
+  background-color: #54c6ab;
   color: white;
   transition: background-color 0.3s;
   min-width: 120px;
@@ -33,7 +33,7 @@
 }
 
 .button:hover {
-  background-color: #056d4d;
+  background-color: #327767;
 }
 
 .registerForm {
@@ -68,21 +68,21 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #09b581;
+  background-color: #54c6ab;
   color: white;
   transition: background-color 0.3s;
 }
 
 .registerForm button:hover {
-  background-color: #056d4d;
+  background-color: #327767;
 }
 
 .registerForm button:last-child {
   margin-top: 10px;
-  background-color: #ccc;
-  color: #333;
+  background-color: #e22245;
+  color: #fff;
 }
 
 .registerForm button:last-child:hover {
-  background-color: #bbb;
+  background-color: #881429;
 }
