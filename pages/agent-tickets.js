@@ -19,7 +19,18 @@ export default function AgentTickets() {
       const response = await fetch(
         `/api/tickets-by-agent?agentId=${loggedInAgentId}`
       );
-      const data = await response.json();
+      const text = await response.text(); // Read response as text for debugging
+      console.log("Response text:", text); // Debugging line
+
+      let data;
+      try {
+        data = JSON.parse(text); // Attempt to parse JSON
+      } catch (err) {
+        console.error("Failed to parse response as JSON:", err);
+        console.error("Response text:", text); // Log raw response for debugging
+        return;
+      }
+
       if (response.ok) {
         setAgentTickets(
           data.tickets.map((ticket) => ({
