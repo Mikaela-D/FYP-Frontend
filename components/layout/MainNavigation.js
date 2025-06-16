@@ -72,7 +72,12 @@ function MainNavigation() {
           <span>
             Logged in: <strong>{agentName}</strong>
           </span>
-          <button className={classes.logoutButton} onClick={handleLogout}>
+          <button
+            className={classes.logoutButton}
+            onClick={handleLogout}
+            style={{ pointerEvents: "auto" }} // Ensure button is clickable
+            tabIndex={0} // Ensure button is focusable
+          >
             Logout
           </button>
         </div>
