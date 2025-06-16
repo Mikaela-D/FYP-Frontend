@@ -72,6 +72,9 @@ function MainNavigation() {
           <span>
             Logged in: <strong>{agentName}</strong>
           </span>
+          <button className={classes.logoutButton} onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       )}
 
@@ -92,11 +95,6 @@ function MainNavigation() {
           </li>
           <li>
             <StatusDropdown />
-          </li>
-          <li>
-            <button className={classes.logoutButton} onClick={handleLogout}>
-              Logout
-            </button>
           </li>
         </ul>
       </nav>
