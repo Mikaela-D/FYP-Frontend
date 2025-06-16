@@ -1,6 +1,6 @@
 // C:\Users\Mikaela\FYP-Frontend\components\layout\MainNavigation.js
 
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import HamMenu from "../generic/HamMenu";
 import HamMenuFAB from "../generic/HamMenuFAB";
@@ -16,13 +16,26 @@ function MainNavigation() {
   const globalCtx = useContext(GlobalContext);
   const router = useRouter();
   const [agentName, setAgentName] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    function syncLoginState() {
       setAgentName(localStorage.getItem("agentName") || "");
-      setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
     }
+
+    syncLoginState();
+
+    window.addEventListener("storage", syncLoginState);
+
+    const origSetItem = localStorage.setItem;
+    localStorage.setItem = function (key, value) {
+      origSetItem.apply(this, arguments);
+      if (key === "isLoggedIn" || key === "agentName") syncLoginState();
+    };
+
+    return () => {
+      window.removeEventListener("storage", syncLoginState);
+      localStorage.setItem = origSetItem;
+    };
   }, [router]);
 
   function toggleMenuHide() {
@@ -30,20 +43,20 @@ function MainNavigation() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn"); // Clear login flag
-    localStorage.removeItem("agentId"); // Clear agent ID
-    localStorage.removeItem("agentName"); // Clear agent name
-    // Optionally clear assigned tickets for a clean logout
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("agentId");
+    localStorage.removeItem("agentName");
     localStorage.removeItem("assignedTickets");
     localStorage.removeItem("resolvedTickets");
-    router.push("/login"); // Redirect to login page
+    setAgentName(""); // Immediately clear agent name
+    router.push("/login");
   };
 
   const contents = [];
   globalCtx.theGlobalObject.tickets.forEach((element) => {
     contents.push({
       title: element.title,
-      webAddress: "/" + element.customerId, // Use customerId instead of ticketId
+      webAddress: "/" + element.customerId,
     });
   });
 
@@ -80,13 +93,11 @@ function MainNavigation() {
           <li>
             <StatusDropdown />
           </li>
-          {isLoggedIn && (
-            <li>
-              <button className={classes.logoutButton} onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
-          )}
+          <li>
+            <button className={classes.logoutButton} onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
