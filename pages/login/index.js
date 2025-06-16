@@ -20,8 +20,9 @@ const LoginPage = () => {
       const data = await response.json();
       if (data.success) {
         localStorage.setItem("isLoggedIn", "true"); // Login flag
-        localStorage.setItem("agentId", data.agentId); // Store agent ID
+        localStorage.setItem("agentId", data.agent._id); // Store agent ID (_id from database)
         localStorage.setItem("agentName", name); // Store agent name
+        console.log("Agent ID stored:", data.agent._id); // Debugging line
         alert("Login successful!");
         router.push("/"); // Redirect to homepage
       } else {

@@ -13,7 +13,11 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-    res.status(response.status).json(data);
+    if (!response.ok) {
+      return res.status(response.status).json(data);
+    }
+
+    res.status(200).json({ success: true, agent: data.agent }); // Include agent object with `_id`
   } catch (error) {
     console.error("Error logging in agent:", error);
     res.status(500).json({ error: "Failed to log in agent" });

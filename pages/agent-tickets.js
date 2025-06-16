@@ -3,10 +3,12 @@
 import { useAgentTickets } from "../components/generic/AgentTicketsContext";
 import { useEffect, useState } from "react";
 import classes from "../styles/agent-tickets.module.css";
+import { useRouter } from "next/router";
 
 export default function AgentTickets() {
   const { agentTickets, setAgentTickets, removeFromAgentTickets, isHydrated } =
     useAgentTickets();
+  const router = useRouter();
 
   const [resolvedTickets, setResolvedTickets] = useState([]);
   const [priorityFilter, setPriorityFilter] = useState("all");
@@ -15,7 +17,16 @@ export default function AgentTickets() {
 
   useEffect(() => {
     async function fetchAssignedTickets() {
-      const loggedInAgentId = localStorage.getItem("agentId");
+      let loggedInAgentId = localStorage.getItem("agentId");
+      if (!loggedInAgentId) {
+        console.error(
+          "Agent ID is missing in localStorage. Redirecting to login."
+        );
+        localStorage.removeItem("isLoggedIn"); // Clear login flag
+        router.push("/login"); // Redirect to login page
+        return;
+      }
+
       const response = await fetch(
         `/api/tickets-by-agent?agentId=${loggedInAgentId}`
       );
@@ -58,7 +69,7 @@ export default function AgentTickets() {
     if (saved) {
       setResolvedTickets(JSON.parse(saved));
     }
-  }, [setAgentTickets]);
+  }, [setAgentTickets, router]);
 
   useEffect(() => {
     localStorage.setItem("resolvedTickets", JSON.stringify(resolvedTickets));
