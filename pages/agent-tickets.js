@@ -20,10 +20,8 @@ export default function AgentTickets() {
       let loggedInAgentId = localStorage.getItem("agentId");
       if (!loggedInAgentId) {
         console.error(
-          "Agent ID is missing in localStorage. Redirecting to login."
+          "Agent ID is missing in localStorage. Cannot fetch assigned tickets."
         );
-        localStorage.removeItem("isLoggedIn"); // Clear login flag
-        router.push("/login"); // Redirect to login page
         return;
       }
 
