@@ -19,12 +19,14 @@ const LoginPage = () => {
 
       const data = await response.json();
       if (data.success) {
-        localStorage.setItem("isLoggedIn", "true"); // Login flag
-        localStorage.setItem("agentId", data.agent._id); // Store agent ID (_id from database)
-        localStorage.setItem("agentName", name); // Store agent name
-        console.log("Agent ID stored:", data.agent._id); // Debugging line
+        // If agent object is present, store agentId, else skip
+        if (data.agent && data.agent._id) {
+          localStorage.setItem("agentId", data.agent._id);
+        }
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("agentName", name);
         alert("Login successful!");
-        router.push("/"); // Redirect to homepage
+        router.push("/");
       } else {
         alert(data.message || "Login failed.");
       }

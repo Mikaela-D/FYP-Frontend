@@ -29,6 +29,11 @@ function MainNavigation() {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn"); // Clear login flag
+    localStorage.removeItem("agentId"); // Clear agent ID
+    localStorage.removeItem("agentName"); // Clear agent name
+    // Optionally clear assigned tickets for a clean logout
+    localStorage.removeItem("assignedTickets");
+    localStorage.removeItem("resolvedTickets");
     router.push("/login"); // Redirect to login page
   };
 
