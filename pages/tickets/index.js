@@ -14,10 +14,15 @@ function TicketsPage() {
     }
   }, [globalCtx.theGlobalObject.dataLoaded, globalCtx.theGlobalObject.tickets]);
 
-  return globalCtx.theGlobalObject.dataLoaded ? (
-    <TicketList tickets={tickets} />
-  ) : (
-    <div>Loading data from database, please wait . . . </div>
+  return (
+    <>
+      <h1 style={{ textAlign: "center" }}>Tickets</h1>
+      {globalCtx.theGlobalObject.dataLoaded ? (
+        <TicketList tickets={tickets} />
+      ) : (
+        <div>Loading data from database, please wait . . . </div>
+      )}
+    </>
   );
 }
 
