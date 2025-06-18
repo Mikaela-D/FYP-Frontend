@@ -16,9 +16,9 @@ export default function Inbox() {
       try {
         const response = await fetch("/api/customers");
         const data = await response.json();
-        // FIX: Always use the array from data.customers
         if (data && Array.isArray(data.customers)) {
           setCustomers(data.customers);
+          console.log("Customers in browser:", data.customers); // <-- This will show in browser console
           const initialChats = data.customers.reduce((acc, customer) => {
             acc[customer._id] = [];
             return acc;
