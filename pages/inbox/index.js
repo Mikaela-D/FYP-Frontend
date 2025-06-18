@@ -16,15 +16,18 @@ export default function Inbox() {
       try {
         const response = await fetch("/api/customers");
         const data = await response.json();
-        if (data) {
-          setCustomers(data);
-          const initialChats = data.reduce((acc, customer) => {
+        // FIX: Always use the array from data.customers
+        if (data && Array.isArray(data.customers)) {
+          setCustomers(data.customers);
+          const initialChats = data.customers.reduce((acc, customer) => {
             acc[customer._id] = [];
             return acc;
           }, {});
           setChats(initialChats);
         } else {
-          console.error("No customers found in the response");
+          setCustomers([]);
+          setChats({});
+          console.error("No customers found in the response", data);
         }
       } catch (error) {
         console.error("Error fetching customers:", error);
