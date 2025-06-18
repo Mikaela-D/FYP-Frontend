@@ -36,6 +36,26 @@ export default function Inbox() {
     fetchCustomers();
   }, []);
 
+  // Fetch conversation history for a customer
+  async function fetchConversation(customerId) {
+    try {
+      const response = await fetch(`/api/messages?customerId=${customerId}`);
+      const data = await response.json();
+      // Convert backend messages to chat format for UI
+      const chatMessages = (data.messages || []).map((msg) => ({
+        sender: msg.role === "user" ? "agent" : "customer",
+        text: msg.content,
+        timestamp: msg.timestamp,
+      }));
+      setChats((prevChats) => ({
+        ...prevChats,
+        [customerId]: chatMessages,
+      }));
+    } catch (error) {
+      console.error("Error fetching conversation:", error);
+    }
+  }
+
   const sendMessage = async () => {
     if (newMessage.trim() === "" || activeChat === null) return;
 
@@ -128,7 +148,10 @@ export default function Inbox() {
                         ? styles["active-customer"]
                         : ""
                     }`}
-                    onClick={() => setActiveChat(customer._id)}
+                    onClick={() => {
+                      setActiveChat(customer._id);
+                      fetchConversation(customer._id); // Fetch conversation when opening chat
+                    }}
                   >
                     {customer.customerName}
                   </div>
