@@ -19,11 +19,8 @@ function NewTicketForm(props) {
   const [selectedCustomerId, setSelectedCustomerId] = useState("");
 
   function handleCustomerChange(event) {
-    const selectedCustomer = props.customers.find(
-      (customer) => customer.customerName === event.target.value
-    );
     setIsCustomerSelected(event.target.value !== "");
-    setSelectedCustomerId(selectedCustomer ? selectedCustomer._id : "");
+    setSelectedCustomerId(event.target.value); // value is now _id
   }
 
   function submitHandler(event) {
@@ -75,11 +72,23 @@ function NewTicketForm(props) {
             onChange={handleCustomerChange}
           >
             <option value="">Select Customer</option>
-            {props.customers && props.customers.map((customer) => (
-              <option key={customer._id} value={customer.customerName}>
-                {customer.customerName}
-              </option>
-            ))}
+            {(() => {
+              if (
+                !Array.isArray(props.customers) ||
+                props.customers.length === 0
+              ) {
+                return (
+                  <option value="" disabled>
+                    No customers available
+                  </option>
+                );
+              }
+              return props.customers.map((customer) => (
+                <option key={customer._id} value={customer._id}>
+                  {customer.customerName}
+                </option>
+              ));
+            })()}
           </select>
         </div>
         <div className={classes.control}>

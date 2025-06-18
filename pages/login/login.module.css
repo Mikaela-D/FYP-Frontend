@@ -1,0 +1,88 @@
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.container p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #54c6ab;
+  color: white;
+  transition: background-color 0.3s;
+  min-width: 120px;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  background-color: #327767;
+}
+
+.registerForm {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.registerForm h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.registerForm input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.registerForm button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #54c6ab;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.registerForm button:hover {
+  background-color: #327767;
+}
+
+.registerForm button:last-child {
+  margin-top: 10px;
+  background-color: #e22245;
+  color: #fff;
+}
+
+.registerForm button:last-child:hover {
+  background-color: #881429;
+}

@@ -7,6 +7,8 @@
   background-color: #ff451a;
   padding: 0 10%;
   color: white;
+  position: relative;
+  padding-top: 0;
 }
 
 .logo {
@@ -51,4 +53,42 @@
 
 .homeIcon svg:hover {
   color: black;
+}
+
+.logoutButton {
+  background-color: #ff4d4d;
+  color: white;
+  border: 2px solid black;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 4px;
+}
+
+.logoutButton:hover {
+  background-color: #cc0000;
+}
+
+.agentNameDisplay {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 13px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 12px;
+  border-radius: 16px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  width: auto;
+}
+
+.agentNameDisplay > span,
+.agentNameDisplay > button {
+  pointer-events: auto;
 }

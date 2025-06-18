@@ -3,10 +3,12 @@
 import { useAgentTickets } from "../components/generic/AgentTicketsContext";
 import { useEffect, useState } from "react";
 import classes from "../styles/agent-tickets.module.css";
+import { useRouter } from "next/router";
 
 export default function AgentTickets() {
   const { agentTickets, setAgentTickets, removeFromAgentTickets, isHydrated } =
     useAgentTickets();
+  const router = useRouter();
 
   const [resolvedTickets, setResolvedTickets] = useState([]);
   const [priorityFilter, setPriorityFilter] = useState("all");
@@ -15,8 +17,29 @@ export default function AgentTickets() {
 
   useEffect(() => {
     async function fetchAssignedTickets() {
-      const response = await fetch("/api/tickets-by-agent?name=Mikaela");
-      const data = await response.json();
+      let loggedInAgentId = localStorage.getItem("agentId");
+      if (!loggedInAgentId) {
+        console.error(
+          "Agent ID is missing in localStorage. Cannot fetch assigned tickets."
+        );
+        return;
+      }
+
+      const response = await fetch(
+        `/api/tickets-by-agent?agentId=${loggedInAgentId}`
+      );
+      const text = await response.text(); // Read response as text for debugging
+      console.log("Response text:", text); // Debugging line
+
+      let data;
+      try {
+        data = JSON.parse(text); // Attempt to parse JSON
+      } catch (err) {
+        console.error("Failed to parse response as JSON:", err);
+        console.error("Response text:", text); // Log raw response for debugging
+        return;
+      }
+
       if (response.ok) {
         setAgentTickets(
           data.tickets.map((ticket) => ({
@@ -44,7 +67,7 @@ export default function AgentTickets() {
     if (saved) {
       setResolvedTickets(JSON.parse(saved));
     }
-  }, [setAgentTickets]);
+  }, [setAgentTickets, router]);
 
   useEffect(() => {
     localStorage.setItem("resolvedTickets", JSON.stringify(resolvedTickets));

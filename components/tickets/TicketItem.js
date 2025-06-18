@@ -19,7 +19,11 @@ function TicketItem(props) {
     async function fetchAgents() {
       const response = await fetch("/api/agents");
       const data = await response.json();
-      setAgents(data);
+      // Only include agents who can login (have password or canLogin flag)
+      const realAgents = data.filter(
+        (agent) => agent.password || agent.canLogin
+      );
+      setAgents(realAgents);
     }
     fetchAgents();
   }, []);
@@ -34,6 +38,12 @@ function TicketItem(props) {
   async function assignAgentHandler(agentId) {
     if (!agentId) {
       alert("Invalid agent selected.");
+      return;
+    }
+    // Check if agent is a real agent
+    const selectedAgent = agents.find((a) => a._id === agentId);
+    if (!selectedAgent) {
+      alert("Selected agent is not a real agent.");
       return;
     }
 
@@ -56,16 +66,32 @@ function TicketItem(props) {
         }),
       });
 
-      const responseText = await response.text();
-      console.log("Response status:", response.status);
-      console.log("Response text:", responseText);
-
       if (!response.ok) {
         alert("Failed to assign agent");
-      } else {
-        const data = JSON.parse(responseText);
-        console.log("Response from server:", data);
-        setAssignedTo(agentId); // Update UI
+        return;
+      }
+
+      const data = await response.json();
+      console.log("Response from server:", data);
+
+      setAssignedTo(agentId); // Update UI
+
+      // Check if the selected agent is the currently logged-in agent
+      const loggedInAgentId = localStorage.getItem("agentId");
+      if (agentId === loggedInAgentId) {
+        addToAgentTickets({
+          id: props.id,
+          customerName: props.customerName,
+          customerPhone: props.customerPhone,
+          customerEmail: props.customerEmail,
+          image: props.image,
+          title: props.title,
+          category: props.category,
+          priority: props.priority,
+          status: props.status,
+          description: props.description,
+          assignedTo: "Me", // Display "Me" in agent-tickets page
+        });
       }
     } catch (error) {
       console.error("Error assigning agent:", error);
@@ -74,11 +100,19 @@ function TicketItem(props) {
 
   // "Assign to me" handler (for agents themselves)
   async function addToAgentTicketsHandler() {
-    const agentName = "Mikaela"; // Hard-coded since Mikaela is the logged-in agent.
+    // Use the logged-in agent's name from localStorage
+    const agentName = localStorage.getItem("agentName"); // Get agent name from localStorage
+
+    if (!agentName) {
+      alert("Could not find your agent profile (missing agent name).");
+      return;
+    }
 
     try {
-      // 1. Fetch Mikaela's agent ID
-      const agentResponse = await fetch(`/api/agent-by-name?name=${agentName}`);
+      // 1. Fetch agent's agent ID
+      const agentResponse = await fetch(
+        `/api/agent-by-name?name=${encodeURIComponent(agentName)}`
+      );
       if (!agentResponse.ok) {
         alert("Could not find your agent profile.");
         return;
@@ -86,7 +120,7 @@ function TicketItem(props) {
       const agent = await agentResponse.json();
       const agentId = agent._id;
 
-      // 2. Assign Mikaela to the ticket
+      // 2. Assign agent to the ticket
       const assignResponse = await fetch(`/api/assign-agent`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -115,7 +149,7 @@ function TicketItem(props) {
 
       router.push("/agent-tickets");
     } catch (error) {
-      console.error("Error assigning ticket to Mikaela:", error);
+      console.error("Error assigning ticket to agent:", error);
       alert("Something went wrong. Check console for details.");
     }
   }

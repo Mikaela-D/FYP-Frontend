@@ -13,7 +13,7 @@ function NewTicketPage() {
     async function fetchCustomers() {
       const response = await fetch("/api/customers");
       const data = await response.json();
-      setCustomers(data.customers);
+      setCustomers(Array.isArray(data.customers) ? data.customers : []);
     }
     fetchCustomers();
   }, []);
