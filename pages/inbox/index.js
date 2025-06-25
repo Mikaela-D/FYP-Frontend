@@ -18,7 +18,7 @@ export default function Inbox() {
         const data = await response.json();
         if (data && Array.isArray(data.customers)) {
           setCustomers(data.customers);
-          console.log("Customers in browser:", data.customers); // <-- This will show in browser console
+          console.log("Customers in browser:", data.customers);
           const initialChats = data.customers.reduce((acc, customer) => {
             acc[customer._id] = [];
             return acc;
@@ -74,7 +74,7 @@ export default function Inbox() {
         body: JSON.stringify({
           message: newMessage,
           conversation: chats[activeChat], // Include conversation history
-          customerId: activeChat, // Include customerId
+          customerId: activeChat,
         }),
       });
 
