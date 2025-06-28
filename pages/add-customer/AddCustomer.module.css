@@ -48,3 +48,40 @@
   background-color: #e03e1a;
   border-color: #e03e1a;
 }
+
+.personaAdmin {
+  margin-top: 1.2rem;
+  background: #f3f6fa;
+  border: 1.5px dashed #b6c2cf;
+  border-radius: 7px;
+  padding: 0.8rem 1rem 0.5rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.personaAdmin label {
+  font-size: 0.98em;
+  color: #6b778c;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.personaAdmin textarea {
+  width: 100%;
+  font-size: 0.97em;
+  color: #253858;
+  border-radius: 5px;
+  border: 1px solid #b6c2cf;
+  padding: 0.5rem;
+  min-height: 48px;
+  resize: vertical;
+  background: #f8fafc;
+  margin-top: 0.2rem;
+  transition: border 0.2s;
+}
+
+.personaAdmin textarea:focus {
+  border: 1.5px solid #ff451a;
+  outline: none;
+  background: #fff;
+}
