@@ -27,6 +27,8 @@ function AddCustomerPage() {
       persona: enteredPersona,
     };
 
+    console.log("Sending customerData:", customerData);
+
     const response = await fetch("/api/create-customer", {
       method: "POST",
       body: JSON.stringify(customerData),
