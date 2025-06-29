@@ -9,8 +9,8 @@ function AddCustomerPage() {
   const nameInputRef = useRef();
   const phoneInputRef = useRef();
   const emailInputRef = useRef();
-  const personaInputRef = useRef();
   const [showPersona, setShowPersona] = useState(false);
+  const [persona, setPersona] = useState("");
 
   async function addCustomerHandler(event) {
     event.preventDefault();
@@ -18,7 +18,7 @@ function AddCustomerPage() {
     const enteredName = nameInputRef.current.value;
     const enteredPhone = phoneInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
-    const enteredPersona = personaInputRef.current.value;
+    const enteredPersona = persona;
 
     const customerData = {
       customerName: enteredName,
@@ -96,7 +96,8 @@ function AddCustomerPage() {
           </label>
           <textarea
             id="persona"
-            ref={personaInputRef}
+            value={persona}
+            onChange={(e) => setPersona(e.target.value)}
             rows={3}
             placeholder="e.g. You are a frustrated parent whose child's phone is stuck on a black screen..."
           />
