@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { message } = req.body;
+  const { message, conversation, customerId } = req.body;
 
   try {
     const response = await fetch("http://localhost:8000/openai/sendMessage", {
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ message, conversation, customerId }),
     });
 
     if (!response.ok) {

@@ -16,15 +16,18 @@ export default function Inbox() {
       try {
         const response = await fetch("/api/customers");
         const data = await response.json();
-        if (data) {
-          setCustomers(data);
-          const initialChats = data.reduce((acc, customer) => {
+        if (data && Array.isArray(data.customers)) {
+          setCustomers(data.customers);
+          console.log("Customers in browser:", data.customers);
+          const initialChats = data.customers.reduce((acc, customer) => {
             acc[customer._id] = [];
             return acc;
           }, {});
           setChats(initialChats);
         } else {
-          console.error("No customers found in the response");
+          setCustomers([]);
+          setChats({});
+          console.error("No customers found in the response", data);
         }
       } catch (error) {
         console.error("Error fetching customers:", error);
@@ -32,6 +35,26 @@ export default function Inbox() {
     }
     fetchCustomers();
   }, []);
+
+  // Fetch conversation history for a customer
+  async function fetchConversation(customerId) {
+    try {
+      const response = await fetch(`/api/messages?customerId=${customerId}`);
+      const data = await response.json();
+      // Convert backend messages to chat format for UI
+      const chatMessages = (data.messages || []).map((msg) => ({
+        sender: msg.role === "user" ? "agent" : "customer",
+        text: msg.content,
+        timestamp: msg.timestamp,
+      }));
+      setChats((prevChats) => ({
+        ...prevChats,
+        [customerId]: chatMessages,
+      }));
+    } catch (error) {
+      console.error("Error fetching conversation:", error);
+    }
+  }
 
   const sendMessage = async () => {
     if (newMessage.trim() === "" || activeChat === null) return;
@@ -51,7 +74,7 @@ export default function Inbox() {
         body: JSON.stringify({
           message: newMessage,
           conversation: chats[activeChat], // Include conversation history
-          customerId: activeChat, // Include customerId
+          customerId: activeChat,
         }),
       });
 
@@ -125,7 +148,10 @@ export default function Inbox() {
                         ? styles["active-customer"]
                         : ""
                     }`}
-                    onClick={() => setActiveChat(customer._id)}
+                    onClick={() => {
+                      setActiveChat(customer._id);
+                      fetchConversation(customer._id); // Fetch conversation when opening chat
+                    }}
                   >
                     {customer.customerName}
                   </div>
