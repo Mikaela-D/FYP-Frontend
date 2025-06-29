@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import styles from "./new-call.module.css";
 
 import { PhoneCall, PhoneOff, Pause, Mic, Circle, Flag } from "lucide-react";
 
