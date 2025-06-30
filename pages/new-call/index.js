@@ -108,6 +108,9 @@ const NewCallPage = () => {
       <Head>
         <title>New Call</title>
       </Head>
+      <div className={styles.topCenterControlsWrapper}>
+        <CallControls selectedCustomer={selectedCustomer} />
+      </div>
       <div className={styles.customerSelectWrapper}>
         <label htmlFor="customerSelect">Select Customer:</label>
         <select
@@ -128,7 +131,6 @@ const NewCallPage = () => {
           ))}
         </select>
       </div>
-      <CallControls selectedCustomer={selectedCustomer} />
     </>
   );
 };
