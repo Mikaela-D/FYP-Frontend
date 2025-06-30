@@ -11,29 +11,29 @@ const CallControls = () => {
   return (
     <div className={styles.container}>
       <button
-        className={`${styles.button} ${
+        className={`${styles.button} ${styles.pickUp} ${
           activeButton === "call" ? styles.active : ""
         }`}
         onClick={() => setActiveButton("call")}
         title="Pick Up"
       >
-        <PhoneCall color="green" size={24} />
+        <PhoneCall className={styles.icon} />
       </button>
-      <button className={styles.button} title="End Call">
-        <PhoneOff color="red" size={24} />
+      <button className={`${styles.button} ${styles.endCall}`} title="End Call">
+        <PhoneOff className={styles.icon} />
       </button>
 
       <button className={styles.buttonDisabled} disabled title="Pause">
-        <Pause size={24} color="#ddd" />
+        <Pause className={styles.iconDisabled} />
       </button>
       <button className={styles.buttonDisabled} disabled title="Mute">
-        <Mic size={24} color="#ddd" />
+        <Mic className={styles.iconDisabled} />
       </button>
       <button className={styles.buttonDisabled} disabled title="Record">
-        <Circle size={24} color="#ddd" />
+        <Circle className={styles.iconDisabled} />
       </button>
       <button className={styles.buttonDisabled} disabled title="Report">
-        <Flag size={24} color="#ddd" />
+        <Flag className={styles.iconDisabled} />
       </button>
     </div>
   );
