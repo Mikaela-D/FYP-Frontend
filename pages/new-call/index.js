@@ -10,6 +10,7 @@ const CallControls = ({ selectedCustomer }) => {
   const [callDuration, setCallDuration] = useState(0);
   const [holdCount, setHoldCount] = useState(0);
   const [onHold, setOnHold] = useState(false);
+  const [startTimestamp, setStartTimestamp] = useState(null);
   const timerRef = useRef(null);
   const router = useRouter();
 
@@ -29,6 +30,7 @@ const CallControls = ({ selectedCustomer }) => {
       setCallDuration(0);
       setHoldCount(0);
       setOnHold(false);
+      setStartTimestamp(null);
     }
   }, [callActive]);
 
@@ -37,12 +39,35 @@ const CallControls = ({ selectedCustomer }) => {
       setCallActive(true);
       setHoldCount(0);
       setOnHold(false);
+      setStartTimestamp(new Date().toISOString());
     } else {
       alert("Please select a customer to call.");
     }
   };
 
-  const handleEndCall = () => {
+  const handleEndCall = async () => {
+    if (!callActive) return;
+    const endTimestamp = new Date().toISOString();
+    // Optionally, get agentId from context or auth
+    const agentId = null; // Replace with actual agentId if available
+    const callData = {
+      customerId: selectedCustomer,
+      callDuration,
+      startTimestamp,
+      endTimestamp,
+      agentId,
+      holdCount,
+    };
+    try {
+      await fetch("/api/calls", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(callData),
+      });
+    } catch (err) {
+      // Optionally show error to user
+      console.error("Failed to save call data", err);
+    }
     setCallActive(false);
   };
 
