@@ -59,3 +59,31 @@
   height: 24px;
   color: #ddd;
 }
+
+.customerSelectWrapper {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.customerSelectWrapper label {
+  font-weight: 500;
+  color: #333;
+}
+
+.customerSelectWrapper select {
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  color: #222;
+  transition: border-color 0.2s;
+}
+
+.customerSelectWrapper select:focus {
+  border-color: #4caf50;
+  outline: none;
+}
