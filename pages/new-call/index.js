@@ -121,8 +121,16 @@ const CallControls = ({ selectedCustomer }) => {
           :{(callDuration % 60).toString().padStart(2, "0")}
         </div>
       )}
-      {callActive && onHold && (
-        <div className={styles.callDuration}>Call is currently on hold</div>
+      {callActive && (
+        <div
+          className={
+            styles.statusPill +
+            (onHold ? " " + styles.onHold : " " + styles.active)
+          }
+        >
+          <Pause className={styles.statusIcon} />
+          {onHold ? "On Hold" : "Active"}
+        </div>
       )}
     </div>
   );

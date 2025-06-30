@@ -117,3 +117,46 @@
   display: block;
   font-size: 13px;
 }
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 16px auto 0 auto;
+  background: #e0f7fa;
+  color: #00796b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: background 0.2s, color 0.2s;
+}
+
+.statusPill.onHold {
+  background: #fff3e0;
+  color: #f57c00;
+  animation: pulse 1.2s infinite;
+}
+
+.statusPill.active {
+  background: #e0f7fa;
+  color: #00796b;
+}
+
+.statusIcon {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #f57c0033;
+  }
+  70% {
+    box-shadow: 0 0 0 8px #f57c0000;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #f57c0033;
+  }
+}
