@@ -8,24 +8,35 @@ import { PhoneCall, PhoneOff, Pause, Mic, Circle, Flag } from "lucide-react";
 const CallControls = ({ selectedCustomer }) => {
   const [callActive, setCallActive] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
+  const [holdCount, setHoldCount] = useState(0);
+  const [onHold, setOnHold] = useState(false);
   const timerRef = useRef(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (callActive) {
+    if (callActive && !onHold) {
       timerRef.current = setInterval(() => {
         setCallDuration((prev) => prev + 1);
       }, 1000);
     } else {
       clearInterval(timerRef.current);
-      setCallDuration(0);
     }
     return () => clearInterval(timerRef.current);
+  }, [callActive, onHold]);
+
+  useEffect(() => {
+    if (!callActive) {
+      setCallDuration(0);
+      setHoldCount(0);
+      setOnHold(false);
+    }
   }, [callActive]);
 
   const handleCall = () => {
     if (selectedCustomer) {
       setCallActive(true);
+      setHoldCount(0);
+      setOnHold(false);
     } else {
       alert("Please select a customer to call.");
     }
@@ -33,6 +44,17 @@ const CallControls = ({ selectedCustomer }) => {
 
   const handleEndCall = () => {
     setCallActive(false);
+  };
+
+  const handlePause = () => {
+    if (callActive) {
+      if (!onHold) {
+        setOnHold(true);
+        setHoldCount((prev) => prev + 1);
+      } else {
+        setOnHold(false);
+      }
+    }
   };
 
   return (
@@ -68,8 +90,17 @@ const CallControls = ({ selectedCustomer }) => {
             className={callActive ? styles.icon : styles.iconDisabled}
           />
         </button>
-        <button className={styles.buttonDisabled} disabled title="Pause">
-          <Pause className={styles.iconDisabled} />
+        <button
+          className={
+            callActive
+              ? `${styles.button} ${onHold ? styles.active : ""}`
+              : styles.buttonDisabled
+          }
+          onClick={handlePause}
+          title={onHold ? "Resume Call" : "Pause (Hold)"}
+          disabled={!callActive}
+        >
+          <Pause className={callActive ? styles.icon : styles.iconDisabled} />
         </button>
         <button className={styles.buttonDisabled} disabled title="Mute">
           <Mic className={styles.iconDisabled} />
@@ -88,6 +119,12 @@ const CallControls = ({ selectedCustomer }) => {
             .toString()
             .padStart(2, "0")}
           :{(callDuration % 60).toString().padStart(2, "0")}
+        </div>
+      )}
+      {callActive && (
+        <div className={styles.callDuration}>
+          On Hold Count: {holdCount}
+          {onHold ? " (On Hold)" : ""}
         </div>
       )}
     </div>
