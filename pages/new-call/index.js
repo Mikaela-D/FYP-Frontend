@@ -48,8 +48,7 @@ const CallControls = ({ selectedCustomer }) => {
   const handleEndCall = async () => {
     if (!callActive) return;
     const endTimestamp = new Date().toISOString();
-    // Optionally, get agentId from context or auth
-    const agentId = null; // Replace with actual agentId if available
+    const agentId = localStorage.getItem("agentId") || null;
     const callData = {
       customerId: selectedCustomer,
       callDuration,
