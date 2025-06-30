@@ -130,7 +130,7 @@
   background: #e0f7fa;
   color: #00796b;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: background 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .statusPill.onHold {
@@ -181,7 +181,7 @@
   font-size: 1em;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .callSummary button:hover {
