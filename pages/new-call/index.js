@@ -38,24 +38,31 @@ const CallControls = ({ selectedCustomer }) => {
   return (
     <div className={styles.container}>
       <button
-        className={`${styles.button} ${styles.pickUp} ${
-          callActive ? styles.active : ""
-        }`}
+        className={
+          callActive
+            ? styles.buttonDisabled
+            : `${styles.button} ${styles.pickUp}${
+                callActive ? " " + styles.active : ""
+              }`
+        }
         onClick={handleCall}
         title="Call"
         disabled={callActive}
       >
-        <PhoneCall className={styles.icon} />
+        <PhoneCall className={callActive ? styles.iconDisabled : styles.icon} />
       </button>
       <button
-        className={`${styles.button} ${styles.endCall}`}
+        className={
+          callActive
+            ? `${styles.button} ${styles.endCall}`
+            : styles.buttonDisabled
+        }
         title="End Call"
         onClick={handleEndCall}
         disabled={!callActive}
       >
-        <PhoneOff className={styles.icon} />
+        <PhoneOff className={callActive ? styles.icon : styles.iconDisabled} />
       </button>
-
       <button className={styles.buttonDisabled} disabled title="Pause">
         <Pause className={styles.iconDisabled} />
       </button>
