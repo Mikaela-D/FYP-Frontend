@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "./new-call.module.css";
@@ -6,21 +6,53 @@ import styles from "./new-call.module.css";
 import { PhoneCall, PhoneOff, Pause, Mic, Circle, Flag } from "lucide-react";
 
 const CallControls = ({ selectedCustomer }) => {
-  const [activeButton, setActiveButton] = useState("call");
+  const [callActive, setCallActive] = useState(false);
+  const [callDuration, setCallDuration] = useState(0);
+  const timerRef = useRef(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (callActive) {
+      timerRef.current = setInterval(() => {
+        setCallDuration((prev) => prev + 1);
+      }, 1000);
+    } else {
+      clearInterval(timerRef.current);
+      setCallDuration(0);
+    }
+    return () => clearInterval(timerRef.current);
+  }, [callActive]);
+
+  const handleCall = () => {
+    if (selectedCustomer) {
+      setCallActive(true);
+    } else {
+      alert("Please select a customer to call.");
+    }
+  };
+
+  const handleEndCall = () => {
+    setCallActive(false);
+  };
 
   return (
     <div className={styles.container}>
       <button
         className={`${styles.button} ${styles.pickUp} ${
-          activeButton === "call" ? styles.active : ""
+          callActive ? styles.active : ""
         }`}
-        onClick={() => setActiveButton("call")}
-        title="Pick Up"
+        onClick={handleCall}
+        title="Call"
+        disabled={callActive}
       >
         <PhoneCall className={styles.icon} />
       </button>
-      <button className={`${styles.button} ${styles.endCall}`} title="End Call">
+      <button
+        className={`${styles.button} ${styles.endCall}`}
+        title="End Call"
+        onClick={handleEndCall}
+        disabled={!callActive}
+      >
         <PhoneOff className={styles.icon} />
       </button>
 
@@ -36,6 +68,15 @@ const CallControls = ({ selectedCustomer }) => {
       <button className={styles.buttonDisabled} disabled title="Report">
         <Flag className={styles.iconDisabled} />
       </button>
+      {callActive && (
+        <div style={{ marginLeft: 20, fontWeight: 500 }}>
+          Call Duration:{" "}
+          {Math.floor(callDuration / 60)
+            .toString()
+            .padStart(2, "0")}
+          :{(callDuration % 60).toString().padStart(2, "0")}
+        </div>
+      )}
     </div>
   );
 };
