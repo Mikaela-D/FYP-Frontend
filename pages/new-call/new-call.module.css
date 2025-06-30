@@ -1,6 +1,11 @@
 .container {
   display: flex;
-  gap: 10px;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
 }
 
 .button {
@@ -95,4 +100,19 @@
   align-items: flex-start;
   margin-top: 40px;
   margin-bottom: 32px;
+}
+
+.callControlsWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.callDuration {
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+  font-weight: 500;
+  display: block;
 }

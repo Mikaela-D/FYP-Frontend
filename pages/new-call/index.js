@@ -36,47 +36,53 @@ const CallControls = ({ selectedCustomer }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <button
-        className={
-          callActive
-            ? styles.buttonDisabled
-            : `${styles.button} ${styles.pickUp}${
-                callActive ? " " + styles.active : ""
-              }`
-        }
-        onClick={handleCall}
-        title="Call"
-        disabled={callActive}
-      >
-        <PhoneCall className={callActive ? styles.iconDisabled : styles.icon} />
-      </button>
-      <button
-        className={
-          callActive
-            ? `${styles.button} ${styles.endCall}`
-            : styles.buttonDisabled
-        }
-        title="End Call"
-        onClick={handleEndCall}
-        disabled={!callActive}
-      >
-        <PhoneOff className={callActive ? styles.icon : styles.iconDisabled} />
-      </button>
-      <button className={styles.buttonDisabled} disabled title="Pause">
-        <Pause className={styles.iconDisabled} />
-      </button>
-      <button className={styles.buttonDisabled} disabled title="Mute">
-        <Mic className={styles.iconDisabled} />
-      </button>
-      <button className={styles.buttonDisabled} disabled title="Record">
-        <Circle className={styles.iconDisabled} />
-      </button>
-      <button className={styles.buttonDisabled} disabled title="Report">
-        <Flag className={styles.iconDisabled} />
-      </button>
+    <div className={styles.callControlsWrapper}>
+      <div className={styles.container}>
+        <button
+          className={
+            callActive
+              ? styles.buttonDisabled
+              : `${styles.button} ${styles.pickUp}${
+                  callActive ? " " + styles.active : ""
+                }`
+          }
+          onClick={handleCall}
+          title="Call"
+          disabled={callActive}
+        >
+          <PhoneCall
+            className={callActive ? styles.iconDisabled : styles.icon}
+          />
+        </button>
+        <button
+          className={
+            callActive
+              ? `${styles.button} ${styles.endCall}`
+              : styles.buttonDisabled
+          }
+          title="End Call"
+          onClick={handleEndCall}
+          disabled={!callActive}
+        >
+          <PhoneOff
+            className={callActive ? styles.icon : styles.iconDisabled}
+          />
+        </button>
+        <button className={styles.buttonDisabled} disabled title="Pause">
+          <Pause className={styles.iconDisabled} />
+        </button>
+        <button className={styles.buttonDisabled} disabled title="Mute">
+          <Mic className={styles.iconDisabled} />
+        </button>
+        <button className={styles.buttonDisabled} disabled title="Record">
+          <Circle className={styles.iconDisabled} />
+        </button>
+        <button className={styles.buttonDisabled} disabled title="Report">
+          <Flag className={styles.iconDisabled} />
+        </button>
+      </div>
       {callActive && (
-        <div style={{ marginLeft: 20, fontWeight: 500 }}>
+        <div className={styles.callDuration}>
           Call Duration:{" "}
           {Math.floor(callDuration / 60)
             .toString()
