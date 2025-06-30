@@ -5,7 +5,7 @@ import styles from "./new-call.module.css";
 
 import { PhoneCall, PhoneOff, Pause, Mic, Circle, Flag } from "lucide-react";
 
-const CallControls = ({ selectedCustomer }) => {
+const CallControls = ({ selectedCustomer, onCallSummary }) => {
   const [callActive, setCallActive] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
   const [holdCount, setHoldCount] = useState(0);
@@ -58,13 +58,22 @@ const CallControls = ({ selectedCustomer }) => {
       holdCount,
     };
     try {
-      await fetch("/api/calls", {
+      const res = await fetch("/api/calls", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(callData),
       });
+      const result = await res.json();
+      if (onCallSummary) {
+        onCallSummary({
+          ...callData,
+          callId: result.callId || (result.call && result.call._id),
+        });
+      }
     } catch (err) {
-      // Optionally show error to user
+      if (onCallSummary) {
+        onCallSummary(null);
+      }
       console.error("Failed to save call data", err);
     }
     setCallActive(false);
@@ -163,6 +172,8 @@ const CallControls = ({ selectedCustomer }) => {
 const NewCallPage = () => {
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState("");
+  const [showSummary, setShowSummary] = useState(false);
+  const [lastCallSummary, setLastCallSummary] = useState(null);
 
   useEffect(() => {
     // Fetch customers from backend
@@ -182,13 +193,28 @@ const NewCallPage = () => {
       });
   }, []);
 
+  // Handler to reset dropdown and summary
+  const handleSummaryOk = () => {
+    setShowSummary(false);
+    setSelectedCustomer("");
+  };
+
+  // Handler to receive summary from CallControls
+  const handleCallSummary = (summary) => {
+    setLastCallSummary(summary);
+    setShowSummary(true);
+  };
+
   return (
     <>
       <Head>
         <title>New Call</title>
       </Head>
       <div className={styles.topCenterControlsWrapper}>
-        <CallControls selectedCustomer={selectedCustomer} />
+        <CallControls
+          selectedCustomer={selectedCustomer}
+          onCallSummary={handleCallSummary}
+        />
       </div>
       <div className={styles.customerSelectWrapper}>
         <label htmlFor="customerSelect">Select Customer:</label>
@@ -210,6 +236,24 @@ const NewCallPage = () => {
           ))}
         </select>
       </div>
+      {/* Centered call summary below the dropdown, not inside the wrapper */}
+      {showSummary && lastCallSummary && (
+        <div className={styles.centeredSummaryContainer}>
+          <div className={styles.callSummary}>
+            <h4>Call Saved!</h4>
+            <div>Call ID: {lastCallSummary.callId}</div>
+            <div>Customer ID: {lastCallSummary.customerId}</div>
+            <div>Duration: {lastCallSummary.callDuration} seconds</div>
+            <div>Start: {lastCallSummary.startTimestamp}</div>
+            <div>End: {lastCallSummary.endTimestamp}</div>
+            <div>Agent ID: {lastCallSummary.agentId}</div>
+            <div>On Hold Count: {lastCallSummary.holdCount}</div>
+            <button className={styles.button} onClick={handleSummaryOk}>
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
