@@ -49,10 +49,8 @@ const NewCallPage = () => {
     fetch("/api/customers")
       .then((res) => res.json())
       .then((data) => {
-        // Handle both array and object response
-        if (Array.isArray(data)) {
-          setCustomers(data);
-        } else if (Array.isArray(data.customers)) {
+        // Always expect { customers: [...] }
+        if (Array.isArray(data.customers)) {
           setCustomers(data.customers);
         } else {
           setCustomers([]);
@@ -77,9 +75,14 @@ const NewCallPage = () => {
           onChange={(e) => setSelectedCustomer(e.target.value)}
         >
           <option value="">-- Choose a customer --</option>
+          {customers.length === 0 && (
+            <option value="" disabled>
+              No customers found
+            </option>
+          )}
           {customers.map((customer) => (
-            <option key={customer.id} value={customer.id}>
-              {customer.name}
+            <option key={customer._id} value={customer._id}>
+              {customer.customerName}
             </option>
           ))}
         </select>
