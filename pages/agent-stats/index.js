@@ -55,7 +55,20 @@ const AgentStats = () => {
   return (
     <div>
       <h1>Agent Stats</h1>
-      <p>Welcome to the Agent Stats page.</p>
+      {/* Message with agent name below heading */}
+      <div
+        style={{
+          marginBottom: 16,
+          color: "#222",
+          fontWeight: 500,
+          fontSize: "1.05em",
+        }}
+      >
+        Call statistics for the agent:{" "}
+        {typeof window !== "undefined"
+          ? localStorage.getItem("agentName") || "Unknown"
+          : ""}
+      </div>
       <div className={styles.statsContainer}>
         <h3>Call Statistics</h3>
         <div className={styles.statsRow}>
