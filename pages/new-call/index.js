@@ -14,6 +14,15 @@ const CallControls = ({ selectedCustomer, onCallSummary }) => {
   const timerRef = useRef(null);
   const router = useRouter();
 
+  // Check queue activation state
+  const [queueActive, setQueueActive] = useState(true);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("queueActive");
+      setQueueActive(stored === null ? true : stored === "true");
+    }
+  }, []);
+
   useEffect(() => {
     if (callActive && !onHold) {
       timerRef.current = setInterval(() => {
@@ -35,6 +44,10 @@ const CallControls = ({ selectedCustomer, onCallSummary }) => {
   }, [callActive]);
 
   const handleCall = () => {
+    if (!queueActive) {
+      alert("You must be on queue to place a call.");
+      return;
+    }
     if (selectedCustomer) {
       setCallActive(true);
       setHoldCount(0);
