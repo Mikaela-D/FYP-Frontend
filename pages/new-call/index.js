@@ -221,7 +221,7 @@ const NewCallPage = () => {
   return (
     <>
       <Head>
-        <title>New Call</title>
+        <title>New Call (Client Simulation)</title>
       </Head>
       <div className={styles.topCenterControlsWrapper}>
         <CallControls
