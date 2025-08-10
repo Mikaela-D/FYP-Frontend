@@ -253,7 +253,7 @@ const NewCallPage = () => {
       {showSummary && lastCallSummary && (
         <div className={styles.centeredSummaryContainer}>
           <div className={styles.callSummary}>
-            <h4>Call Saved!</h4>
+            <h4>Call Saved! 🎉</h4>
             <div>Call ID: {lastCallSummary.callId}</div>
             <div>Customer ID: {lastCallSummary.customerId}</div>
             <div>Duration: {lastCallSummary.callDuration} seconds</div>
