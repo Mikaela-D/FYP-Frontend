@@ -261,6 +261,9 @@ const NewCallPage = () => {
             <div>End: {lastCallSummary.endTimestamp}</div>
             <div>Agent ID: {lastCallSummary.agentId}</div>
             <div>On Hold Count: {lastCallSummary.holdCount}</div>
+            <div style={{ fontSize: "0.95em", color: "#888", marginTop: 8 }}>
+              Thank you for using our call simulation!
+            </div>
             <button className={styles.button} onClick={handleSummaryOk}>
               OK
             </button>
