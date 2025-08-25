@@ -187,3 +187,26 @@
   box-shadow: none;
   position: relative;
 }
+
+:global(html[data-theme="dark"]) .inbox-label,
+:global(html[data-theme="dark"]) .tab-content,
+:global(html[data-theme="dark"]) .tab-bar,
+:global(html[data-theme="dark"]) .tab-button,
+:global(html[data-theme="dark"]) .message,
+:global(html[data-theme="dark"]) .messages,
+:global(html[data-theme="dark"]) .agent-message,
+:global(html[data-theme="dark"]) .customer-message,
+:global(html[data-theme="dark"]) .inbox-container {
+  color: #222 !important;
+}
+.customers-list,
+.customer,
+.chat-content p {
+  color: #222 !important;
+}
+
+:global(html[data-theme="dark"]) .customers-list,
+:global(html[data-theme="dark"]) .customer,
+:global(html[data-theme="dark"]) .chat-content p {
+  color: #222 !important;
+}
