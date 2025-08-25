@@ -85,3 +85,13 @@
   outline: none;
   background: #fff;
 }
+
+.form label {
+  color: #111 !important;
+}
+
+.form input,
+.form textarea {
+  color: #111 !important;
+  background: #fff;
+}
