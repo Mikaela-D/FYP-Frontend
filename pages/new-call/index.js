@@ -14,6 +14,15 @@ const CallControls = ({ selectedCustomer, onCallSummary }) => {
   const timerRef = useRef(null);
   const router = useRouter();
 
+  // Check queue activation state
+  const [queueActive, setQueueActive] = useState(true);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("queueActive");
+      setQueueActive(stored === null ? true : stored === "true");
+    }
+  }, []);
+
   useEffect(() => {
     if (callActive && !onHold) {
       timerRef.current = setInterval(() => {
@@ -35,6 +44,10 @@ const CallControls = ({ selectedCustomer, onCallSummary }) => {
   }, [callActive]);
 
   const handleCall = () => {
+    if (!queueActive) {
+      alert("You must be on queue to place a call.");
+      return;
+    }
     if (selectedCustomer) {
       setCallActive(true);
       setHoldCount(0);
@@ -208,7 +221,7 @@ const NewCallPage = () => {
   return (
     <>
       <Head>
-        <title>New Call</title>
+        <title>New Call (Client Simulation)</title>
       </Head>
       <div className={styles.topCenterControlsWrapper}>
         <CallControls
@@ -240,7 +253,7 @@ const NewCallPage = () => {
       {showSummary && lastCallSummary && (
         <div className={styles.centeredSummaryContainer}>
           <div className={styles.callSummary}>
-            <h4>Call Saved!</h4>
+            <h4>Call Saved! 🎉</h4>
             <div>Call ID: {lastCallSummary.callId}</div>
             <div>Customer ID: {lastCallSummary.customerId}</div>
             <div>Duration: {lastCallSummary.callDuration} seconds</div>
@@ -248,6 +261,9 @@ const NewCallPage = () => {
             <div>End: {lastCallSummary.endTimestamp}</div>
             <div>Agent ID: {lastCallSummary.agentId}</div>
             <div>On Hold Count: {lastCallSummary.holdCount}</div>
+            <div style={{ fontSize: "0.95em", color: "#888", marginTop: 8 }}>
+              Thank you for using our call simulation!
+            </div>
             <button className={styles.button} onClick={handleSummaryOk}>
               OK
             </button>

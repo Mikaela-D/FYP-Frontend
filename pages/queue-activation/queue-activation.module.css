@@ -1,0 +1,68 @@
+.container {
+  max-width: 420px;
+  margin: 48px auto 0 auto;
+  padding: 32px 28px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(44, 62, 80, 0.08);
+  text-align: center;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.switchLabel {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 30px;
+}
+
+.switchInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switchSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc;
+  border-radius: 30px;
+  transition: background 0.2s;
+}
+
+.switchInput:checked + .switchSlider {
+  background: #4caf50;
+}
+
+.switchSlider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.switchInput:checked + .switchSlider:before {
+  transform: translateX(24px);
+}
+
+.statusText {
+  font-size: 1.08em;
+  font-weight: 500;
+  color: #253858;
+}
