@@ -99,7 +99,7 @@ export default function AgentTickets() {
 
   return (
     <div className={classes.agentTickets}>
-      <h1>Agent's Assigned Tickets</h1>
+      <h1>Agent&apos;s Assigned Tickets</h1>
 
       {/* Filter Bar */}
       <div className={classes.filterBar}>

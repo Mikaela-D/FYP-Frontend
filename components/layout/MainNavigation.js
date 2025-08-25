@@ -90,7 +90,7 @@ function MainNavigation() {
             {globalCtx.theGlobalObject.tickets.length})
           </li>
           <li>
-            <Link href="/agent-tickets">Agent's Tickets</Link>
+            <Link href="/agent-tickets">Agent&apos;s Tickets</Link>
           </li>
           <li>
             <Link href="/tickets">Tickets</Link>
