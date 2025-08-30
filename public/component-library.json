@@ -126,7 +126,7 @@
       "/call-controls-1.png",
       "/call-controls-2.png"
     ],
-    "description": "(Placeholder) No implementation found in the current codebase.",
+    "description": "Simulate and manage live calls with controls for start, end, and hold.",
     "attributes": [
       {
         "name": "AUTHOR",
@@ -148,11 +148,11 @@
     "tabs": [
       {
         "name": "Description",
-        "content": "<p>(Placeholder) No implementation found in the current codebase. Update this tab if the component is added or specify its intended functionality.</p>"
+        "content": "<p>The Call Controls component allows agents to simulate and manage live calls. Agents can start and end calls, place calls on hold, and track call duration and hold count. Call data is saved and summarized after each call.</p>"
       },
       {
         "name": "Component Details",
-        "content": "<ul><li>(Placeholder) No details available. Update if implemented.</li></ul>"
+        "content": "<ul><li>Accessible from the 'New Call' page.</li><li>Start a call with a selected customer (must be on queue).</li><li>End calls and automatically save call data (duration, hold count, timestamps, agent/customer IDs).</li><li>Pause (hold) and resume calls, with hold count tracked.</li><li>Displays real-time call duration and status (active/on hold).</li><li>Integrates with /api/calls for saving call records.</li></ul>"
       }
     ]
   }
