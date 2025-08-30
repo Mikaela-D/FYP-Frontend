@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "platforms": ["generic"],
-    "link": "station-selection",
-    "name": "Station Selection",
-    "images": ["/station-selection.png"],
-    "description": "Manage and assign workstations efficiently.",
+    "platforms": ["generic", "sf", "zendesk"],
+    "link": "inbox",
+    "name": "Agent Inbox",
+    "images": ["/agent-inbox.jpg"],
+    "description": "View, select, and chat with customers in real time.",
     "attributes": [
       {
         "name": "AUTHOR",
@@ -27,11 +27,11 @@
     "tabs": [
       {
         "name": "Description",
-        "content": "<p>This component allows an agent to view and interact with active and incoming conversations.</p>"
+        "content": "<p>The Agent Inbox is a real-time workspace for agents to view, select, and chat with customers. It supports direct messaging, displays conversation history, and provides AI-powered replies. Customers are loaded from the backend, and message history is fetched per customer.</p>"
       },
       {
         "name": "Component Details",
-        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+        "content": "<ul><li>Accessible from the main navigation as 'Inbox'.</li><li>Displays a list of customers and their conversations.</li><li>Supports sending and receiving messages, with AI-generated customer replies.</li><li>Integrates with /api/customers and /api/messages endpoints.</li></ul>"
       }
     ]
   },
@@ -40,8 +40,12 @@
     "platforms": ["sf", "generic"],
     "link": "agent-stats",
     "name": "Agent Stats",
-    "images": ["/agent-stats-full.png", "/agent-stats-mini-2.png"],
-    "description": "Monitor agent performance and metrics.",
+    "images": [
+      "/agent-stats.jpg",
+      "/agent-stats-full.png",
+      "/agent-stats-mini-2.png"
+    ],
+    "description": "Shows real-time statistics for the logged-in agent.",
     "agentStats": {
       "name": "Agent Performance & Stats",
       "title": "Agent Performance and Stats",
@@ -66,11 +70,11 @@
       "tabs": [
         {
           "name": "Description",
-          "content": "<p>The Genesys Cloud CX Agent Performance Stats is an embeddable component that allows an agent to view their real-time performance stats.</p>"
+          "content": "<p>Agent Stats displays real-time statistics for the logged-in agent, including total calls, average call duration, and average hold count. Data is fetched from the backend and personalized per agent.</p>"
         },
         {
           "name": "Component Details",
-          "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+          "content": "<ul><li>Fetches call data for the current agent from /api/calls.</li><li>Calculates and displays total calls, average duration, and hold count.</li><li>Handles loading and error states.</li></ul>"
         }
       ]
     }
@@ -80,8 +84,8 @@
     "platforms": ["zendesk", "sn"],
     "link": "queue-activation",
     "name": "Queue Activation",
-    "images": ["/queue-activation.png"],
-    "description": "Activate and manage customer service queues.",
+    "images": ["/queue-activation.jpg", "/queue-activation.png"],
+    "description": "Toggle your queue status (On/Off) and see current state.",
     "attributes": [
       {
         "name": "AUTHOR",
@@ -103,11 +107,11 @@
     "tabs": [
       {
         "name": "Description",
-        "content": "<p>The Genesys Cloud CX Queue Activation and Stats is an embeddable component that displays queue statistics.</p>"
+        "content": "<p>Queue Activation allows agents to toggle their queue status (On/Off). When on queue, agents can place calls; when off queue, they cannot. The state is saved in local storage for persistence.</p>"
       },
       {
         "name": "Component Details",
-        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+        "content": "<ul><li>Accessible from the main navigation as 'Queue Activation'.</li><li>Toggle switch updates queue status and persists it in local storage.</li><li>Status text updates to reflect current queue state.</li></ul>"
       }
     ]
   },
@@ -116,8 +120,13 @@
     "platforms": ["sf", "generic", "zendesk"],
     "link": "call-controls",
     "name": "Call Controls",
-    "images": ["/call-controls-1.png", "/call-controls-2.png"],
-    "description": "Control and manage live calls efficiently.",
+    "images": [
+      "/call-controls.jpg",
+      "/call-controls-ongoing.jpg",
+      "/call-controls-1.png",
+      "/call-controls-2.png"
+    ],
+    "description": "Simulate and manage live calls with controls for start, end, and hold.",
     "attributes": [
       {
         "name": "AUTHOR",
@@ -139,11 +148,11 @@
     "tabs": [
       {
         "name": "Description",
-        "content": "<p>This component allows an agent to view and interact with active and incoming conversations.</p>"
+        "content": "<p>The Call Controls component allows agents to simulate and manage live calls. Agents can start and end calls, place calls on hold, and track call duration and hold count. Call data is saved and summarized after each call.</p>"
       },
       {
         "name": "Component Details",
-        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+        "content": "<ul><li>Accessible from the 'New Call' page.</li><li>Start a call with a selected customer (must be on queue).</li><li>End calls and automatically save call data (duration, hold count, timestamps, agent/customer IDs).</li><li>Pause (hold) and resume calls, with hold count tracked.</li><li>Displays real-time call duration and status (active/on hold).</li><li>Integrates with /api/calls for saving call records.</li></ul>"
       }
     ]
   }

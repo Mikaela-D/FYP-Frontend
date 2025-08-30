@@ -92,3 +92,80 @@
 .agentNameDisplay > button {
   pointer-events: auto;
 }
+
+@media (max-width: 900px) {
+  .header {
+    padding: 0 6%;
+    height: 4.5rem;
+  }
+
+  .header a {
+    font-size: 1.25rem;
+  }
+
+  .header li {
+    margin-left: 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 1rem;
+    height: 4rem;
+    align-items: center;
+  }
+
+  .header ul {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .header li {
+    margin-left: 0.6rem;
+  }
+
+  .header a {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .agentNameDisplay {
+    position: static;
+    margin-left: auto;
+    background: rgba(0, 0, 0, 0.06);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 12px;
+    flex-direction: row;
+    gap: 0.5rem;
+    font-size: 12px;
+    pointer-events: auto;
+  }
+
+  .logoutButton {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header a {
+    font-size: 0.95rem;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+
+  .header ul {
+    gap: 0.4rem;
+  }
+}
