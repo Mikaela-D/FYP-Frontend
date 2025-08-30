@@ -120,7 +120,12 @@
     "platforms": ["sf", "generic", "zendesk"],
     "link": "call-controls",
     "name": "Call Controls",
-    "images": ["/call-controls-1.png", "/call-controls-2.png"],
+    "images": [
+      "/call-controls.jpg",
+      "/call-controls-ongoing.jpg",
+      "/call-controls-1.png",
+      "/call-controls-2.png"
+    ],
     "description": "Control and manage live calls efficiently.",
     "attributes": [
       {
