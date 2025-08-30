@@ -21,11 +21,6 @@ export default function HamMenuContent({ onClose = () => {} }) {
     closeMenu();
   };
 
-  const navigateToStationSelection = () => {
-    router.push("/station-selection");
-    closeMenu();
-  };
-
   const navigateToAgentStats = () => {
     router.push("/agent-stats");
     closeMenu();
@@ -54,12 +49,6 @@ export default function HamMenuContent({ onClose = () => {} }) {
         >
           <div className={classes.menuItem} onClick={navigateToTutorial}>
             Tutorial
-          </div>
-          <div
-            className={classes.menuItem}
-            onClick={navigateToStationSelection}
-          >
-            Station Selection
           </div>
           <div className={classes.menuItem} onClick={navigateToAgentStats}>
             Agent Stats
