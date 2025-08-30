@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "platforms": ["generic"],
-    "link": "station-selection",
-    "name": "Station Selection",
-    "images": ["/station-selection.png"],
-    "description": "Manage and assign workstations efficiently.",
+    "platforms": ["generic", "sf", "zendesk"],
+    "link": "inbox",
+    "name": "Agent Inbox",
+    "images": ["/agent-inbox.jpg"],
+    "description": "Centralized inbox for agents to view and manage customer conversations in real time.",
     "attributes": [
       {
         "name": "AUTHOR",
@@ -27,11 +27,11 @@
     "tabs": [
       {
         "name": "Description",
-        "content": "<p>This component allows an agent to view and interact with active and incoming conversations.</p>"
+        "content": "<p>The Agent Inbox component allows support agents to view, filter, and respond to customer messages in a unified interface. Includes real-time updates and easy customer selection.</p>"
       },
       {
         "name": "Component Details",
-        "content": "<p>Add component via Lightning App Builder to Lightning page or Utility bar.</p>"
+        "content": "<p>Accessible from the main navigation. Supports desktop and mobile. Integrates with ticket and customer management features.</p>"
       }
     ]
   },
