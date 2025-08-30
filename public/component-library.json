@@ -40,7 +40,11 @@
     "platforms": ["sf", "generic"],
     "link": "agent-stats",
     "name": "Agent Stats",
-    "images": ["/agent-stats-full.png", "/agent-stats-mini-2.png"],
+    "images": [
+      "/agent-stats.jpg",
+      "/agent-stats-full.png",
+      "/agent-stats-mini-2.png"
+    ],
     "description": "Monitor agent performance and metrics.",
     "agentStats": {
       "name": "Agent Performance & Stats",
