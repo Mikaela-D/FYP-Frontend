@@ -84,7 +84,7 @@
     "platforms": ["zendesk", "sn"],
     "link": "queue-activation",
     "name": "Queue Activation",
-    "images": ["/queue-activation.png"],
+    "images": ["/queue-activation.jpg", "/queue-activation.png"],
     "description": "Activate and manage customer service queues.",
     "attributes": [
       {
