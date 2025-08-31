@@ -1,5 +1,5 @@
 // C:\Users\Mikaela\FYP-Frontend\pages\tickets\index.js
-
+// This file is for displaying the main list of tickets
 import TicketList from "../../components/tickets/TicketList";
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../store/globalContext";
