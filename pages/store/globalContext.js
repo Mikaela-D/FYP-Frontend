@@ -1,8 +1,4 @@
-// Lets do all database stuff here and just share this global context with the rest of the App
-// - so no database code anywhere else in our App
-// - every CRUD function the App needs to do is in here, in one place
-// - makes debugging etc so much easier
-// - all external connections still have to go through /api routes
+// C:\Users\Mikaela\FYP-Frontend\pages\store\globalContext.js
 
 import { createContext, useState, useEffect } from "react";
 
