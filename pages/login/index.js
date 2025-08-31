@@ -59,7 +59,7 @@ const LoginPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Welcome to the Call Centre CRM</h1>
+      <h1>Welcome to the Customer Support Platform</h1>
       {isRegistering ? (
         <div className={styles.registerForm}>
           <h2>Register</h2>
