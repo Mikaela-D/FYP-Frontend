@@ -55,7 +55,7 @@ function Layout(props) {
             boxSizing: "border-box",
           }}
         >
-          Welcome to the Call Centre CRM. Please log in to continue.
+          Welcome to the Customer Support Platform. Please log in to continue.
         </div>
       )}
       <main className={classes.main}>{props.children}</main>
